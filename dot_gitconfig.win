@@ -1,0 +1,52 @@
+[init]
+	defaultBranch = trunk
+[user]
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBcTf155SsDiQx7w4ylePL3e27mGbikc3/gxfA2ay6yx
+	email = raysuliteanu@gmail.com
+	name = Ray Suliteanu
+[commit]
+	gpgsign = true
+[core]
+	autocrlf = input
+	sshCommand = ssh.exe
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true    # use n and N to move between diff sections
+	line-numbers = true
+	hyperlinks = true
+
+[merge]
+	conflictstyle = diff3
+
+[diff]
+	colorMoved = default
+
+[alias]
+	co = checkout
+	sw = switch
+
+[rerere]
+	enabled = true
+
+[pull]
+	rebase = false
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[rebase]
+	updateRefs = true
+
+[gpg]
+	format = ssh
+
+[gpg "ssh"]
+	program = "/mnt/c/Users/ray/AppData/Local/1Password/app/8/op-ssh-sign-wsl"
+
