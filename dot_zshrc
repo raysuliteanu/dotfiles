@@ -170,8 +170,8 @@ eval $(thefuck --alias)
 # wezterm
 # eval "$(wezterm shell-completion --shell zsh)"
 
+# atuin configuration
 . "$HOME/.atuin/bin/env"
-
 eval "$(atuin init zsh)"
 
 # starship https://starship.rs/
