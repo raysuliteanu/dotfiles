@@ -1,4 +1,5 @@
 return {
+	{ "folke/neoconf.nvim" },
 	{ "folke/zen-mode.nvim" },
 	{
 		"folke/todo-comments.nvim",

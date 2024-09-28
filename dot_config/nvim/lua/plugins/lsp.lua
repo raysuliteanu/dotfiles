@@ -1,22 +1,29 @@
 return {
-	{
-		"neovim/nvim-lspconfig",
-		opts = {
-			setup = {
-				rust_analyzer = function()
-					return true
-				end,
-			},
-		},
+	"neovim/nvim-lspconfig", -- REQUIRED: for native Neovim LSP integration
+	lazy = false, -- REQUIRED: tell lazy.nvim to start this plugin at startup
+	dependencies = {
+		-- main one
+		{ "ms-jpq/coq_nvim", branch = "coq" },
+
+		-- 9000+ Snippets
+		{ "ms-jpq/coq.artifacts", branch = "artifacts" },
+
+		-- lua & third party sources -- See https://github.com/ms-jpq/coq.thirdparty
+		-- Need to **configure separately**
+		{ "ms-jpq/coq.thirdparty", branch = "3p" },
+		-- - shell repl
+		-- - nvim lua api
+		-- - scientific calculator
+		-- - comment banner
+		-- - etc
 	},
-	-- 	-- add symbols-outline
-	-- 	{
-	-- 		"simrat39/symbols-outline.nvim",
-	-- 		cmd = "SymbolsOutline",
-	-- 		keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
-	-- 		opts = {
-	-- 			-- add your options that should be passed to the setup() function here
-	-- 			position = "right",
-	-- 		},
-	-- 	},
+	init = function()
+		vim.g.coq_settings = {
+			auto_start = true, -- if you want to start COQ at startup
+			-- Your COQ settings here
+		}
+	end,
+	config = function()
+		-- Your LSP settings here
+	end,
 }
