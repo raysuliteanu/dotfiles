@@ -15,10 +15,11 @@
 
 [delta]
 	navigate = true    # use n and N to move between diff sections
+	dark = true
 	line-numbers = true
 	hyperlinks = true
 	side-by-side = true
-	syntax-theme = Coldark-Dark
+#	syntax-theme = Coldark-Dark
 
 [merge]
 	conflictstyle = diff3
