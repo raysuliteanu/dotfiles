@@ -19,9 +19,8 @@ return {
 	},
 	init = function()
 		vim.g.coq_settings = {
-			-- if you want to start COQ at startup
+			-- start COQ at startup but don't announce it
 			auto_start = "shut-up",
-			-- Your COQ settings here
 		}
 	end,
 	config = function()
