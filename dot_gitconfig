@@ -19,7 +19,7 @@
 	line-numbers = true
 	hyperlinks = true
 	side-by-side = true
-#	syntax-theme = Coldark-Dark
+	syntax-theme = Coldark-Dark
 
 [merge]
 	conflictstyle = diff3
