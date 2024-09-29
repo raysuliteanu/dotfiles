@@ -1,8 +1,8 @@
 alias a=alias
 
-a zshconfig="chezmoi edit ~/.zshrc"
-a zalias="chezmoi edit ~/.oh-my-zsh/custom/aliases.zsh"
-a nvimconfig="chezmoi edit ~/.config/nvim/init.lua"
+a zshconfig="chezmoi edit --apply ~/.zshrc"
+a zalias="chezmoi edit --apply ~/.oh-my-zsh/custom/aliases.zsh"
+a nvimconfig="chezmoi --apply edit ~/.config/nvim/init.lua"
 
 a vi=nvim
 a vim=nvim
