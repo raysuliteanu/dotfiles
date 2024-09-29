@@ -76,7 +76,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(chezmoi git rust gradle docker gh kubectl web-search aliases tmux )
+plugins=(chezmoi git rust gradle docker gh kubectl web-search aliases tmux systemd)
 
 source $ZSH/oh-my-zsh.sh
 
