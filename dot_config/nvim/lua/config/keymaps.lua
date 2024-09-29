@@ -2,14 +2,7 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
-vim.keymap.set("n", "\\", "<cmd>Neotree focus toggle<cr>", { desc = "Toggle Neotree file viewer" })
-vim.keymap.set("n", "\\b", "<cmd>Neotree focus buffers toggle<cr>", { desc = "Toggle Neotree buffer viewer" })
-vim.keymap.set(
-	"n",
-	"\\g",
-	"<cmd>Neotree focus git_status toggle float<cr>",
-	{ desc = "Toggle Neotree git status viewer" }
-)
+vim.keymap.set("n", "\\", "<cmd>CHADopen<cr>", { desc = "Toggle file tree viewer" })
 
 -- from Primeagen https://raw.githubusercontent.com/ThePrimeagen/init.lua/master/lua/theprimeagen/remap.lua
 -- move selected text up and down like IntelliJ <c-shift-up/down>
