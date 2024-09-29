@@ -17,7 +17,8 @@ file I created some aliases to open config files using `chezmoi edit` e.g.
 
 ### Plugins
 
-- I use "xvzc/chezmoi.nvim" Neovim plugin. See dot_config/nvim/lua/plugins/chezmoi.lua
+- I use ["xvzc/chezmoi.nvim"](https://github.com/xvzc/chezmoi.nvim)
+Neovim plugin. See dot_config/nvim/lua/plugins/chezmoi.lua
 - There's a plugin for oh-my-zsh for chezmoi. You can add it with
 `omz plugins add chezmoi` or manually edit your .zshrc file to add it to the
 `plugins=...`.
