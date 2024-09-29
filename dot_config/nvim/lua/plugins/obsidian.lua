@@ -20,12 +20,12 @@ return {
 				desc = "Apply Obsidian 'note' template",
 			},
 			{
-				"<leader>O/",
+				"<leader>O ",
 				":Telescope find_files search_dirs={'/home/ray/Documents/Obsidian/Ray'}<cr>",
 				desc = "Find in Obsidian vault",
 			},
 			{
-				"<leader>Os",
+				"<leader>O/",
 				":Telescope find_files live_grep={'/home/ray/Documents/Obsidian/Ray'}<cr>",
 				desc = "Grep in Obsidian vault",
 			},
@@ -38,7 +38,7 @@ return {
 						path = "/home/ray/Documents/Obsidian/Ray",
 					},
 				},
-				notes_subdir = "Inbox",
+				notes_subdir = "Resources/Notes",
 				new_notes_location = "notes_subdir",
 				disable_frontmatter = true,
 				templates = {
