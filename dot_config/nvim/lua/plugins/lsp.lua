@@ -20,7 +20,7 @@ return {
 	init = function()
 		vim.g.coq_settings = {
 			-- if you want to start COQ at startup
-			auto_start = true,
+			auto_start = "shut-up",
 			-- Your COQ settings here
 		}
 	end,
