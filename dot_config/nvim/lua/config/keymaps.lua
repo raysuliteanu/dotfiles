@@ -40,10 +40,6 @@ vim.keymap.set("n", "gf", function()
 	end
 end, { noremap = false, expr = true })
 
-vim.keymap.set("n", "<leader>f.", function()
-	require("telescope.builtin").find_files({ cwd = vim.fn.expand("%:p:h") })
-end)
-
 -- chezmoi/telescope integration
 local telescope = require("telescope")
 telescope.load_extension("chezmoi")
