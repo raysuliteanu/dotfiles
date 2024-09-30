@@ -1,5 +1,6 @@
 alias a=alias
 
+a tmuxconfig="chezmoi edit --apply ~/.config/tmux/tmux.conf"
 a zshconfig="chezmoi edit --apply ~/.zshrc"
 a zalias="chezmoi edit --apply ~/.oh-my-zsh/custom/aliases.zsh"
 a nvimconfig="echo $(fd --glob '*.lua' ~/.config/nvim | tr '\n' ' ') | xargs chezmoi edit --apply"
