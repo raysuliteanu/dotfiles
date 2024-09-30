@@ -3,6 +3,7 @@ alias a=alias
 a zshconfig="chezmoi edit --apply ~/.zshrc"
 a zalias="chezmoi edit --apply ~/.oh-my-zsh/custom/aliases.zsh"
 a nvimconfig="chezmoi edit --apply $(fd --glob  "*.lua" ~/.config/nvim)"
+a ce="chezmoi edit --apply"
 
 a vi=nvim
 a vim=nvim
