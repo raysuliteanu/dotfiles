@@ -34,5 +34,4 @@ vim.opt.scrolloff = 10
 vim.opt.hlsearch = true
 
 vim.opt.conceallevel = 1
-
 vim.opt.mouse = "a"
