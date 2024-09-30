@@ -17,7 +17,12 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	spec = {
 		-- add LazyVim and import its plugins
+		-- the lazyvim.plugins adds a ton of stuff; most is nice
+		-- and you can disable plugins (see ../plugins/diabled.lua)
+		-- but would it be better to just import the core plugins
+		-- individually?
 		{ "LazyVim/LazyVim", import = "lazyvim.plugins" },
+
 		{ import = "lazyvim.plugins.extras.test.core" },
 		{ import = "lazyvim.plugins.extras.dap.core" },
 		{ import = "lazyvim.plugins.extras.dap.nlua" },
@@ -39,8 +44,8 @@ require("lazy").setup({
 		{ import = "lazyvim.plugins.extras.lang.scala" },
 		{ import = "lazyvim.plugins.extras.lang.terraform" },
 		{ import = "lazyvim.plugins.extras.lang.toml" },
-		{ import = "lazyvim.plugins.extras.lang.typescript" },
 		{ import = "lazyvim.plugins.extras.lang.yaml" },
+
 		-- import/override with your plugins
 		{ import = "plugins" },
 	},
