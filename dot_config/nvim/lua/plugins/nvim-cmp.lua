@@ -1,69 +1,43 @@
 return {
-	{ -- Autocompletion
+	{
 		"hrsh7th/nvim-cmp",
-		event = "InsertEnter",
-		dependencies = {
-			-- add cmp-emoji
-			"hrsh7th/cmp-emoji",
-			"hrsh7th/cmp-nvim-lsp",
-			"L3MON4D3/LuaSnip",
-			"saadparwaiz1/cmp_luasnip",
-		},
 		---@param opts cmp.ConfigSchema
 		opts = function(_, opts)
-			opts.sources = opts.sources or {}
-			table.insert(opts.sources, {
-				name = "lazydev",
-				group_index = 0, -- set group index to 0 to skip loading LuaLS completions
-			})
-			table.insert(opts.sources, { name = "emoji" })
-		end,
-		config = function()
-			-- nvim-cmp setup
-			local cmp = require("cmp")
-			local luasnip = require("luasnip")
+			local has_words_before = function()
+				unpack = unpack or table.unpack
+				local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+				return col ~= 0
+					and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+			end
 
-			cmp.setup({
-				view = {
-					entries = "native",
-				},
-				snippet = {
-					expand = function(args)
-						luasnip.lsp_expand(args.body)
-					end,
-				},
-				mapping = cmp.mapping.preset.insert({
-					["<C-d>"] = cmp.mapping.scroll_docs(-4),
-					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-CR>"] = cmp.mapping.complete(),
-					["<CR>"] = cmp.mapping.confirm({
-						behavior = cmp.ConfirmBehavior.Replace,
-						select = true,
-					}),
-					["<Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_next_item()
-						elseif luasnip.expand_or_jumpable() then
-							luasnip.expand_or_jump()
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-					["<S-Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_prev_item()
-						elseif luasnip.jumpable(-1) then
-							luasnip.jump(-1)
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-				}),
-				sources = {
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
-					{ name = "neorg" },
-				},
+			local cmp = require("cmp")
+
+			opts.mapping = vim.tbl_extend("force", opts.mapping, {
+				["<Tab>"] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						-- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
+						cmp.select_next_item()
+					elseif vim.snippet.active({ direction = 1 }) then
+						vim.schedule(function()
+							vim.snippet.jump(1)
+						end)
+					elseif has_words_before() then
+						cmp.complete()
+					else
+						fallback()
+					end
+				end, { "i", "s" }),
+				["<S-Tab>"] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						cmp.select_prev_item()
+					elseif vim.snippet.active({ direction = -1 }) then
+						vim.schedule(function()
+							vim.snippet.jump(-1)
+						end)
+					else
+						fallback()
+					end
+				end, { "i", "s" }),
 			})
 		end,
 	},
