@@ -6,6 +6,8 @@ a zalias="chezmoi edit --apply ~/.oh-my-zsh/custom/aliases.zsh"
 a nvimconfig="echo $(fd --glob '*.lua' ~/.config/nvim | tr '\n' ' ') | xargs chezmoi edit --apply"
 a ce="chezmoi edit --apply"
 a cs="chezmoi status"
+a ca="chezmoi apply"
+a cpush="chezmoi git push"
 
 a vi=nvim
 a vim=nvim
