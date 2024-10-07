@@ -57,3 +57,4 @@ a kscope='cscope -kd -p 3'
 
 a wezterm='open-wezterm-here &'
 
+a obs="fd -E .git -e .md --base-directory ~/Documents/Obsidian . | fzf --preview 'cat ~/Documents/Obsidian/{}'"
