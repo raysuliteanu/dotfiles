@@ -168,7 +168,7 @@ tm() {
 
 #a obs="fd -E .git -e .md --base-directory ~/Documents/Obsidian/Ray . | fzf -m --preview 'cat ~/Documents/Obsidian/Ray/{}' --bind 'enter:become(nvim '{}')'" 
 obs2() {
-  IFS=$'\n' files=($(fd -E .git -e .md --base-directory ~/Documents/Obsidian/Ray .fzf -m -1 -0 --preview 'cat ~/Documents/Obsidian/Ray/{}'))
+  IFS=$'\n' files=($(fd -E .git -e .md --base-directory ~/Documents/Obsidian/Ray . | fzf -m -1 -0 --preview 'cat ~/Documents/Obsidian/Ray/{}'))
   [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
 }
 
