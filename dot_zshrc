@@ -166,12 +166,6 @@ tm() {
   session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
 }
 
-#a obs="fd -E .git -e .md --base-directory ~/Documents/Obsidian/Ray . | fzf -m --preview 'cat ~/Documents/Obsidian/Ray/{}' --bind 'enter:become(nvim '{}')'" 
-obs2() {
-  IFS=$'\n' files=($(fd -E .git -e .md --base-directory ~/Documents/Obsidian/Ray . | fzf -m -1 -0 --preview 'cat ~/Documents/Obsidian/Ray/{}'))
-  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
-}
-
 # ---- Zoxide (better cd) ----
 eval "$(zoxide init zsh)"
 
