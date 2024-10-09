@@ -4,3 +4,4 @@ email = "raysuliteanu@pm.me"
 
 [ui]
 default-command = "log"
+diff.tool = "delta"
