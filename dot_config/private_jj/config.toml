@@ -5,3 +5,7 @@ email = "raysuliteanu@pm.me"
 [ui]
 default-command = "log"
 diff.tool = "delta"
+
+
+[merge-tools.delta]
+diff-args=["--navigate", "--line-numbers", "--hyperlinks", "--color-only", "--syntax-theme=Coldark-Dark", "--side-by-side"]
