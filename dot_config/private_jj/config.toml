@@ -8,4 +8,4 @@ diff.tool = "delta"
 
 
 [merge-tools.delta]
-diff-args=["--navigate", "--line-numbers", "--hyperlinks", "--color-only", "--syntax-theme=Coldark-Dark", "--side-by-side"]
+diff-args=["--navigate", "--line-numbers", "--hyperlinks", "--color-only", "--syntax-theme=Coldark-Dark", "--side-by-side", "$left", "$right"]
