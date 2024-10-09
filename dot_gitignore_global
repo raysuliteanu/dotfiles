@@ -1,0 +1,3 @@
+# ignore Jujutsu vcs dir
+.jj/
+
