@@ -4,4 +4,4 @@ email = "raysuliteanu@pm.me"
 
 [ui]
 default-command = "log"
-diff.tool = ["/home/linuxbrew/.linuxbrew/bin/delta", "--navigate", "--line-numbers", "--hyperlinks", "--color-only", "--side-by-side", "$left", "$right"]
+# diff.tool = ["/home/linuxbrew/.linuxbrew/bin/delta", "--navigate", "--line-numbers", "--hyperlinks", "--color-only", "--side-by-side", "$left", "$right"]
