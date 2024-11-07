@@ -1,6 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+eval "$(brew shellenv)"
 
 ZSH_WEB_SEARCH_ENGINES=(
   rdoc "https://docs.rs/"
@@ -89,7 +89,7 @@ EDITOR=nvim
 
 BREW_PREFIX=$(brew --prefix)
 
-PATH=$PATH:/home/ray/bin:/home/ray/.local/share/JetBrains/Toolbox/scripts:$HOME/.local/bin
+PATH=$PATH:$HOME/bin:$HOME/.local/share/JetBrains/Toolbox/scripts:$HOME/.local/bin
 
 GROOVY_HOME=$BREW_PREFIX/opt/groovy/libexec
 
@@ -99,17 +99,15 @@ KAFKA_CLUSTER_ID=GYD7shokQV6Qf3NKao-Fvg
 
 umask 022
 
-. $(pack completion --shell zsh)
-
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/ray/google-cloud-sdk/path.zsh.inc' ]; then . '/home/ray/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/home/ray/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/ray/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-cloud-sdk/completion.zsh.inc'; fi
 
 eval "$(op completion zsh)"; compdef _op op
 
-source /home/ray/.config/op/plugins.sh
+source $HOME/.config/op/plugins.sh
 
 # use 1Password's as ssh-agent
 SSH_AUTH_SOCK=$HOME/.1password/agent.sock
@@ -134,7 +132,9 @@ _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
 
-source ~/.fzf-git/fzf-git.sh
+if [ -e ~/.fzf-git/fzf-git.sh ]; then
+  source ~/.fzf-git/fzf-git.sh
+fi
 
 show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
 
@@ -180,7 +180,9 @@ eval $(thefuck --alias)
 # eval "$(wezterm shell-completion --shell zsh)"
 
 # atuin configuration
-. "$HOME/.atuin/bin/env"
+if [ -e $HOME/.atuin/bin/env ]; then
+  . "$HOME/.atuin/bin/env"
+fi
 eval "$(atuin init zsh)"
 
 # starship https://starship.rs/
