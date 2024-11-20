@@ -23,4 +23,4 @@ news.version=3.1.0
 #include solarized-dark-256.theme
 #include solarized-light-256.theme
 #include no-color.theme
-
+include bubblegum-256.theme
