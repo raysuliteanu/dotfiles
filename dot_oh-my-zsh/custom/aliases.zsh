@@ -39,7 +39,6 @@ a e=emacs
 a du=dust
 a fd='fd -H'
 a cd=z
-a t=tmux
 a lg=lazygit
 
 a dps='docker ps'
