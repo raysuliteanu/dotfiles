@@ -62,6 +62,7 @@ a wezterm='open-wezterm-here &'
 a obs="fd -E .git -e .md --base-directory ~/Documents/Obsidian/Ray . | fzf --preview 'cat ~/Documents/Obsidian/Ray/{}' --bind 'enter:become(nvim '~/Documents/Obsidian/Ray/{}')'"
 
 # taskwarrior
-a ta='task add'
-a tls='task list'
-a tc='task calendar'
+a t=task
+a ta='t add'
+a tls='t list'
+a tc='t calendar'
