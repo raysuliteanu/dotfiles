@@ -203,6 +203,8 @@ eval "$(starship init zsh)"
 
 . "$HOME/.deno/env"
 
+export PATH=$PATH:$BREW_PREFIX/lib/ruby/gems/3.3.0/bin
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
