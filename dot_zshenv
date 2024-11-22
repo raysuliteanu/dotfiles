@@ -13,4 +13,4 @@ export XDG_DATA_DIRS="/home/linuxbrew/.linuxbrew/share:$XDG_DATA_DIRS"
 
 export GPG_TTY=$(tty)
 
-export PATH=$PATH:$HOMEBREW_PREFIX/lib/ruby/gems/3.3.0/bin
+export PATH=$PATH:$BREW_PREFIX/lib/ruby/gems/3.3.0/bin
