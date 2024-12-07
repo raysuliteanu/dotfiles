@@ -26,7 +26,7 @@ end)
 
 -- config
 return {
-	color_scheme = "Catppuccin Mocha",
+	color_scheme = "Catppuccin Latte",
 	font = wezterm.font("JetBrainsMono Nerd Font Mono", {
 		weight = "DemiBold",
 		stretch = "Normal",
