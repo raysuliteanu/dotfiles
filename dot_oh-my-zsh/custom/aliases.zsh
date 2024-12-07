@@ -12,6 +12,7 @@ a cpush="chezmoi git push"
 a vi=nvim
 a vim=nvim
 a v=nvim
+a view='nvim -R'
 
 a b=brew
 a bs='b search'
