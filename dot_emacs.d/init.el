@@ -7,7 +7,7 @@
 (package-initialize)
 (package-refresh-contents)
 
-(setq catppuccin-flavor 'mocha) ; or 'latte, 'macchiato, or 'mocha
+(setq catppuccin-flavor 'latte) ; or 'latte, 'macchiato, or 'mocha
 (load-theme 'catppuccin t)
 
 (custom-set-variables
