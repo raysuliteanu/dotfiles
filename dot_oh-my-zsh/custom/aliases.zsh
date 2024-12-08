@@ -43,6 +43,7 @@ a cd=z
 a lg=lazygit
 
 a dps='docker ps'
+a ds='docker search'
 
 a ls='eza --git'
 a l='ls -l'
