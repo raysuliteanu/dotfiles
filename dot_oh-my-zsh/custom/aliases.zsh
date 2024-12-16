@@ -50,9 +50,9 @@ a l='ls -l'
 a ll='ls -l'
 a la='ll -a'
 a lR='ls -R'
-# when using exa to sort by timestamp it's '-snew' not '-t'
-a lrt='ls -lr -snew'
-a lart='ls -lar -snew'
+# when using exa to sort by timestamp it's '-sold' not '-t'
+a lrt='ls -lr -sold'
+a lart='ls -lar -sold'
 
 a warp='warp-terminal > /dev/null 2>&1 &'
 
