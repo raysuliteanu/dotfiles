@@ -54,7 +54,7 @@ return {
 			{
 				"<leader>On",
 				":ObsidianNewFromTemplate note<CR>",
-				desc = "New Obsidian note from template",
+				desc = "New Obsidian note",
 			},
 			{
 				"<leader>Of",
@@ -69,12 +69,17 @@ return {
 			{
 				"<leader>Oe",
 				":ObsidianExtractNote<CR>",
-				desc = "Extract selected text to note",
+				desc = "Extract selected text to file",
 			},
 			{
 				"<leader>Od",
 				":ObsidianToday<CR>",
 				desc = "New/Open daily note",
+			},
+			{
+				"<leader>Ot",
+				":ObsidianTOC<CR>",
+				desc = "Open TOC for current file",
 			},
 		},
 	},
