@@ -53,27 +53,27 @@ return {
 			},
 			{
 				"<leader>On",
-				":ObsidianNewFromTemplate note<cr>",
+				":ObsidianNewFromTemplate note<CR>",
 				desc = "New Obsidian note from template",
 			},
 			{
 				"<leader>Of",
-				":ObsidianQuickSwitch<cr>",
+				":ObsidianQuickSwitch<CR>",
 				desc = "Find in Obsidian vault",
 			},
 			{
 				"<leader>Os",
-				":ObsidianSearch<cr>",
+				":ObsidianSearch<CR>",
 				desc = "Search in Obsidian vault",
 			},
 			{
 				"<leader>Oe",
-				":ObsidianExtractNote<cr>",
+				":ObsidianExtractNote<CR>",
 				desc = "Extract selected text to note",
 			},
 			{
 				"<leader>Od",
-				":ObsidianTodaycr>",
+				":ObsidianToday<CR>",
 				desc = "New/Open daily note",
 			},
 		},
