@@ -29,7 +29,7 @@ require("lazy").setup({
 		{ import = "lazyvim.plugins.extras.editor.harpoon2" },
 		{ import = "lazyvim.plugins.extras.editor.inc-rename" },
 		{ import = "lazyvim.plugins.extras.editor.refactoring" },
-		{ import = "lazyvim.plugins.extras.editor.telescope" },
+		--		{ import = "lazyvim.plugins.extras.editor.telescope" },
 		{ import = "lazyvim.plugins.extras.lang.clangd" },
 		{ import = "lazyvim.plugins.extras.lang.cmake" },
 		{ import = "lazyvim.plugins.extras.lang.docker" },

@@ -41,9 +41,9 @@ vim.keymap.set("n", "gf", function()
 end, { noremap = false, expr = true })
 
 -- chezmoi/telescope integration
-local telescope = require("telescope")
-telescope.load_extension("chezmoi")
-vim.keymap.set("n", "<leader>cz", telescope.extensions.chezmoi.find_files, {})
+-- local telescope = require("telescope")
+-- telescope.load_extension("chezmoi")
+-- vim.keymap.set("n", "<leader>cz", telescope.extensions.chezmoi.find_files, {})
 
 --
 -- IntelliJ Keymaps - WIP
