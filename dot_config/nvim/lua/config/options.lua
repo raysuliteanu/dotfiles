@@ -12,18 +12,25 @@ vim.opt.clipboard = "unnamedplus"
 
 -- indent new line with previous
 vim.opt.breakindent = true
+
 vim.opt.undofile = true
+
 -- ignore case unless search starts with \C
 vim.opt.ignorecase = true
+
 -- :help smartcase ... e.g. even if ignorecase true,
 -- if search is all caps, will search only all caps
 vim.opt.smartcase = true
+
 vim.opt.signcolumn = "yes"
+
 -- time in millis after idle to update swapfile (default 4000)
 vim.opt.updatetime = 250
+
 -- time in millis for mapped sequence to complete
 -- (or with which-key plugin to show popup with options)
 vim.opt.timeoutlen = 500
+
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.list = true
