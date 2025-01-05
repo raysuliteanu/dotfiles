@@ -1,0 +1,12 @@
+theme = catppuccin-latte
+
+keybind = ctrl+shift+l=new_split:left
+keybind = ctrl+shift+j=new_split:down
+keybind = ctrl+shift+h=new_split:right
+keybind = ctrl+shift+k=new_split:up
+
+keybind = ctrl+alt+k=goto_split:top
+keybind = ctrl+alt+j=goto_split:bottom
+keybind = ctrl+alt+h=goto_split:left
+keybind = ctrl+alt+l=goto_split:right
+
