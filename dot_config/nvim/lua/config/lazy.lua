@@ -16,12 +16,13 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	spec = {
-		-- add LazyVim and import its plugins
-		-- the lazyvim.plugins adds a ton of stuff; most is nice
-		-- and you can disable plugins (see ../plugins/diabled.lua)
-		-- but would it be better to just import the core plugins
-		-- individually?
-		{ "LazyVim/LazyVim", import = "lazyvim.plugins" },
+		{
+			"LazyVim/LazyVim",
+			import = "lazyvim.plugins",
+			opts = {
+				colorscheme = "catppuccin-latte",
+			},
+		},
 
 		{ import = "lazyvim.plugins.extras.coding.yanky" },
 		{ import = "lazyvim.plugins.extras.dap.core" },
@@ -60,8 +61,8 @@ require("lazy").setup({
 		lazy = false,
 		-- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
 		-- have outdated releases, which may break your Neovim install.
-		-- version = false, -- always use the latest git commit
-		version = "*", -- try installing the latest stable version for plugins that support semver
+		version = false, -- always use the latest git commit
+		-- version = "*", -- try installing the latest stable version for plugins that support semver
 	},
 	checker = {
 		enabled = true, -- check for plugin updates periodically
