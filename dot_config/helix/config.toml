@@ -1,0 +1,17 @@
+theme = "catppuccin_latte"
+
+[editor]
+line-number = "relative"
+default-line-ending = "lf"
+popup-border = "menu"
+color-modes = true
+true-color = true
+
+[editor.statusline]
+center = ["version-control", "file-type"]
+
+[editor.lsp]
+display-inlay-hints = true
+
+[editor.indent-guides]
+render = true
