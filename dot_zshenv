@@ -7,7 +7,9 @@ fi
 
 export PAGER='less -F'
 export EDITOR=vi
-export BAT_THEME=Coldark-Dark
+
+export BAT_PAGER=$PAGER
+export BAT_THEME=GitHub
 
 export XDG_DATA_DIRS="/home/linuxbrew/.linuxbrew/share:$XDG_DATA_DIRS"
 
