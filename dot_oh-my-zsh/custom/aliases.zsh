@@ -34,7 +34,7 @@ a more='less -F'
 a less='less -F'
 #a top='btm --color=nord-light'
 a top=bpytop
-a cat='bat --theme=ansi'
+a cat='bat --pager="less -F" --theme=ansi'
 a curl=curlie
 a e=emacs
 a du=dust
