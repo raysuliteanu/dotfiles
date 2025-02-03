@@ -8,7 +8,7 @@ $git_branch\
 $git_status\
 [](fg:#394260 bg:#212736)\
 $direnv\
-[](fg:#769ff0 bg:#394260)\
+[](fg:#394260 bg:#212736)\
 $c\
 $golang\
 $gradle\
@@ -24,7 +24,6 @@ $time\
 
 [direnv]
 disabled = false
-style = "bold orange"
 
 [directory]
 style = "fg:#e3e5e5 bg:#769ff0"
