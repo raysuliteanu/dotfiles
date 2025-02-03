@@ -7,8 +7,9 @@ $directory\
 $git_branch\
 $git_status\
 [](fg:#394260 bg:#212736)\
-$c\
 $direnv\
+[](fg:#769ff0 bg:#394260)\
+$c\
 $golang\
 $gradle\
 $haskell\
