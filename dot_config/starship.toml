@@ -4,8 +4,6 @@ $os\
 [](bg:#769ff0 fg:#a3aed2)\
 $directory\
 [](fg:#769ff0 bg:#394260)\
-$direnv\
-[](fg:#394260 bg:#212736)\
 $git_branch\
 $git_status\
 [](fg:#394260 bg:#212736)\
