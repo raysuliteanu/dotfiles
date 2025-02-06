@@ -22,3 +22,11 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 		vim.schedule(edit_watch)
 	end,
 })
+
+-- Set colorcolumn=80 only for markdown files
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "markdown",
+	callback = function()
+		vim.opt_local.colorcolumn = "80"
+	end,
+})
