@@ -2,9 +2,10 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
-vim.keymap.set("n", "\\", "<cmd>Neotree toggle<cr>", { desc = "Toggle file tree viewer" })
+-- vim.keymap.set("n", "\\", "<cmd>Neotree toggle<cr>", { desc = "Toggle file tree viewer" })
 
 -- from Primeagen https://raw.githubusercontent.com/ThePrimeagen/init.lua/master/lua/theprimeagen/remap.lua
+
 -- move selected text up and down like IntelliJ <c-shift-up/down>
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -16,9 +17,10 @@ vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
--- greatest remap ever
+-- paste over selected text without 'destroying' what's in the default register
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
+-- disable Ex mode
 vim.keymap.set("n", "Q", "<nop>")
 
 -- end Primeagen
