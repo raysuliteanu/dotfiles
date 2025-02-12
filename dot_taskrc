@@ -1,5 +1,5 @@
 # [Created by task 3.1.0 8/18/2024 10:47:42]
-news.version=3.1.0
+news.version=3.3.0
 
 # To use the default location of the XDG directories,
 # move this configuration file from ~/.taskrc to ~/.config/task/taskrc and update location config as follows:
