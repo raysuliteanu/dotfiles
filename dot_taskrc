@@ -1,16 +1,16 @@
 # [Created by task 3.1.0 8/18/2024 10:47:42]
-data.location=/home/ray/.task
 news.version=3.1.0
 
 # To use the default location of the XDG directories,
 # move this configuration file from ~/.taskrc to ~/.config/task/taskrc and update location config as follows:
 
-#data.location=~/.local/share/task
-#hooks.location=~/.config/task/hooks
+#data.location=/home/ray/.task
+data.location=~/.local/share/task
+hooks.location=~/.config/task/hooks
 
 # Color theme (uncomment one to use)
 #include light-16.theme
-#include light-256.theme
+include light-256.theme
 #include dark-16.theme
 #include dark-256.theme
 #include dark-red-256.theme
@@ -23,4 +23,4 @@ news.version=3.1.0
 #include solarized-dark-256.theme
 #include solarized-light-256.theme
 #include no-color.theme
-include bubblegum-256.theme
+#include bubblegum-256.theme
