@@ -1,3 +1,4 @@
+local vpath = vim.fn.expand("~") .. "/Documents/Obsidian/Ray"
 return {
 	{
 		"epwalsh/obsidian.nvim",
@@ -10,19 +11,19 @@ return {
 			-- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
 			-- refer to `:h file-pattern` for more examples
 			"BufReadPre "
-				.. vim.fn.expand("~")
-				.. "/Documents/Obsidian/Ray/**/*.md",
-			"BufNewFile " .. vim.fn.expand("~") .. "/Documents/Obsidian/Ray/**/*.md",
+				.. vpath
+				.. "/**/*.md",
+			"BufNewFile " .. vpath .. "/**/*.md",
 		},
 		dependencies = {
-			"nvim-lua/plenary.nvim",
+			"echasnovski/mini.pick",
 		},
 		config = function()
 			require("obsidian").setup({
 				workspaces = {
 					{
 						name = "Ray",
-						path = "/home/ray/Documents/Obsidian/Ray",
+						path = vpath,
 					},
 				},
 				notes_subdir = "Resources/Notes",
@@ -43,13 +44,17 @@ return {
 					-- see plugins/markdown.lua
 					enable = false,
 				},
+				picker = {
+					-- Set your preferred picker. Can be one of 'telescope.nvim', 'fzf-lua', or 'mini.pick'.
+					name = "mini.pick",
+				},
 			})
 		end,
 		-- defaults to [n]ormal mode if not specified
 		keys = {
 			{
 				"<leader>ov",
-				":cd /home/ray/Documents/Obsidian/Ray<CR>:ObsidianQuickSwitch<CR>",
+				":cd " .. vpath .. "<CR>:ObsidianQuickSwitch<CR>",
 				desc = "Open Obsidian vault",
 			},
 			{
