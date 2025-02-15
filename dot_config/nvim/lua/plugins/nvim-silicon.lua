@@ -22,7 +22,7 @@ return {
 				local vpath = vim.fn.expand("~") .. "/Pictures/Screenshots/"
 				local buf_name = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
 				local fname = vim.fn.fnamemodify(buf_name, ":t")
-				return vpath .. fname .. "-" .. os.date("!%Y-%m-%dT%H-%M-%S") .. ".png"
+				return vpath .. fname .. "-" .. os.date("!%Y%m%d-%H%M%S") .. ".png"
 			end,
 		})
 	end,
