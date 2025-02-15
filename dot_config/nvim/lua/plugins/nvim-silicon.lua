@@ -15,11 +15,14 @@ return {
 			pad_vert = 0,
 			window_title = function()
 				local buf_name = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
-				return vim.fn.fnamemodify(buf_name, ":t")
+				local fname = vim.fn.fnamemodify(buf_name, ":t")
+				return fname
 			end,
 			output = function()
 				local vpath = vim.fn.expand("~") .. "/Pictures/Screenshots/"
-				return vpath .. os.date("!%Y-%m-%dT%H-%M-%S") .. ".png"
+				local buf_name = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
+				local fname = vim.fn.fnamemodify(buf_name, ":t")
+				return vpath .. fname .. "-" .. os.date("!%Y-%m-%dT%H-%M-%S") .. ".png"
 			end,
 		})
 	end,
