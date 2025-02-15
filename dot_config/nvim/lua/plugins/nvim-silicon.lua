@@ -22,13 +22,5 @@ return {
 				return vpath .. os.date("!%Y-%m-%dT%H-%M-%S") .. ".png"
 			end,
 		})
-
-		-- take a screenshot of selectionm with ctrl-t
-		vim.keymap.set(
-			"v",
-			"<C-t>",
-			":Silicon<CR>",
-			{ noremap = false, silent = false, desc = "[t]ake screenshot from selection" }
-		)
 	end,
 }
