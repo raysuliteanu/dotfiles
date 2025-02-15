@@ -41,3 +41,10 @@ vim.keymap.set("n", "gf", function()
 		return "gf"
 	end
 end, { noremap = false, expr = true })
+
+vim.keymap.set(
+	"v",
+	"<C-t>",
+	":Silicon<CR>",
+	{ noremap = false, silent = false, desc = "[t]ake screenshot from selection" }
+)
