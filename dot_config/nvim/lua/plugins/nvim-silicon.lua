@@ -5,9 +5,9 @@ return {
 	cmd = "Silicon",
 	config = function()
 		require("nvim-silicon").setup({
-			background = "#ff0000",
+			-- background = "#000000",
 			-- for list of themes available use `silicon --list-themes`
-			theme = "GitHub",
+			theme = "gruvbox-dark",
 			-- for list of fonts installed use `fc-list`
 			font = "JetBrainsMonoNLNerdFontMono-ExtraBold",
 			no_window_controls = true,
