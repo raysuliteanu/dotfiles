@@ -6,6 +6,7 @@ default-line-ending = "lf"
 popup-border = "menu"
 color-modes = true
 true-color = true
+clipboard-provider = "x-clip"
 
 [editor.statusline]
 center = ["version-control", "file-type"]
@@ -13,8 +14,16 @@ center = ["version-control", "file-type"]
 [editor.lsp]
 display-inlay-hints = true
 
+[editor.inline-diagnostics]
+cursor-line = "hint"
+other-lines = "hint"
+
 [editor.indent-guides]
 render = true
 
 [editor.file-picker]
 hidden = false
+
+[keys.normal]
+# like (neo)vim
+G = "goto_file_end"
