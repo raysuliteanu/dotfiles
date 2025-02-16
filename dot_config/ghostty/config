@@ -10,3 +10,6 @@ keybind = ctrl+alt+j=goto_split:bottom
 keybind = ctrl+alt+h=goto_split:left
 keybind = ctrl+alt+l=goto_split:right
 
+font-family = "JetBrainsMono Nerd Font"
+
+clipboard-read = allow
