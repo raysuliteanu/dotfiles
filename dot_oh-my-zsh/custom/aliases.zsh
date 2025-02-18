@@ -9,10 +9,10 @@ a cs="chezmoi status"
 a ca="chezmoi apply"
 a cpush="chezmoi git push"
 
-a vi=nvim
-a vim=nvim
-a v=nvim
-a view='nvim -R'
+a vi=~/nvim-linux-x86_64/bin/nvim
+a vim=vi
+a v=vi
+a view='vi -R'
 
 a b=brew
 a bs='b search'
