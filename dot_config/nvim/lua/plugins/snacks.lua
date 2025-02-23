@@ -1,4 +1,3 @@
--- local home = vim.fn.expand("~")
 return {
 	{
 		"folke/snacks.nvim",
