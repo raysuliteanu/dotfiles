@@ -4,12 +4,13 @@ return {
 		---@type snacks.Config
 		opts = {
 			dashboard = {
+				enabled = true,
 				sections = {
 					{ section = "header" },
 					{
 						pane = 2,
 						section = "terminal",
-						cmd = "colorscript -e square",
+						cmd = "colorscript -e tiefighter1row",
 						height = 5,
 						padding = 1,
 					},
