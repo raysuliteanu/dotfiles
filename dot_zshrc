@@ -94,7 +94,7 @@ source $ZSH/oh-my-zsh.sh
 # Rust
 . "$HOME/.cargo/env"
 
-EDITOR=nvim
+EDITOR=vim
 
 BREW_PREFIX=$(brew --prefix)
 
