@@ -18,6 +18,7 @@
 	line-numbers = true
 	hyperlinks = true
 	side-by-side = true
+    syntax-theme = GitHub
     grep-output-type = ripgrep
 
 [merge]
