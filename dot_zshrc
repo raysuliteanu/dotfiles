@@ -199,7 +199,7 @@ export PATH=$PATH:$BREW_PREFIX/lib/ruby/gems/3.3.0/bin
 
 set -o ignoreeof
 
-if [ ! -v GITHUB_TOKEN ]
+if [ ! -v GITHUB_TOKEN ]; then
     export GITHUB_TOKEN=$(gh auth token)
 fi
 
