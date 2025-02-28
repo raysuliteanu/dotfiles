@@ -1,10 +1,17 @@
 [init]
 	defaultBranch = trunk
+[column]
+        ui = auto
+[branch]
+        sort = -committerdate
+[tag]
+        sort = version:refname
 [user]
 	signingkey = 25BCE3C253935ABE
 	email = raysuliteanu@gmail.com
 	name = Ray Suliteanu
 [commit]
+        verbose = true
 	gpgsign = true
 [core]
 	autocrlf = input
@@ -25,7 +32,10 @@
 	conflictstyle = diff3
 
 [diff]
-	colorMoved = default
+        algorithm = histogram
+	colorMoved = plain
+        mnemonicPrefix = true
+        renames = true
 
 [alias]
 	co = checkout
@@ -33,12 +43,23 @@
 
 [rerere]
 	enabled = true
+	autoupdate = true
 
 [pull]
 	rebase = false
 
 [push]
   autoSetupRemote = true
+        default = simple
+        followtags = true
+
+[fetch]
+        prune = true
+        pruneTags = true
+        all = true
+
+[help]
+        autocorrect = prompt
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -48,3 +69,6 @@
 
 [rebase]
 	updateRefs = true
+	autoSquash = true
+        autoStash = true
+
