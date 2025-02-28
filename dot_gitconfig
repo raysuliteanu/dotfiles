@@ -1,74 +1,62 @@
 [init]
-	defaultBranch = trunk
+    defaultBranch = trunk
 [column]
-        ui = auto
+    ui = auto
 [branch]
-        sort = -committerdate
+    sort = -committerdate
 [tag]
-        sort = version:refname
+    sort = version:refname
 [user]
-	signingkey = 25BCE3C253935ABE
-	email = raysuliteanu@gmail.com
-	name = Ray Suliteanu
+    signingkey = 25BCE3C253935ABE
+    email = raysuliteanu@gmail.com
+    name = Ray Suliteanu
 [commit]
-        verbose = true
-	gpgsign = true
+    verbose = true
+    gpgsign = true
 [core]
-	autocrlf = input
-	pager = delta
-
+    autocrlf = input
+    pager = delta
 [interactive]
-	diffFilter = delta --color-only
-
+    diffFilter = delta --color-only
 [delta]
-	navigate = true    # use n and N to move between diff sections
-	line-numbers = true
-	hyperlinks = true
-	side-by-side = true
+    navigate = true    # use n and N to move between diff sections
+    line-numbers = true
+    hyperlinks = true
+    side-by-side = true
     syntax-theme = GitHub
     grep-output-type = ripgrep
-
 [merge]
-	conflictstyle = diff3
-
+    conflictstyle = diff3
 [diff]
-        algorithm = histogram
-	colorMoved = plain
-        mnemonicPrefix = true
-        renames = true
-
+    algorithm = histogram
+    colorMoved = plain
+    mnemonicPrefix = true
+    renames = true
 [alias]
-	co = checkout
-	sw = switch
-
+    co = checkout
+    sw = switch
 [rerere]
-	enabled = true
-	autoupdate = true
-
+    enabled = true
+    autoupdate = true
 [pull]
-	rebase = false
-
+    rebase = false
 [push]
-  autoSetupRemote = true
-        default = simple
-        followtags = true
-
+    autoSetupRemote = true
+    default = simple
+    followtags = true
 [fetch]
-        prune = true
-        pruneTags = true
-        all = true
-
+    prune = true
+    pruneTags = true
+    all = true
 [help]
-        autocorrect = prompt
-
+    autocorrect = prompt
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
 [rebase]
-	updateRefs = true
-	autoSquash = true
-        autoStash = true
+    updateRefs = true
+    autoSquash = true
+    autoStash = true
 
