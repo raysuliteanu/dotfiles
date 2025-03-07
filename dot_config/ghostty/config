@@ -11,5 +11,8 @@ keybind = ctrl+alt+h=goto_split:left
 keybind = ctrl+alt+l=goto_split:right
 
 font-family = "JetBrainsMono Nerd Font"
+font-size = 16
 
 clipboard-read = allow
+mouse-hide-while-typing = true
+window-save-state = default
