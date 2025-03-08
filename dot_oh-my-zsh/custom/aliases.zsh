@@ -15,12 +15,12 @@ a v=vi
 a view='vi -R'
 
 a b=brew
-a bs='b search'
-a bi='b info'
-a bl='b list'
-a bu='b update'
-a bcl='b cleanup'
-a bo='b outdated'
+a bs='brew search'
+a bi='brew info'
+a bl='brew list'
+a bu='brew update'
+a bcl='brew cleanup'
+a bo='brew outdated'
 a ba='brew autoremove'
 a bsl='brew services list'
 a bsoff='brew services stop'
@@ -49,8 +49,8 @@ a docker-use-context='docker context use $(docker context ls -q | fzf --height=1
 a ls='eza --git'
 a l='ls -l'
 a ll='ls -l'
-a la='ll -a'
-a lR='ls -R'
+a la='ls -la'
+a lR='ls -lR'
 # when using exa to sort by timestamp it's '-sold' not '-t'
 a lrt='ls -lr -sold'
 a lart='ls -lar -sold'
@@ -65,6 +65,6 @@ a obs="fd -E .git -e .md --base-directory ~/Documents/Obsidian/Ray . | fzf --pre
 
 # taskwarrior
 a t=task
-a ta='t add'
-a tls='t list'
-a tc='t calendar'
+a ta='task add'
+a tls='task list'
+a tc='task calendar'
