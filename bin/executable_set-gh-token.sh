@@ -1,6 +1,7 @@
 #!/bin/bash
 
 if [ ! -v GITHUB_TOKEN ]; then
-    export GITHUB_TOKEN=$(gh auth token)
+    GITHUB_TOKEN=$(gh auth token)
+    export GITHUB_TOKEN
 fi
 
