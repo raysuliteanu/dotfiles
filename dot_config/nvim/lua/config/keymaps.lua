@@ -49,3 +49,6 @@ vim.keymap.set(
 	":Silicon<CR>",
 	{ noremap = false, silent = false, desc = "[t]ake screenshot from selection" }
 )
+
+-- Cloak.nvim keybindings
+vim.keymap.set("n", "<leader>ct", "<cmd>CloakToggle<cr>")
