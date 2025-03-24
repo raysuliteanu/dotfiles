@@ -1,8 +1,10 @@
 return {
 	"sotte/presenting.nvim",
-	opts = {
-		-- fill in your options here
-		-- see :help Presenting.config
+	config = {
+		separator = {
+			markdown = "^---$",
+		},
+		keep_separator = false,
 	},
 	cmd = { "Presenting" },
 }
