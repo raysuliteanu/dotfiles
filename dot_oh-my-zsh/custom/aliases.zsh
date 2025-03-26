@@ -10,6 +10,7 @@ a ca="chezmoi apply"
 a cpush="chezmoi git push"
 
 # a vi=~/nvim-linux-x86_64/bin/nvim
+a vi=nvim
 a vim=vi
 a v=vi
 a view='vi -R'
