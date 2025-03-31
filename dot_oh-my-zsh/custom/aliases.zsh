@@ -42,6 +42,7 @@ a du=dust
 a fd='fd -H'
 a cd=z
 a lg=lazygit
+a rg='rg -i'
 
 a dps='docker ps'
 a ds='docker search'
@@ -69,3 +70,4 @@ a t=task
 a ta='task add'
 a tls='task list'
 a tc='task calendar'
+a to=taskopen
