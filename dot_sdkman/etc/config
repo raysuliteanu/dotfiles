@@ -9,3 +9,5 @@ sdkman_curl_max_time=10
 sdkman_debug_mode=false
 sdkman_insecure_ssl=false
 sdkman_selfupdate_feature=true
+sdkman_native_enable=true
+sdkman_auto_update=true
