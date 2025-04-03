@@ -112,7 +112,7 @@ if [ -e $HOME/.config/op/plugins.sh ]; then
   source $HOME/.config/op/plugins.sh
 fi
 
-if [ -n "$SSH_TTY ]; then
+if [ -n "$SSH_TTY" ]; then
   export SSH_AUTH_SOCK=""
   export SSH_ASKPASS=""
 else [ -e $HOME/.1password/agent.sock ]; then
