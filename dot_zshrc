@@ -113,11 +113,13 @@ if [ -e $HOME/.config/op/plugins.sh ]; then
 fi
 
 if [ -n "$SSH_TTY" ]; then
+  echo "logging in via ssh"
   export SSH_AUTH_SOCK=""
   export SSH_ASKPASS=""
 elif [ -e $HOME/.1password/agent.sock ]; then
   # use 1Password's as ssh-agent
   SSH_AUTH_SOCK=$HOME/.1password/agent.sock
+  export SSH_ASKPASS="/usr/bin/ssh-askpass"
 fi
 
 source <(fzf --zsh)
