@@ -112,8 +112,11 @@ if [ -e $HOME/.config/op/plugins.sh ]; then
   source $HOME/.config/op/plugins.sh
 fi
 
-# use 1Password's as ssh-agent
-if [ -e $HOME/.1password/agent.sock ]; then
+if [ -n "$SSH_TTY ]; then
+  export SSH_AUTH_SOCK=""
+  export SSH_ASKPASS=""
+else [ -e $HOME/.1password/agent.sock ]; then
+  # use 1Password's as ssh-agent
   SSH_AUTH_SOCK=$HOME/.1password/agent.sock
 fi
 
