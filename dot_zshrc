@@ -115,7 +115,7 @@ fi
 if [ -n "$SSH_TTY" ]; then
   export SSH_AUTH_SOCK=""
   export SSH_ASKPASS=""
-else [ -e $HOME/.1password/agent.sock ]; then
+elif [ -e $HOME/.1password/agent.sock ]; then
   # use 1Password's as ssh-agent
   SSH_AUTH_SOCK=$HOME/.1password/agent.sock
 fi
