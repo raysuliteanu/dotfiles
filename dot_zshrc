@@ -100,8 +100,6 @@ BREW_PREFIX=$(brew --prefix)
 
 PATH=$PATH:$HOME/bin:$HOME/.local/share/JetBrains/Toolbox/scripts:$HOME/.local/bin
 
-GROOVY_HOME=$BREW_PREFIX/opt/groovy/libexec
-
 # Kafka
 KAFKA_HOME=$BREW_PREFIX/opt/kafka/libexec
 KAFKA_CLUSTER_ID=GYD7shokQV6Qf3NKao-Fvg
@@ -113,9 +111,9 @@ if [ -e $HOME/.config/op/plugins.sh ]; then
 fi
 
 if [ -n "$SSH_TTY" ]; then
-  echo "logging in via ssh"
   unset SSH_AUTH_SOCK
-  unset SSH_ASKPASS
+  # normally gh is aliased to 'op plugin run -- gh' to use 1Password CLI
+  # can't use that when just a terminal because no GUI
   unalias gh
 elif [ -e $HOME/.1password/agent.sock ]; then
   # use 1Password's as ssh-agent
