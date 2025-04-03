@@ -1,6 +1,6 @@
 return {
 	"sotte/presenting.nvim",
-	config = {
+	opts = {
 		separator = {
 			markdown = "^---$",
 		},
