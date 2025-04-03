@@ -116,6 +116,7 @@ if [ -n "$SSH_TTY" ]; then
   echo "logging in via ssh"
   unset SSH_AUTH_SOCK
   unset SSH_ASKPASS
+  unalias gh
 elif [ -e $HOME/.1password/agent.sock ]; then
   # use 1Password's as ssh-agent
   SSH_AUTH_SOCK=$HOME/.1password/agent.sock
