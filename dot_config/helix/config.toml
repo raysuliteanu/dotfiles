@@ -6,7 +6,7 @@ default-line-ending = "lf"
 popup-border = "menu"
 color-modes = true
 true-color = true
-clipboard-provider = "x-clip"
+#clipboard-provider = "x-clip"
 
 [editor.statusline]
 center = ["version-control", "file-type"]
@@ -22,7 +22,7 @@ other-lines = "hint"
 render = true
 
 [editor.file-picker]
-hidden = false
+#hidden = false
 
 [keys.normal]
 # like (neo)vim
