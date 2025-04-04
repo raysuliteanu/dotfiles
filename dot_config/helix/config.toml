@@ -35,6 +35,8 @@ e = [
   ":insert-output echo \"x1b[?1049h\" > /dev/tty",
   ":open %sh{cat /tmp/unique-file-h21a434}",
   ":redraw",
+  ":set mouse false",
+  ":set mouse true",
 ]
 E = [
   ":sh rm -f /tmp/unique-file-u41ae14",
@@ -42,4 +44,6 @@ E = [
   ":insert-output echo \"x1b[?1049h\" > /dev/tty",
   ":open %sh{cat /tmp/unique-file-u41ae14}",
   ":redraw",
+  ":set mouse false",
+  ":set mouse true",
 ]
