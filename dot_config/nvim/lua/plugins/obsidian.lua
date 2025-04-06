@@ -53,37 +53,37 @@ return {
 		-- defaults to [n]ormal mode if not specified
 		keys = {
 			{
-				"<leader>ov",
+				"<leader>Ov",
 				":cd " .. vpath .. "<CR>:ObsidianQuickSwitch<CR>",
 				desc = "Open Obsidian vault",
 			},
 			{
-				"<leader>on",
+				"<leader>On",
 				":ObsidianNewFromTemplate note<CR>",
 				desc = "New Obsidian note",
 			},
 			{
-				"<leader>of",
+				"<leader>Of",
 				":ObsidianQuickSwitch<CR>",
 				desc = "Find in Obsidian vault",
 			},
 			{
-				"<leader>os",
+				"<leader>Os",
 				":ObsidianSearch<CR>",
 				desc = "Search in Obsidian vault",
 			},
 			{
-				"<leader>oe",
+				"<leader>Oe",
 				":ObsidianExtractNote<CR>",
 				desc = "Extract selected text to file",
 			},
 			{
-				"<leader>od",
+				"<leader>Od",
 				":ObsidianToday<CR>",
 				desc = "New/Open daily note",
 			},
 			{
-				"<leader>ot",
+				"<leader>Ot",
 				":ObsidianTOC<CR>",
 				desc = "Open TOC for current file",
 			},
