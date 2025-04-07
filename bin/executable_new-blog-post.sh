@@ -14,4 +14,4 @@ OBS_VAULT=$HOME/Documents/kidoni.dev
 TEMPLATE=$OBS_VAULT/blog-template.md
 BLOG_FILE=$OBS_VAULT/content/$FILE_NAME
 
-vi +":r $TEMPLATE" "$BLOG_FILE"
+nvim +":r $TEMPLATE" "$BLOG_FILE"
