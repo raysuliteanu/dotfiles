@@ -13,9 +13,6 @@
 [commit]
     verbose = true
     gpgsign = true
-
-# `delta` exists only on linux
-{{ if eq .chezmoi.os "linux" }}
 [core]
     pager = delta
 [interactive]
@@ -27,8 +24,6 @@
     side-by-side = true
     syntax-theme = GitHub
     grep-output-type = ripgrep
-{{ end }}
-
 [merge]
     conflictstyle = diff3
 [diff]
