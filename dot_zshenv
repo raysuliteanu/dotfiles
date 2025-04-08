@@ -4,6 +4,7 @@ if [ -n "$TMUX" ]; then
 fi
 
 . "$HOME/.cargo/env"
+export CARGO_TARGET_DIR="$HOME/.cargo-target"
 
 export PAGER='less -F'
 export EDITOR=vi
