@@ -34,14 +34,6 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 -- NOTE: This won't work in all terminal emulators/tmux/etc.
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
-vim.keymap.set("n", "gf", function()
-	if require("obsidian").util.cursor_on_markdown_link() then
-		return "<cmd>ObsidianFollowLink<CR>"
-	else
-		return "gf"
-	end
-end, { noremap = false, expr = true })
-
 -- take a screenshot of selectionm with ctrl-t
 vim.keymap.set(
 	"v",
