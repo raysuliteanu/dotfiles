@@ -137,7 +137,7 @@ return {
 			min_chars = 3,
 		},
 	},
-	keys = {
+	mappings = {
 		{
 			"<leader>Ov",
 			":cd " .. vpath .. "<CR>:ObsidianQuickSwitch<CR>",
