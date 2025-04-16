@@ -68,6 +68,10 @@ a obs="fd -E .git -e .md --base-directory ~/Documents/Obsidian/Ray . | fzf --pre
 # taskwarrior
 a t=task
 a ta='task add'
-a tls='task list'
+a ts='task start'
+a tst='task stop'
+a td='task done'
+a tan='task annotate'
 a tc='task calendar'
+a tctx='task context'
 a to=taskopen
