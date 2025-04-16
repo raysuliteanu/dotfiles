@@ -39,11 +39,11 @@ return {
 			-- vim.cmd(':silent exec "!start ' .. url .. '"') -- Windows
 			vim.ui.open(url) -- need Neovim 0.10.0+
 		end,
-		-- ui = {
-		-- 	-- using MeanderingProgrammer/render-markdown.nvim
-		-- 	-- see plugins/markdown.lua
-		-- 	enable = false,
-		-- },
+		ui = {
+			-- using MeanderingProgrammer/render-markdown.nvim
+			-- see plugins/markdown.lua
+			enable = false,
+		},
 		picker = {
 			-- Set your preferred picker. Can be one of 'telescope.nvim', 'fzf-lua', or 'mini.pick'.
 			name = "snacks.pick",
