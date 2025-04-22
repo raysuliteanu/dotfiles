@@ -44,3 +44,6 @@ vim.keymap.set(
 
 -- Cloak.nvim keybindings
 vim.keymap.set("n", "<leader>ct", "<cmd>CloakToggle<cr>")
+
+-- Navigate to next diagnostic with F2
+vim.keymap.set("n", "<F2>", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
