@@ -24,3 +24,6 @@ include light-256.theme
 #include solarized-light-256.theme
 #include no-color.theme
 #include bubblegum-256.theme
+context.rust-lox.read=project:rust-lox +rust
+context.rust-lox.write=project:rust-lox +rust
+context=rust-lox
