@@ -1,0 +1,10 @@
+# A TOML linter such as https://taplo.tamasfe.dev/ can use this schema to validate your config.
+# If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
+"$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
+
+[manager]
+
+keymap = [
+  { on = ["g", "e"], run = "arrow bot", desc = "Go to bottom" },
+  # { on = "G",          run = "arrow bot", desc = "Go to bottom" },
+]
