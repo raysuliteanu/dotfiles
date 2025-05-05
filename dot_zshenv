@@ -7,7 +7,7 @@ fi
 export CARGO_TARGET_DIR="$HOME/.cargo-target"
 
 export PAGER='less -F'
-export EDITOR=vi
+export EDITOR=nvim
 
 export BAT_PAGER="$PAGER"
 export BAT_THEME=GitHub
