@@ -14,9 +14,11 @@ export BAT_THEME=GitHub
 
 export XDG_DATA_DIRS="/home/linuxbrew/.linuxbrew/share:$XDG_DATA_DIRS"
 
-export GPG_TTY=$(tty)
+export GPG_TTY="$(tty)"
 
 MOLD_PATH=$(which mold)
-if [ -e $MOLD_PATH ]; then
-  export LD=$MOLD_PATH
+if [ -e "$MOLD_PATH" ]; then
+  export LD="$MOLD_PATH"
 fi
+
+export HOMEBREW_NO_ENV_HINTS
