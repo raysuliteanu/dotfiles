@@ -24,8 +24,8 @@ bup() {
 }
 
 # Delete (one or multiple) selected application(s)
-# mnemonic [B]rew [R]remove [P]ackage (e.g. uninstall)
-bpp() {
+# mnemonic [B]rew [R]emove [P]ackage (e.g. uninstall)
+brp() {
   local uninst=$(brew leaves | fzf -m)
 
   if [[ $uninst ]]; then
