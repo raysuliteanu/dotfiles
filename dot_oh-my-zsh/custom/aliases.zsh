@@ -29,7 +29,6 @@ a bsl='brew services list'
 a bsoff='brew services stop'
 a bson='brew services start'
 a bsr='brew services run'
-a bup='brew upgrade'
 
 a h=history
 a c=clear
