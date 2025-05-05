@@ -78,4 +78,3 @@ a tc='task calendar'
 a tctx='task context'
 a to=taskopen
 
-a y=yazi
