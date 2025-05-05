@@ -1,10 +1,8 @@
 # some functions to combined brew with fzf
 
-# Install (one or multiple) selected application(s)
-# using "brew search" as source input
 # mnemonic [B]rew [I]nstall [P]ackage
 bip() {
-  local inst=$(brew search "$@" | fzf --layout=reverse-list -m)
+  local inst=$(brew search "$@" | fzf --layout=reverse-list --preview='brew info {}')
 
   if [[ $inst ]]; then
     for prog in $(echo $inst);
@@ -12,10 +10,9 @@ bip() {
   fi
 }
 
-# Update (one or multiple) selected application(s)
 # mnemonic [B]rew [U]pdate [P]ackage
 bup() {
-  local upd=$(brew leaves | fzf --layout=reverse-list -m)
+  local upd=$(brew leaves | fzf --layout=reverse-list --preview='brew info {}')
 
   if [[ $upd ]]; then
     for prog in $(echo $upd);
@@ -23,10 +20,9 @@ bup() {
   fi
 }
 
-# Delete (one or multiple) selected application(s)
 # mnemonic [B]rew [R]emove [P]ackage (e.g. uninstall)
 brp() {
-  local uninst=$(brew leaves | fzf --layout=reverse-list -m)
+  local uninst=$(brew leaves | fzf --layout=reverse-list --preview='brew info {}')
 
   if [[ $uninst ]]; then
     for prog in $(echo $uninst);
