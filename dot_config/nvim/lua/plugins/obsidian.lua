@@ -66,16 +66,6 @@ return {
 	},
 	keys = {
 		{
-			"<leader>Ov",
-			":cd " .. vpath .. "<CR>:ObsidianQuickSwitch<CR>",
-			desc = "Open Obsidian vault",
-		},
-		{
-			"<leader>On",
-			":ObsidianNewFromTemplate note<CR>",
-			desc = "New Obsidian note",
-		},
-		{
 			"<leader>Of",
 			":ObsidianQuickSwitch<CR>",
 			desc = "Find in Obsidian vault",
@@ -84,11 +74,6 @@ return {
 			"<leader>Os",
 			":ObsidianSearch<CR>",
 			desc = "Search in Obsidian vault",
-		},
-		{
-			"<leader>Oe",
-			":ObsidianExtractNote<CR>",
-			desc = "Extract selected text to file",
 		},
 		{
 			"<leader>Od",
