@@ -13,10 +13,6 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- join line with next but keep cursor at current location
 vim.keymap.set("n", "J", "mzJ`z")
 
--- when inc scroll, keep cursor centered on the page
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-
 -- paste over selected text without 'destroying' what's in the default register
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
