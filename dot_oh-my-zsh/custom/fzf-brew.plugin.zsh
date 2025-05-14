@@ -12,7 +12,7 @@ bip() {
 
 # mnemonic [B]rew [U]pdate [P]ackage
 bup() {
-  local upd=$(brew outdated -q | fzf --layout=reverse-list --preview='brew info {}')
+  local upd=$(brew outdated -q | fzf --layout=reverse-list --preview='brew info {}' -m)
 
   if [[ $upd ]]; then
     for prog in $(echo $upd);
