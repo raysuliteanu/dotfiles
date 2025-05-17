@@ -21,4 +21,4 @@ if [ -e "$MOLD_PATH" ]; then
   export LD="$MOLD_PATH"
 fi
 
-export HOMEBREW_NO_ENV_HINTS
+export HOMEBREW_NO_ENV_HINTS="true"
