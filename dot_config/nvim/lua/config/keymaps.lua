@@ -30,6 +30,7 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 -- NOTE: This won't work in all terminal emulators/tmux/etc.
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
+-- ToggleTerm mappings
 vim.keymap.set({ "n", "t" }, "<C-t>", "<cmd>ToggleTerm<CR>", { desc = "toggle terminal" })
 vim.keymap.set("v", "<C-t>", "<cmd>ToggleTermSendVisualSelection<CR>", { desc = "send selection to terminal" })
 
