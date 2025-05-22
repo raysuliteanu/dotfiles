@@ -31,15 +31,10 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- take a screenshot of selectionm with ctrl-t
-vim.keymap.set(
-	"v",
-	"<C-t>",
-	":Silicon<CR>",
-	{ noremap = false, silent = false, desc = "[t]ake screenshot from selection" }
-)
+vim.keymap.set("n", "<C-t>", "<cmd>ToggleTerm<CR>", { desc = "toggle terminal" })
 
 -- Cloak.nvim keybindings
-vim.keymap.set("n", "<leader>ct", "<cmd>CloakToggle<cr>")
+vim.keymap.set("n", "<leader>Ct", "<cmd>CloakToggle<cr>")
 
 -- Navigate to next diagnostic with F2
 vim.keymap.set("n", "<F2>", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
