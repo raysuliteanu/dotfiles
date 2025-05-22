@@ -7,5 +7,4 @@ search_dir=${1:-$(pwd)}
 export PATH=$(echo "$PATH" | sed 's/:$//')
 
 # Find directories with a file named 'gradlew' and execute 'gradlew clean' in those directories
-find "$search_dir" -type f -name "gradlew" -execdir ./gradlew -q clean \;
-
+find "$search_dir" -type f -name "gradlew" -execdir gradle -q clean \;
