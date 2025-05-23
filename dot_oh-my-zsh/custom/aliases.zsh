@@ -1,5 +1,7 @@
 alias a=alias
 
+a claude="/home/ray/.claude/local/claude"
+
 a tmuxconfig="chezmoi edit --apply ~/.config/tmux/tmux.conf"
 a zshconfig="chezmoi edit --apply ~/.zshrc"
 a zalias="chezmoi edit --apply ~/.oh-my-zsh/custom/aliases.zsh"
