@@ -5,7 +5,7 @@ email = "raysuliteanu@pm.me"
 [ui]
 default-command = "log"
 diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
-diff.format = "git"
+diff-formatter = ":git"
 pager = "delta"
 
 [git]
