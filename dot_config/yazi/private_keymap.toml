@@ -2,12 +2,12 @@
 # If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
 "$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["g", "r"]
 run = 'shell -- ya emit cd "$(git rev-parse --show-toplevel)"'
 desc = "Go to Git root dir"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["g", "e"]
 run = "arrow bot"
 desc = "Go to bottom"
