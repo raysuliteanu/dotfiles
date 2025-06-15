@@ -17,7 +17,7 @@ a cpush="cm git push"
 a vi=hx-latest
 a vim=hx-latest
 a v=hx-latest
-a view='vi -R'
+a view='nvim -R'
 
 a b=brew
 a bs='brew search'
