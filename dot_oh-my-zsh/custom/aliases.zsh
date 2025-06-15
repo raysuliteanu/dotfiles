@@ -14,9 +14,9 @@ a ca="cm apply"
 a cpush="cm git push"
 
 # a vi=~/nvim-linux-x86_64/bin/nvim
-a vi=nvim
-a vim=vi
-a v=vi
+a vi=hx-latest
+a vim=hx-latest
+a v=hx-latest
 a view='vi -R'
 
 a b=brew
