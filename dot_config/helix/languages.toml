@@ -1,3 +1,9 @@
 [[language]]
 name = "markdown"
 formatter = { command = "dprint", args = ["fmt", "--stdin", "md"] }
+
+[language-server.rust-analyzer.config.check]
+command = "clippy"
+
+[language-server.rust-analyzer.config.cargo]
+features = "all"
