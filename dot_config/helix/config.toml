@@ -37,6 +37,3 @@ C-y = [
     ':open %sh{cat /tmp/yazi-unique-file}',
     ':redraw',
 ]
-
-[keys.normal.t]
-r = ":sh mvn test"
