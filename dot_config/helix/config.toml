@@ -39,4 +39,4 @@ C-y = [
 ]
 
 [keys.normal.t]
-r = ":sh mvn test -Dtest=%{buffer_name}"
+r = ":sh mvn test"
