@@ -14,7 +14,15 @@ args = [
 
 [[language]]
 name = "markdown"
+language-servers = ["marksman", "mpls"]
+
+[language-server.marksman]
 formatter = { command = "dprint", args = ["fmt", "--stdin", "md"] }
+auto-format = true
+
+[language-server.mpls]
+command = "mpls"
+args = ["--enable-emoji", "--no-auto", "--enable-wikilinks"]
 
 [language-server.rust-analyzer.config.check]
 command = "clippy"

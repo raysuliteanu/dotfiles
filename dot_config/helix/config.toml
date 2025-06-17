@@ -37,3 +37,4 @@ C-y = [
     ':open %sh{cat /tmp/yazi-unique-file}',
     ':redraw',
 ]
+M = ':lsp-workspace-command open-preview'
