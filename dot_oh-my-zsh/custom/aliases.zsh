@@ -51,14 +51,14 @@ a dps='docker ps'
 a ds='docker search'
 a docker-use-context='docker context use $(docker context ls -q | fzf --height=10 --prompt="use context > ")'
 
-a ls='eza --icons --git --git-ignore'
+a ls='eza --icons --git'
 a l='ls -l'
 a ll='ls -l'
 a la='ls -la'
 a lR='ls -lR'
-# when using exa to sort by timestamp it's '-sold' not '-t'
-a lrt='ls -lr -sold'
-a lart='ls -lar -sold'
+# eza -snew == ls -rt
+a lrt='ls -l -snew'
+a lart='ls -la -snew'
 
 a warp='warp-terminal > /dev/null 2>&1 &'
 
