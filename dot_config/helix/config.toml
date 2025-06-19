@@ -30,11 +30,16 @@ insert = "bar"
 select = "underline"
 
 [keys.normal]
-C-y = [
-    ':sh rm -f /tmp/yazi-unique-file',
-    ':insert-output yazi %{buffer_name} --chooser-file=/tmp/yazi-unique-file',
-    ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
-    ':open %sh{cat /tmp/yazi-unique-file}',
-    ':redraw',
-]
 M = ':lsp-workspace-command open-preview'
+# C-y = [
+#     ':sh rm -f /tmp/yazi-unique-file',
+#     ':insert-output yazi %{buffer_name} --chooser-file=/tmp/yazi-unique-file',
+#     ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
+#     ':open %sh{cat /tmp/yazi-unique-file}',
+#     ':redraw',
+# ]
+# [keys.normal.space]
+# t = [
+#     ':new',
+#     ':insert-output cargo test',
+# ]
