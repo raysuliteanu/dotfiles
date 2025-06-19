@@ -1,0 +1,5 @@
+[keys.normal.space]
+t = [
+    ':new',
+    ':insert-output mvn test',
+]
