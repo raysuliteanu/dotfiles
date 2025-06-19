@@ -6,17 +6,16 @@ if [ $# -ne 1 ]; then
 fi
 
 case "$1" in
-    rust|mvn|gradle)
-        config_type="$1"
-        ;;
-    *)
-        echo "Error: Invalid argument. Must be one of: rust, mvn, gradle"
-        exit 1
-        ;;
+rust | mvn | gradle)
+    config_type="$1"
+    ;;
+*)
+    echo "Error: Invalid argument. Must be one of: rust, mvn, gradle"
+    exit 1
+    ;;
 esac
 
 mkdir -p .helix
 
-ln -sf ~/src/.helix/config-${config_type}.toml .helix/config.toml
-
-echo "Created symlink .helix/config.toml -> ~/src/.helix/config-${config_type}.toml"
+echo "ln -sf ${HOME}/src/.helix/config-${config_type}.toml .helix/config.toml"
+ln -sf "${HOME}"/src/.helix/config-"${config_type}".toml .helix/config.toml
