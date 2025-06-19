@@ -13,11 +13,10 @@ a cs="cm status"
 a ca="cm apply"
 a cpush="cm git push"
 
-# a vi=~/nvim-linux-x86_64/bin/nvim
-a vi=hx-latest
-a vim=hx-latest
-a v=hx-latest
-a view='nvim -R'
+a vi=nvim
+a vim=vi
+a v=vi
+a view='vi -R'
 
 a b=brew
 a bs='brew search'
