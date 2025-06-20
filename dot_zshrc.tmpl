@@ -142,7 +142,7 @@ _fzf_compgen_dir() {
 
 if [ -e ~/.fzf-git/fzf-git.sh ]; then
   source ~/.fzf-git/fzf-git.sh
- 
+
   gco() {
     _fzf_git_each_ref --no-multi | xargs git checkout
   }
@@ -209,6 +209,8 @@ eval "$(starship init zsh)"
 export PATH=$PATH:$BREW_PREFIX/lib/ruby/gems/3.3.0/bin
 
 set -o ignoreeof
+
+export ANTHROPIC_API_KEY={{onepasswordRead "op://Personal/Anthropic API Credential/credential" }}
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
