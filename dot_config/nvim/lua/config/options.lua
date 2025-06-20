@@ -42,3 +42,7 @@ vim.opt.hlsearch = true
 
 vim.opt.conceallevel = 1
 vim.opt.mouse = "a"
+
+-- From avante.nvim recommendation https://github.com/yetone/avante.nvim
+-- views can only be fully collapsed with the global statusline
+vim.opt.laststatus = 3
