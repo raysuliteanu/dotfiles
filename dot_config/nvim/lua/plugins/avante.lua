@@ -5,12 +5,20 @@ return {
     opts = {
         input = {
             provider = "snacks", -- "native" | "dressing" | "snacks"
-            provider_opts = {
-                -- Snacks input configuration
-                title = "Avante Input",
-                placeholder = "ENTER YOUR API key...",
-            },
         },
+        -- MCP Hub integration
+        -- https://ravitemer.github.io/mcphub.nvim/extensions/avante.html
+        system_prompt = function()
+            local hub = require("mcphub").get_hub_instance()
+            return hub and hub:get_active_servers_prompt() or ""
+        end,
+        custom_tools = function()
+            return {
+                require("mcphub.extensions.avante").mcp_tool(),
+            }
+        end,
+        -- Disable Avante's built-in tools to avoid conflicts with MCP Hub
+        -- https://ravitemer.github.io/mcphub.nvim/extensions/avante.html#tool-conflicts
         disabled_tools = {
             "list_files", -- Built-in file operations
             "search_files",
@@ -23,15 +31,6 @@ return {
             "delete_dir",
             "bash", -- Built-in terminal access
         },
-        -- provider = "openai", -- default is claude
-        -- openai = {
-        -- 	endpoint = "https://api.openai.com/v1",
-        -- 	model = "gpt-4o",
-        -- 	timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
-        -- 	temperature = 0,
-        -- 	max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
-        -- 	--reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
-        -- },
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
     build = "make",
