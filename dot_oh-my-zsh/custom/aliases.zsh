@@ -78,3 +78,6 @@ a tc='task calendar'
 a tctx='task context'
 a to=taskopen
 
+# codecrafters
+a ccs='codecrafters submit'
+a cct='codecrafters test'
