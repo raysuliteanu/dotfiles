@@ -8,6 +8,7 @@ $git_branch\
 $git_status\
 [](fg:#394260 bg:#212736)\
 $nix_shell\
+[](fg:#394260 bg:#212736)\
 $c\
 $golang\
 $gradle\
