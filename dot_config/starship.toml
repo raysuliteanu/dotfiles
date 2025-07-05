@@ -114,3 +114,4 @@ style = "bg:#86BBD8"
 [nix_shell]
 format = "[$symbol$state:($name)]($style)"
 style = "bg:#86BBD8"
+disabled = true
