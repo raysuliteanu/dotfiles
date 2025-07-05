@@ -7,6 +7,7 @@ $directory\
 $git_branch\
 $git_status\
 [](fg:#394260 bg:#212736)\
+$nix_shell\
 $c\
 $golang\
 $gradle\
@@ -15,6 +16,7 @@ $java\
 $nodejs\
 $rust\
 $scala\
+$terraform\
 $zig\
 [](fg:#212736 bg:#1d2230)\
 $time\
@@ -99,8 +101,15 @@ format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
 format = "[ $symbol]($style)"
 style = 'bold green'
 symbol = '👩‍💻 '
-disabled = false
+disabled = true
 
 [zig]
-format = '[ $symbol ($version) ]($style)'
+format = "[ $symbol ($version) ]($style)"
 style = "bg:#86BBD8"
+
+[terraform]
+format = "[🏎💨 $workspace]($style) "
+style = "bg:#86BBD8"
+
+[nix_shell]
+format = "[$symbol$state($name)]($style)"
