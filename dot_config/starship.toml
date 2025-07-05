@@ -6,7 +6,6 @@ $directory\
 [](fg:#769ff0 bg:#394260)\
 $git_branch\
 $git_status\
-[](fg:#394260 bg:#212736)\
 $nix_shell\
 [](fg:#394260 bg:#212736)\
 $c\
@@ -113,5 +112,5 @@ format = "[🏎💨 $workspace]($style) "
 style = "bg:#86BBD8"
 
 [nix_shell]
-format = "[$symbol $state:($name)]($style)"
+format = "[$symbol$state:($name)]($style)"
 style = "bg:#86BBD8"
