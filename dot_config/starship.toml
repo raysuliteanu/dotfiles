@@ -99,3 +99,7 @@ format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
 style = 'bold green'
 symbol = '👩‍💻 '
 disabled = false
+
+[zig]
+format = '[ $symbol ($version) ]($style)'
+style = "bg:#86BBD8"
