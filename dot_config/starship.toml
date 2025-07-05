@@ -41,7 +41,7 @@ truncation_symbol = "…/"
 
 [os]
 style = "bg:#9A348E"
-disabled = false     # Disabled by default
+disabled = false
 
 [git_branch]
 symbol = ""
@@ -112,5 +112,5 @@ format = "[🏎💨 $workspace]($style) "
 style = "bg:#86BBD8"
 
 [nix_shell]
-format = "[$symbol$state($name)]($style)"
+format = "[$symbol $state ($name)]($style)"
 style = "bg:#86BBD8"
