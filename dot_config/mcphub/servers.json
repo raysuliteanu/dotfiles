@@ -1,0 +1,44 @@
+{
+  "nativeMCPServers": {
+    "neovim": {
+      "disabled": false,
+      "autoApprove": [
+        "read_file",
+        "find_files",
+        "list_directory",
+        "write_file",
+        "replace_in_file"
+      ]
+    },
+    "mcphub": {
+      "autoApprove": [
+        "get_current_servers",
+        "toggle_mcp_server"
+      ]
+    }
+  },
+  "mcpServers": {
+    "github.com/modelcontextprotocol/servers/tree/main/src/git": {
+      "command": "/home/ray/.local/bin/uvx",
+      "autoApprove": [
+        "git_status",
+        "git_diff_unstaged",
+        "git_diff_staged",
+        "git_diff",
+        "git_log",
+        "git_checkout",
+        "git_show",
+        "git_add"
+      ],
+      "args": [
+        "mcp-server-git"
+      ]
+    },
+    "brew": {
+      "args": [
+        "mcp-server"
+      ],
+      "command": "brew"
+    }
+  }
+}
