@@ -1,7 +1,14 @@
 ---
 "editor_view:select_all": ctrl-shift-A
-"editor_view:insert_autosuggestion": tab
+"workspace:activate_prev_tab": none
+"terminal:select_all_blocks": none
 "editor_view:move_to_line_end": ctrl-e
-"workspace:toggle_ai_assistant": none
+"editor_view:insert_autosuggestion": tab
+"workspace:activate_next_tab": none
 "input:open_completion_suggestions": ctrl-space
 "editor_view:move_to_line_start": ctrl-a
+"workspace:toggle_ai_assistant": none
+"terminal:ask_ai_assistant": none
+"notebookview:focus_terminal_input": none
+"code_view:close_saved_tabs": none
+"code_view:close_all_tabs": none
