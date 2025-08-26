@@ -81,3 +81,4 @@ a to=taskopen
 # codecrafters
 a ccs='codecrafters submit'
 a cct='codecrafters test'
+a cctp='codecrafters test --previous'
