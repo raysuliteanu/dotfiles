@@ -1,6 +1,6 @@
 alias a=alias
 
-# a claude="/home/ray/.claude/local/claude"
+a claude="/home/ray/.claude/local/claude"
 
 a tmuxconfig="chezmoi edit --apply ~/.config/tmux/tmux.conf"
 a zshconfig="chezmoi edit --apply ~/.zshrc"
