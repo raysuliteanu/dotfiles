@@ -1,13 +1,15 @@
 return {
     {
-        "mason-org/mason-lspconfig.nvim",
-        version = "1.32.0",
+        "mason-org/mason.nvim",
+        version = "2.0.1",
         opts = {
-            ensure_installed = { "lua_ls", "rust_analyzer" },
-        },
-        dependencies = {
-            { "mason-org/mason.nvim", version = "1.11.0" },
-            "neovim/nvim-lspconfig",
+            ui = {
+                icons = {
+                    package_installed = "✓",
+                    package_pending = "➜",
+                    package_uninstalled = "✗",
+                },
+            },
         },
     },
 }
