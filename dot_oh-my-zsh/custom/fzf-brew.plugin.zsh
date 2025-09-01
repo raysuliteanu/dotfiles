@@ -2,7 +2,7 @@
 
 # menmonic [B]rew [P]ackage [I]nfo
 bpi() {
-    brew search "$@" | fzf --layout=reverse-list --preview='brew info {}'
+    brew ls -1 | fzf --layout=reverse-list --preview='brew info {}'
 }
 
 # mnemonic [B]rew [I]nstall [P]ackage
