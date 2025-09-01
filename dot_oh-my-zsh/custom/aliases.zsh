@@ -1,5 +1,8 @@
 alias a=alias
 
+# use nvim with sudo
+a sudovi='sudo $(which nvim)'
+
 a claude="/home/ray/.claude/local/claude"
 
 a tmuxconfig="chezmoi edit --apply ~/.config/tmux/tmux.conf"
