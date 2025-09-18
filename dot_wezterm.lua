@@ -1,5 +1,7 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
+local act = wezterm.action
+local config = wezterm.config_builder()
 
 wezterm.on("user-var-changed", function(window, pane, name, value)
     local overrides = window:get_config_overrides() or {}
@@ -24,30 +26,32 @@ wezterm.on("user-var-changed", function(window, pane, name, value)
     window:set_config_overrides(overrides)
 end)
 
--- config
-local config = {
-    color_scheme = "Catppuccin Latte",
-    font = wezterm.font("JetBrainsMono Nerd Font Mono", {
-        weight = "DemiBold",
-        stretch = "Normal",
-        style = "Normal",
-    }),
-    font_size = 16.0,
-    enable_tab_bar = false,
-    keys = {
-        {
-            key = "'",
-            mods = "CTRL",
-            action = wezterm.action.ClearScrollback("ScrollbackAndViewport"),
-        },
-    },
-    mouse_bindings = {
-        -- Ctrl-click will open the link under the mouse cursor
-        {
-            event = { Up = { streak = 1, button = "Left" } },
-            mods = "CTRL",
-            action = wezterm.action.OpenLinkAtMouseCursor,
-        },
+config.initial_rows = 80
+config.initial_cols = 120
+config.color_scheme = "Catppuccin Latte"
+config.font = wezterm.font("JetBrainsMono Nerd Font Mono", {
+    weight = "DemiBold",
+    stretch = "Normal",
+    style = "Normal",
+})
+config.font_size = 16.0
+config.enable_tab_bar = false
+config.keys = {
+    { key = "'", mods = "CTRL", action = wezterm.action.ClearScrollback("ScrollbackAndViewport") },
+    { key = "_", mods = "CTRL|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+    { key = "|", mods = "CTRL|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+    -- navigate between panes using ctrl + hjkl like vim
+    { key = "h", mods = "CTRL", action = act.ActivatePaneDirection("Left") },
+    { key = "j", mods = "CTRL", action = act.ActivatePaneDirection("Down") },
+    { key = "k", mods = "CTRL", action = act.ActivatePaneDirection("Up") },
+    { key = "l", mods = "CTRL", action = act.ActivatePaneDirection("Right") },
+}
+config.mouse_bindings = {
+    -- Ctrl-click will open the link under the mouse cursor
+    {
+        event = { Up = { streak = 1, button = "Left" } },
+        mods = "CTRL",
+        action = wezterm.action.OpenLinkAtMouseCursor,
     },
 }
 
