@@ -16,3 +16,4 @@ font-size = 16
 clipboard-read = allow
 mouse-hide-while-typing = true
 window-save-state = default
+keybind = shift+enter=text:\x1b\r
