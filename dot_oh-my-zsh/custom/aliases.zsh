@@ -85,3 +85,6 @@ a to=taskopen
 a ccs='codecrafters submit'
 a cct='codecrafters test'
 a cctp='codecrafters test --previous'
+
+
+a python=python3
