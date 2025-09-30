@@ -86,5 +86,6 @@ a ccs='codecrafters submit'
 a cct='codecrafters test'
 a cctp='codecrafters test --previous'
 
-
 a python=python3
+
+a gpff='git pull -ff'
