@@ -1,7 +1,7 @@
 return {
     {
         "mistricky/codesnap.nvim",
-        build = "make",
+        build = "make build_generator",
         opts = {
             bg_padding = 0,
             save_path = "~/Pictures/Screenshots/",
