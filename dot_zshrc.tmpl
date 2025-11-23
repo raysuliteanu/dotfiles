@@ -212,6 +212,7 @@ export PATH=$PATH:$BREW_PREFIX/lib/ruby/gems/3.3.0/bin
 set -o ignoreeof
 
 # export ANTHROPIC_API_KEY={{onepasswordRead "op://Personal/Anthropic API Credential/credential" }}
+export GITHUB_TOKEN={{onepasswordRead "op://Personal/GitHub Personal Access Token/token" }}
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
