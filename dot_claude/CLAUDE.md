@@ -10,6 +10,13 @@ Use newer, more modern tools, replacing legacy tools, if available. For example,
 
 ## Languages
 
+### Rust
+
+Always run `cargo clippy` after code changes and address issues reported.
+
+Run `cargo fmt --check` before doing a `git add`, and if there is a formatting
+issue, run `cargo fmt` to fix the formatting.
+
 ### Scripting
 
 Generally prefer shell scripts to other scripting languages like Python for
