@@ -10,3 +10,6 @@ pager = "delta"
 
 [git]
 auto-local-bookmark = true
+
+[aliases]
+init = ["git", "init"]
