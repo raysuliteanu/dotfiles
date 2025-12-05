@@ -8,8 +8,8 @@ diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
 diff-formatter = ":git"
 pager = "delta"
 
-[git]
-auto-local-bookmark = true
-
 [aliases]
 init = ["git", "init"]
+
+[remotes.origin]
+auto-track-bookmarks = "glob:*"
