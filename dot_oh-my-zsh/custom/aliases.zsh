@@ -11,10 +11,10 @@ a zalias="chezmoi edit --apply ~/.oh-my-zsh/custom/aliases.zsh"
 a nvimconfig="chezmoi edit --apply ~/.config/nvim"
 
 a cm=chezmoi
-a ce="cm edit --apply"
-a cs="cm status"
-a ca="cm apply"
-a cpush="cm git push"
+a cme="cm edit --apply"
+a cms="cm status"
+a cma="cm apply"
+a cmpush="cm git push"
 
 a vi=nvim
 a vim=vi
