@@ -11,6 +11,7 @@ Use newer, more modern tools, replacing legacy tools, if available. For example,
 ## Docker
 
 - use `docker compose` not `docker-compose`
+- use the `dive` tool for checking generated images for optimal image generation
 
 # Programming Guidelines
 
@@ -19,7 +20,8 @@ when simple/straightforward.
 
 Apply 'clean code' guidelines generally:
 
-- use descriptive names for types, methods, fields, variables, etc.; however, follow the standards and conventions of the programming language in use.
+- use descriptive names for types, methods, fields, variables, etc.; however,
+  follow the standards and conventions of the programming language in use.
 - code should "flow" like a top-down "story" with methods defined later in a
   file than the methods that call them e.g.
 
@@ -86,7 +88,7 @@ Use the `thiserror` crate for custom error types.
 
 When adding dependencies to Rust projects, use `cargo add`.
 
-In code that uses `eyre` or `anyhow` `Result`s, consistently use
+In code that uses `color-eyre` or `anyhow` `Result`s, consistently use
 `.context()` prior to every error-propagation with `?`. Context
 messages in `.context` should be simple present tense, such as to
 complete the sentence "while attempting to ...".
@@ -97,7 +99,7 @@ concise, and should explain why that expect call cannot fail.
 When designing `pub` or crate-wide Rust APIs, consult the checklist in
 <https://rust-lang.github.io/api-guidelines/checklist.html>.
 
-Always run `cargo clippy` after code changes and address issues reported
+Always run `cargo clippy` after code changes and address issues reported.
 
 Run `cargo fmt --check` before doing a `git add`, and if there is a formatting
 issue, run `cargo fmt` to fix the formatting.
@@ -114,6 +116,39 @@ code should fail to compile.
 If there is no obvious item to add the doctest to, create a new private
 item with `#[allow(dead_code)]` that you add the compile-fail tests to.
 Document that that's its purpose.
+
+### Java
+
+Prefer `Gradle` (with `Groovy` syntax) over `Maven` for the build system.
+
+Prefer JDK LTS versions.
+
+For backend services, use Spring Boot. When building containers for Java Spring
+Boot projects, follow the recommendations and best practices for structuring the
+image, using the Spring Boot Gradle/Maven plugins to build exploded JAR files.
+
+#### Exceptions
+
+Prefer `RuntimeException` to `Exception` for APIs.
+
+Create class hierarchies for business/domain exceptions that, generally, extend
+`RuntimeException` and have a base exception class for all domain exceptions,
+and override all constructors. For example,
+
+```java
+public abstract class MyBaseDomainException extends RuntimeException {
+    // ...
+}
+public class MyMessagingDomainException extends MyBaseDomainException {
+    // ...
+}
+public class MySpecificMessagingDomainException extends MyMessagingDomainException {
+    // ...
+}
+public class MyDatabaseDomainException extends MyBaseDomainException {
+    // ...
+}
+```
 
 ### General Scripting
 
