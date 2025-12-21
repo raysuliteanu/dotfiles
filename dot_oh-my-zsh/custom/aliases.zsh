@@ -56,7 +56,7 @@ a docker-use-context='docker context use $(docker context ls -q | fzf --height=1
 a ls='eza --icons --git'
 a l='ls -l'
 a ll='ls -l'
-a la='ls -la'
+a la='ls -a'
 a lR='ls -lR'
 # eza -snew == ls -rt
 a lrt='ls -l -snew'
