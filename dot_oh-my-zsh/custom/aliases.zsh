@@ -90,6 +90,7 @@ a python=python3
 
 a gpff='git pull -ff'
 a gst='git status'
+a gd='git diff'
 
 a tf='tail -f'
 
