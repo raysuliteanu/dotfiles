@@ -89,6 +89,7 @@ a cctp='codecrafters test --previous'
 a python=python3
 
 a gpff='git pull -ff'
+a gst='git status'
 
 a tf='tail -f'
 
