@@ -91,6 +91,7 @@ a python=python3
 a gpff='git pull -ff'
 a gst='git status'
 a gd='git diff'
+a glog='git log --oneline --graph'
 
 a tf='tail -f'
 
