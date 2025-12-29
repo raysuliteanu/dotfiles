@@ -11,6 +11,15 @@ else
   echo "can't find brew!"
 fi
 
+# Create a user-specific runtime directory if it doesn't exist (for WSL compatibility)
+if [ -z "$XDG_RUNTIME_DIR" ]; then
+  export XDG_RUNTIME_DIR="$HOME/.local/run/user/$(id -u)"
+  if [ ! -d "$XDG_RUNTIME_DIR" ]; then
+    mkdir -p "$XDG_RUNTIME_DIR"
+    chmod 0700 "$XDG_RUNTIME_DIR"
+  fi
+fi
+
 ZSH_WEB_SEARCH_ENGINES=(
   rdoc "https://docs.rs/"
   crates "https://crates.io/search/?q="
