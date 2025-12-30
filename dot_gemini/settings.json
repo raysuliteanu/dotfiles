@@ -1,5 +1,5 @@
 {
-  "theme": "Default Light",
   "selectedAuthType": "oauth-personal",
-  "preferredEditor": "vim"
+  "preferredEditor": "neovim",
+  "theme": "Default Light"
 }
