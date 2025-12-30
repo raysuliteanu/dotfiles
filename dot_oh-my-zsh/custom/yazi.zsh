@@ -1,3 +1,4 @@
+# run yazi such that when exit, will cd to whatever dir was view in yazi
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	yazi "$@" --cwd-file="$tmp"
