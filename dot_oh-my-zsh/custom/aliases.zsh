@@ -96,3 +96,26 @@ a glog='git log --oneline --graph'
 a tf='tail -f'
 
 a glow='glow -t'
+
+# suffix aliases
+# run `glow` if file on command-line ends in '.md' without command first
+# i.e. "$ README.md" --> "$ glow README.md"
+a -s md=glow
+# run `open` for jpg|gif|svg
+a -s jpg=open
+a -s gif=open
+a -s svg=open
+a -s rs=$EDITOR
+a -s sh=$EDITOR
+a -s java=$EDITOR
+a -s c=$EDITOR
+a -s C=$EDITOR
+a -s h=$EDITOR
+a -s S=$EDITOR
+a -s s=$EDITOR
+a -s cpp=$EDITOR
+a -s ts=$EDITOR
+a -s tsx=$EDITOR
+a -s js=$EDITOR
+a -s jsx=$EDITOR
+a -s css=$EDITOR
