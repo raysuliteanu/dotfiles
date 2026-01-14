@@ -106,7 +106,6 @@ a -s jpg=open
 a -s gif=open
 a -s svg=open
 a -s rs=$EDITOR
-a -s sh=$EDITOR
 a -s java=$EDITOR
 a -s c=$EDITOR
 a -s C=$EDITOR
