@@ -1,0 +1,9 @@
+[Desktop Entry]
+Categories=System;FileTools;FileManager;
+Comment=Spacedrive
+Exec=sh -c "spacedrive %U >/dev/null 2>&1"
+Icon=spacedrive
+Name=Spacedrive
+Terminal=false
+Type=Application
+MimeType=inode/directory;
