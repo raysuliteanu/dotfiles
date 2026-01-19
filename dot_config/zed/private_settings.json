@@ -1,34 +1,41 @@
 {
-  "icon_theme": "Catppuccin Latte",
+  "calls": {
+    "mute_on_join": true,
+  },
+  "tabs": {
+    "show_close_button": "always",
+    "show_diagnostics": "all",
+    "file_icons": true,
+  },
+  "title_bar": {
+    "show_menus": false,
+    "show_user_picture": true,
+    "show_branch_icon": true,
+  },
+  "close_on_file_delete": true,
+  "auto_signature_help": true,
+  "sticky_scroll": {
+    "enabled": true,
+  },
+  "scroll_beyond_last_line": "off",
+  "which_key": {
+    "enabled": true,
+  },
+  "autosave": "on_focus_change",
+  "ui_font_family": ".ZedSans",
+  "buffer_font_family": "FiraCode Nerd Font Mono",
+  "restore_on_startup": "launchpad",
+  "icon_theme": "Catppuccin Mocha",
   "agent": {
     "default_model": {
       "provider": "anthropic",
-      "model": "claude-sonnet-4-latest"
+      "model": "claude-sonnet-4-latest",
     },
-    "version": "2"
   },
   "base_keymap": "JetBrains",
   "vim_mode": true,
   "ui_font_size": 18,
   "buffer_font_size": 18,
-  "theme": {
-    "mode": "light",
-    "light": "Catppuccin Latte",
-    "dark": "Catppuccin Mocha"
-  },
-  "relative_line_numbers": true,
-  "inline_blame": {
-    "enabled": false
-  },
-  "inlayHints": {
-    "maxLength": null,
-    "lifetimeElisionHints": {
-      "useParameterNames": true,
-      "enable": "skip_trivial"
-    },
-    "closureReturnTypeHints": {
-      "enable": "always"
-    }
-  },
-  "copy_on_select": true
+  "theme": "Catppuccin Mocha",
+  "relative_line_numbers": "enabled",
 }
