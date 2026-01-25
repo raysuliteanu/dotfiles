@@ -116,3 +116,5 @@ a -s tsx=$EDITOR
 a -s js=$EDITOR
 a -s jsx=$EDITOR
 a -s css=$EDITOR
+
+a mutt=neomutt
