@@ -1,0 +1,42 @@
+# Identity
+set realname = "Ray Suliteanu"
+set from = "raysuliteanu@pm.me"
+set use_from = yes
+
+# IMAP settings (Proton Bridge)
+set imap_user = "raysuliteanu@proton.me"
+set imap_pass = "qLQ_EGJLpNbIn0pRQ2-DDw"
+
+set folder = "imap://127.0.0.1:1143/"
+set spoolfile = "+INBOX"
+set postponed = "+Drafts"
+set record = "+Sent"
+
+# SMTP settings (Proton Bridge)
+set smtp_url = "smtp://raysuliteanu@pm.me@127.0.0.1:1025/"
+set smtp_pass = "qLQ_EGJLpNbIn0pRQ2-DDw"
+
+# TLS disabled (local only)
+set ssl_starttls = no
+set ssl_force_tls = no
+
+# UI niceties
+set header_cache = ~/.mutt/cache/headers
+set message_cachedir = ~/.mutt/cache/bodies
+set certificate_file = ~/.mutt/certificates
+
+set sidebar_visible = yes
+set sidebar_width = 25
+set sidebar_short_path = yes
+set sidebar_sort_method = alpha
+set sidebar_format = "%D%* %?N?%N?"
+# bind index \C-n sidebar-next
+# bind index \C-p sidebar-prev
+# bind index \C-o sidebar-open
+
+bind index J sidebar-next
+bind index K sidebar-prev
+bind index L sidebar-open
+
+source ~/.mutt/gruvbox/colors-gruvbox-shuber.muttrc
+source ~/.mutt/gruvbox/colors-gruvbox-shuber-extended.muttrc
