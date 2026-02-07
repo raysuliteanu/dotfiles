@@ -8,6 +8,15 @@ Use newer, more modern tools, replacing legacy tools, if available. For example,
 - use `rg` rather than `grep`
 - use `eza` rather than `ls`
 
+Be aware of shell aliases that could cause issues, such as
+
+- `cd` is aliased to `z` for `zoxide`; this causes issues with changing directories
+since `z` is a shell function but it is not sourced in the environment claude runs
+in, so `cd` fails.
+- `cat` is aliases to `bat`; this may cause issues since there is paging by default
+and so it will sometimes be that the `cat` command appears not to exit since it's
+waiting for input.
+
 ## Docker
 
 - use `docker compose` not `docker-compose`
@@ -62,23 +71,23 @@ Ensure all tests pass before offering to commit to source control.
 ### General
 
 Regardless of the actual source control tool (e.g. `git`, `jj`), follow the
-'conventional commits' guidelines defined [here](https://www.conventionalcommits.org/en/v1.0.0/).
+[conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)
+guidelines defined.
 
 When writing commit messages, ensure that you explain any
-non-obvious trade-offs we've made in the design or implementation.
-
-### Git
-
-Make sure you use git mv to move any files that are already checked into
-git.
+non-obvious trade-offs made in the design or implementation.
 
 When you refer to types or very short code snippets, place them in
 backticks. When you have a full line of code or more than one line of
 code, put them in indented code blocks.
 
-Prefer to write git commit messages by using a temporary file rather
-than using command-line arguments to the `git` command. Remove the
-temporary file afterwards.
+Prefer to write commit messages by using a temporary file rather
+than using command-line arguments. Remove the temporary file afterwards.
+
+### Git
+
+Make sure you use git mv to move any files that are already checked into
+git.
 
 ## Languages
 
@@ -101,8 +110,8 @@ When designing `pub` or crate-wide Rust APIs, consult the checklist in
 
 Always run `cargo clippy` after code changes and address issues reported.
 
-Run `cargo fmt --check` before doing a `git add`, and if there is a formatting
-issue, run `cargo fmt` to fix the formatting.
+Run `cargo fmt --check` before committing to source control, and if there is a
+formatting issue, run `cargo fmt` to fix the formatting.
 
 #### Writing compile_fail Tests
 
@@ -156,18 +165,14 @@ Generally prefer shell scripts to other scripting languages like Python for
 simple scripts. Propose using Python when the solution would be much simpler
 or faster to execute.
 
+For the shebang line, always use `#!/usr/bin/env` prefix to find the correct
+shell binary, e.g. `#!/usr/bin/env bash`.
+
 #### Shell Scripts
 
 Generally use `bash` as the shell script language.
 
-For the shebang line, always use `#!/usr/bin/env` prefix to find the correct
-shell binary, e.g. `#!/usr/bin/env bash`.
-
 Run shell scripts through `shellcheck`.
-
-## MCP
-
-- only use the github MCP server for interactions with github; avoid use the gh cli
 
 ## SESSION.md
 
@@ -182,7 +187,8 @@ sufficient. **Do not write your accomplishments into this file.**
 
 ### The XY Problem
 
-The XY problem occurs when someone asks about their attempted solution (Y) instead of their actual underlying problem (X).
+The XY problem occurs when someone asks about their attempted solution (Y)
+instead of their actual underlying problem (X).
 
 #### The Pattern
 
@@ -216,4 +222,6 @@ The XY problem occurs when someone asks about their attempted solution (Y) inste
 
 #### Key Principle
 
-Always try to understand the fundamental problem (X) before helping with the proposed solution (Y). The user's approach may not be optimal or may indicate they're solving the wrong problem entirely.
+Always try to understand the fundamental problem (X) before helping with the
+proposed solution (Y). The user's approach may not be optimal or may indicate
+they're solving the wrong problem entirely.
