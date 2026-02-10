@@ -23,10 +23,10 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	end,
 })
 
--- Set colorcolumn=80 only for markdown files
+-- Auto-wrap at 80 columns for markdown files
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "markdown",
 	callback = function()
-		vim.opt_local.colorcolumn = "80"
+		vim.opt_local.textwidth = 80
 	end,
 })
