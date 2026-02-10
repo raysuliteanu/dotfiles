@@ -8,15 +8,6 @@ Use newer, more modern tools, replacing legacy tools, if available. For example,
 - use `rg` rather than `grep`
 - use `eza` rather than `ls`
 
-Be aware of shell aliases that could cause issues, such as
-
-- `cd` is aliased to `z` for `zoxide`; this causes issues with changing directories
-since `z` is a shell function but it is not sourced in the environment claude runs
-in, so `cd` fails.
-- `cat` is aliases to `bat`; this may cause issues since there is paging by default
-and so it will sometimes be that the `cat` command appears not to exit since it's
-waiting for input.
-
 ## Docker
 
 - use `docker compose` not `docker-compose`
