@@ -39,6 +39,7 @@ vim.opt.inccommand = "split"
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 vim.opt.hlsearch = true
+vim.opt.colorcolumn = "80"
 
 vim.opt.conceallevel = 1
 vim.opt.mouse = "a"
