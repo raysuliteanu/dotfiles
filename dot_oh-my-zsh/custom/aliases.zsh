@@ -43,6 +43,7 @@ a curl=curlie
 a e=emacs
 a du=dust
 a fd='fd -H'
+a fdni='fd --no-ignore -H'
 a cd=z
 a lg=lazygit
 a rg='rg -i'
