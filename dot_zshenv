@@ -10,7 +10,7 @@ export PAGER='less -F'
 export EDITOR=nvim
 
 export BAT_PAGER="$PAGER"
-export BAT_THEME=GitHub
+export BAT_THEME="Catpuccin Mocha"
 
 export XDG_DATA_DIRS="/home/linuxbrew/.linuxbrew/share:$XDG_DATA_DIRS"
 
