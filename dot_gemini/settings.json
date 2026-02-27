@@ -1,5 +1,22 @@
 {
   "selectedAuthType": "oauth-personal",
   "preferredEditor": "neovim",
-  "theme": "Default Light"
+  "theme": "Default Light",
+  "general": {
+    "sessionRetention": {
+      "enabled": true,
+      "maxAge": "30d",
+      "warningAcknowledged": true
+    },
+    "preferredEditor": "neovim"
+  },
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "ui": {
+    "theme": "GitHub Light",
+    "showStatusInTitle": true
+  }
 }
