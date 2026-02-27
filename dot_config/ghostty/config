@@ -1,4 +1,4 @@
-theme = catppuccin-latte
+theme = Catppuccin Mocha
 
 keybind = ctrl+shift+l=new_split:left
 keybind = ctrl+shift+j=new_split:down
