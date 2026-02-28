@@ -76,13 +76,9 @@ concise, and should explain why that expect call cannot fail.
 When designing `pub` or crate-wide Rust APIs, consult the checklist in
 <https://rust-lang.github.io/api-guidelines/checklist.html>.
 
-Run `cargo fmt --check` before committing to source control, and if there is a
-formatting issue, run `cargo fmt` to fix the formatting.
-
-Always run `cargo clippy` after code changes and address issues reported.
-
-Always run `cargo fmt` before `cargo clippy` to avoid `cargo clippy` failing on
-formatting issues.
+`cargo fmt --check` runs automatically as a pre-push hook and `cargo clippy`
+(with `-D warnings`) runs automatically after every `.rs` file save. Address
+any issues they report before proceeding.
 
 ### Writing compile_fail Tests
 
