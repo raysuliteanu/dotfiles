@@ -43,6 +43,8 @@ The full `chezmoi` command reference is: "<https://www.chezmoi.io/reference/>"
 | Add a file to chezmoi                      | `chezmoi add ~/.zshrc`    |
 | Re-add a file to chezmoi modified manually | `chezmoi re-add ~/.zshrc` |
 | Apply pending changes                      | `chezmoi apply`           |
+| Check if a file is managed                 | `chezmoi managed ~/.zshrc`   |
+| Check if a file is unmanaged               | `chezmoi unmanaged ~/.zshrc` |
 | Check status                               | `chezmoi status`          |
 | See what has changed in a file             | `chezmoi diff ~/.zshrc`   |
 | Push pending changes                       | `chezmoi git push`        |
@@ -54,9 +56,9 @@ The full `chezmoi` command reference is: "<https://www.chezmoi.io/reference/>"
 
 If a file is not managed by chezmoi, it can be added with `chezmoi add`.
 
-To determine if a file is managed by chezmoi, use `chezmoi unmanaged`. If the
-file is not managed by chezmoi, then `chezmoi unmanaged` will echo the path of
-the unmanaged file, otherwise it echos nothing (it does not use error codes).
+To determine if a file is managed by chezmoi, use `chezmoi managed` (echoes the
+path if managed, nothing otherwise) or `chezmoi unmanaged` (echoes the path if
+unmanaged, nothing otherwise). Neither uses error codes.
 
 If a file is managed by chezmoi and it needs modification, use `chezmoi edit`
 which opens the chezmoi source file in $EDITOR (e.g. neovim) and on saving the
