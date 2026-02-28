@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 # print the count of different file types by file extension in the current
 # directory tree, sorted by high count to low count.
 #

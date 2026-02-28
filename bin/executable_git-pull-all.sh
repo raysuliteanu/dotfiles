@@ -1,14 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -euo pipefail
 
 # Get the directory to search in, or use the current directory if none is provided
 search_dir=${1:-$(pwd)}
 
 # Find all directories containing a .git subdirectory
-repo_dirs=$(find "$search_dir" -type d -name '.git' -prune -exec dirname {} \;)
-
-# Iterate over each repository directory found and perform git pull
-for repo in $repo_dirs; do
+while IFS= read -r git_dir; do
+    repo=$(dirname "$git_dir")
     echo "Pulling updates in repository: $repo"
-    (cd "$repo" && git pull)
-done
-
+    git -C "$repo" pull
+done < <(fd -H -t d "^\.git$" "$search_dir")

@@ -1,10 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -euo pipefail
 
 # Check if a directory is provided as an argument, if not, use the current directory
 search_dir=${1:-$(pwd)}
 
-# find -execdir won't run if PATH ends in a colon, for security; see man page
-export PATH=$(echo "$PATH" | sed 's/:$//')
-
 # Find directories with a file named 'gradlew' and execute 'gradlew clean' in those directories
-find "$search_dir" -type f -name "gradlew" -execdir gradle -q clean \;
+# $1 is intentionally unexpanded here; it expands inside the inner bash -c invocation
+# shellcheck disable=SC2016
+fd -t f "^gradlew$" "$search_dir" -x bash -c 'cd "$1" && gradle -q clean' -- '{//}'

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-nmap -v -sL $*
+nmap -v -sL "$@"
 

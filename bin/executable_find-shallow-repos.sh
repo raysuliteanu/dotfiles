@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 # Parse arguments
 print_non_shallow=false
 search_dir="."
@@ -18,7 +20,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 # Find all .git directories and process their parent directories
-find "$search_dir" -name .git -type d 2>/dev/null | while IFS= read -r git_dir; do
+fd -H -t d "^\.git$" "$search_dir" | while IFS= read -r git_dir; do
     repo_dir=$(dirname "$git_dir")
 
     # Check if the repo has a remote

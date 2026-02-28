@@ -1,7 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -euo pipefail
 
 # Directory to search for git repositories
-SEARCH_DIR=$1
+SEARCH_DIR=${1:-}
 
 if [ -z "$SEARCH_DIR" ]; then
     echo "Please provide a directory to search for git repositories."
@@ -9,9 +11,8 @@ if [ -z "$SEARCH_DIR" ]; then
 fi
 
 # Find all git repositories and run 'git gc'
-find "$SEARCH_DIR" -type d -name ".git" | while read -r gitdir; do
-    repo_dir=$(dirname "$gitdir")
+while IFS= read -r git_dir; do
+    repo_dir=$(dirname "$git_dir")
     echo "Running 'git gc' in $repo_dir"
-    cd "$repo_dir" && git gc
-done
-
+    git -C "$repo_dir" gc
+done < <(fd -H -t d "^\.git$" "$SEARCH_DIR")

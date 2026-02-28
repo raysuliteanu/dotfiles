@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -euo pipefail
 
 if [ $# -ne 1 ]; then
     echo "Usage: $0 <rust|mvn|gradle>"
@@ -18,4 +20,4 @@ esac
 mkdir -p .helix
 
 echo "ln -sf ${HOME}/src/.helix/config-${config_type}.toml .helix/config.toml"
-ln -sf "${HOME}"/src/.helix/config-"${config_type}".toml .helix/config.toml
+ln -sf "${HOME}/src/.helix/config-${config_type}.toml" .helix/config.toml
