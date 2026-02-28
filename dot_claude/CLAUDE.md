@@ -124,4 +124,5 @@ shell binary, e.g. `#!/usr/bin/env bash`.
 
 Generally use `bash` as the shell script language.
 
-Run shell scripts through `shellcheck`.
+`shellcheck` runs automatically as a post-save hook on `.sh` files. Address
+any issues it reports before proceeding.
