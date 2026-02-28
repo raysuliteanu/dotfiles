@@ -1,3 +1,4 @@
 [default]
 region = us-west-1
 output = yaml
+login_session = arn:aws:iam::301696999981:user/ksw-admin
