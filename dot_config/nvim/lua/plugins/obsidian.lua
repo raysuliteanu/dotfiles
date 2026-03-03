@@ -26,7 +26,6 @@ return {
         notes_subdir = "Resources/Notes",
         new_notes_location = "notes_subdir",
         open_notes_in = "vsplit",
-        disable_frontmatter = false,
         preferred_link_style = "markdown",
         templates = {
             folder = "Templates",
@@ -34,14 +33,9 @@ return {
             time_format = "%H:%M",
             substitutions = {},
         },
-        ---@param url string
-        follow_url_func = function(url)
-            -- Open the URL in the default web browser.
-            -- vim.fn.jobstart({ "open", url }) -- Mac OS
-            -- vim.fn.jobstart({"xdg-open", url})  -- linux
-            -- vim.cmd(':silent exec "!start ' .. url .. '"') -- Windows
-            vim.ui.open(url) -- need Neovim 0.10.0+
-        end,
+        frontmatter = {
+            enabled = true,
+        },
         ui = {
             -- using MeanderingProgrammer/render-markdown.nvim
             -- see plugins/markdown.lua
