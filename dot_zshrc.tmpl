@@ -107,7 +107,7 @@ EDITOR=nvim
 
 BREW_PREFIX=$(brew --prefix)
 
-PATH=$PATH:$HOME/bin:$HOME/.local/share/JetBrains/Toolbox/scripts:$HOME/.local/bin
+PATH=$PATH:$HOME/bin:$HOME/.local/share/JetBrains/Toolbox/scripts
 
 # Kafka
 KAFKA_HOME=$BREW_PREFIX/opt/kafka/libexec
@@ -224,6 +224,9 @@ export NVM_DIR="$HOME/.nvm"
 
 # ---- Zoxide (better cd) ----
 eval "$(zoxide init zsh)"
+
+export PATH="$HOME/.local/bin:$PATH"
+eval "$(mise activate zsh)"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
