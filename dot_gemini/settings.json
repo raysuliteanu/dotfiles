@@ -16,7 +16,7 @@
     }
   },
   "ui": {
-    "theme": "GitHub Light",
+    "theme": "GitHub",
     "showStatusInTitle": true
   }
 }
