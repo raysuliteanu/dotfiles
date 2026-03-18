@@ -189,11 +189,6 @@ tm() {
   session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $command -t "$session" || echo "No sessions found."
 }
 
-# delta diff tool
-eval "$(delta --generate-completion zsh)"
-
-eval "$(direnv hook zsh)"
-
 eval $(thefuck --alias)
 
 # wezterm
