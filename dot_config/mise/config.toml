@@ -1,0 +1,15 @@
+[tools]
+gradle = "latest"
+groovy = "latest"
+java = "temurin-24"
+kotlin = { version = "latest", asset_pattern = "kotlin-compiler-*.zip", bin_path = "kotlinc/bin" }
+maven = "latest"
+micronaut = { version = "latest", exe = "mn" }
+node = "latest"
+quarkus = "latest"
+sbt = "latest"
+scala = "latest"
+spring-boot = "latest"
+ant = "latest"
+leiningen = "latest"
+zig = "latest"
