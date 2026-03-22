@@ -37,33 +37,36 @@ Do NOT use `chezmoi` when:
 
 The full `chezmoi` command reference is: "<https://www.chezmoi.io/reference/>"
 
-| Goal                                       | Command                   |
-| ------------------------------------------ | ------------------------- |
-| Edit a chezmoi-managed file                | `chezmoi edit ~/.zshrc`   |
-| Add a file to chezmoi                      | `chezmoi add ~/.zshrc`    |
-| Re-add a file to chezmoi modified manually | `chezmoi re-add ~/.zshrc` |
-| Apply pending changes                      | `chezmoi apply`           |
+| Goal                                       | Command                      |
+| ------------------------------------------ | ---------------------------- |
+| Edit a chezmoi-managed file                | `chezmoi edit ~/.zshrc`      |
+| Add a file to chezmoi                      | `chezmoi add ~/.zshrc`       |
+| Re-add a file to chezmoi modified manually | `chezmoi re-add ~/.zshrc`    |
+| Apply pending changes                      | `chezmoi apply`              |
 | Check if a file is managed                 | `chezmoi managed ~/.zshrc`   |
 | Check if a file is unmanaged               | `chezmoi unmanaged ~/.zshrc` |
-| Check status                               | `chezmoi status`          |
-| See what has changed in a file             | `chezmoi diff ~/.zshrc`   |
-| Push pending changes                       | `chezmoi git push`        |
-| Pull remote changes and apply              | `chezmoi update`          |
+| Check status                               | `chezmoi status`             |
+| See what has changed in a file             | `chezmoi diff ~/.zshrc`      |
+| Push pending changes                       | `chezmoi git push`           |
+| Pull remote changes and apply              | `chezmoi update`             |
 
 ## Key Workflows
 
-### Adding and Editing Files
-
-If a file is not managed by chezmoi, it can be added with `chezmoi add`.
+### Determining if a file is managed by chezmoi
 
 To determine if a file is managed by chezmoi, use `chezmoi managed` (echoes the
 path if managed, nothing otherwise) or `chezmoi unmanaged` (echoes the path if
 unmanaged, nothing otherwise). Neither uses error codes.
 
-If a file is managed by chezmoi and it needs modification, use `chezmoi edit`
-which opens the chezmoi source file in $EDITOR (e.g. neovim) and on saving the
-file automatically does a `chezmoi apply` to apply the changes to the target
-file.
+### Adding New Files
+
+If a file is not managed by chezmoi, it can be added with `chezmoi add`. First
+create the new configuration file, then do `chezmoi add [file]`.
+
+### Editing Files
+
+If a file is managed by chezmoi, edit the file directly in the `chezmoi`
+configuration source directory, then do `chezmoi apply [file]`.
 
 ### Templates
 

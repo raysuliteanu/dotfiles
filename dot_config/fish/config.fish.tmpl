@@ -1,0 +1,126 @@
+# Homebrew
+if command -v brew > /dev/null
+    eval (brew shellenv)
+else if test -e /home/linuxbrew/.linuxbrew/bin/brew
+    eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+else
+    echo "can't find brew!"
+end
+
+# XDG_RUNTIME_DIR (WSL compatibility)
+if not set -q XDG_RUNTIME_DIR
+    set -gx XDG_RUNTIME_DIR $HOME/.local/run/user/(id -u)
+    if not test -d $XDG_RUNTIME_DIR
+        mkdir -p $XDG_RUNTIME_DIR
+        chmod 0700 $XDG_RUNTIME_DIR
+    end
+end
+
+# PATH
+fish_add_path $HOME/bin $HOME/.local/bin $HOME/.local/share/JetBrains/Toolbox/scripts
+
+# Rust
+fish_add_path $HOME/.cargo/bin
+
+# Deno
+fish_add_path $HOME/.deno/bin
+
+# Ruby gems
+fish_add_path (brew --prefix)/lib/ruby/gems/3.3.0/bin
+
+set -gx EDITOR nvim
+
+set -gx BREW_PREFIX (brew --prefix)
+
+# Kafka
+set -gx KAFKA_HOME $BREW_PREFIX/opt/kafka/libexec
+set -gx KAFKA_CLUSTER_ID GYD7shokQV6Qf3NKao-Fvg
+
+umask 022
+
+# 1Password SSH agent
+if set -q SSH_TTY
+    set -e SSH_AUTH_SOCK
+else if test -e $HOME/.1password/agent.sock
+    set -gx SSH_AUTH_SOCK $HOME/.1password/agent.sock
+end
+
+# 1Password CLI plugin aliases (mirrors ~/.config/op/plugins.sh)
+if test -e $HOME/.config/op/plugins.sh
+    set -gx OP_PLUGIN_ALIASES_SOURCED 1
+    alias aws "op plugin run -- aws"
+end
+
+# fzf
+fzf --fish | source
+
+set -gx FZF_DEFAULT_COMMAND "fd --hidden --strip-cwd-prefix --exclude .git --exclude .obsidian"
+set -gx FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
+set -gx FZF_ALT_C_COMMAND "fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+
+# Preview: directories with eza tree, files with bat
+set -gx FZF_CTRL_T_OPTS "--preview 'if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi'"
+set -gx FZF_ALT_C_OPTS "--preview 'eza --tree --color=always {} | head -200'"
+
+# fzf-git (prefer the native fish integration if available)
+if test -e ~/.fzf-git/fzf-git.fish
+    source ~/.fzf-git/fzf-git.fish
+else if test -e ~/.fzf-git/fzf-git.sh
+    source ~/.fzf-git/fzf-git.sh
+end
+
+# Checkout a git ref via fzf-git
+function gco
+    _fzf_git_each_ref --no-multi | xargs git checkout
+end
+
+# cd into a git worktree via fzf-git
+function gswt
+    cd (_fzf_git_worktrees --no-multi)
+end
+
+# tmux - create/attach sessions with fzf fallback
+function tm
+    if set -q TMUX
+        set tmux_cmd switch-client
+    else
+        set tmux_cmd attach-session
+    end
+    if test (count $argv) -gt 0
+        if test -d (pwd)/$argv[1]
+            set dir (pwd)/$argv[1]
+        else
+            set dir (pwd)
+        end
+        tmux $tmux_cmd -t $argv[1] 2>/dev/null
+        or tmux new-session -A -c $dir -s $argv[1]
+        return
+    end
+    set session (tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0)
+    and tmux $tmux_cmd -t $session
+    or echo "No sessions found."
+end
+
+# thefuck
+thefuck --alias | source
+
+# vi key bindings (replaces oh-my-zsh vi-mode plugin)
+fish_vi_key_bindings
+
+# atuin is configured via conf.d/atuin.env.fish
+
+# starship prompt
+starship init fish | source
+
+# Prevent Ctrl-D from exiting the shell (equivalent to zsh's ignoreeof)
+set -U fish_exit_on_ctrl_d 0
+
+# API keys
+set -gx ANTHROPIC_API_KEY {{onepasswordRead "op://Personal/Anthropic API Credential/credential" }}
+set -gx GITHUB_TOKEN {{onepasswordRead "op://Personal/GitHub Personal Access Token/token" }}
+
+# zoxide (better cd)
+zoxide init fish | source
+
+# mise (runtime version manager)
+mise activate fish | source
