@@ -1,5 +1,5 @@
 # Homebrew
-if command -v brew > /dev/null
+if command -v brew >/dev/null
     eval (brew shellenv)
 else if test -e /home/linuxbrew/.linuxbrew/bin/brew
     eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
@@ -80,7 +80,6 @@ set -gx FZF_ALT_C_COMMAND "fd --type=d --hidden --strip-cwd-prefix --exclude .gi
 set -gx FZF_CTRL_T_OPTS "--preview 'if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi'"
 set -gx FZF_ALT_C_OPTS "--preview 'eza --tree --color=always {} | head -200'"
 
-
 # tmux - create/attach sessions with fzf fallback
 function tm
     if set -q TMUX
@@ -119,8 +118,18 @@ atuin init fish | source
 # starship prompt
 starship init fish | source
 
-# Prevent Ctrl-D from exiting the shell (equivalent to zsh's ignoreeof)
-set -U fish_exit_on_ctrl_d 0
+# Prevent Ctrl-D from exiting the shell (equivalent to zsh's ignoreeof).
+# fish_exit_on_ctrl_d is unreliable in fish 4.x with vi bindings, so bind explicitly.
+function __fish_ctrl_d
+    if test -z (commandline)
+        printf "\nfish: use 'exit' to exit."
+        commandline -f execute
+    else
+        commandline -f delete-char
+    end
+end
+bind ctrl-d __fish_ctrl_d
+bind -M insert ctrl-d __fish_ctrl_d
 
 # API keys
 set -gx ANTHROPIC_API_KEY {{onepasswordRead "op://Personal/Anthropic API Credential/credential" }}
