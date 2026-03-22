@@ -29,12 +29,30 @@ fish_add_path $HOME/.deno/bin
 fish_add_path (brew --prefix)/lib/ruby/gems/3.3.0/bin
 
 set -gx EDITOR nvim
+set -gx PAGER 'less -F'
+set -gx BAT_PAGER $PAGER
 
 set -gx BREW_PREFIX (brew --prefix)
 
 # Kafka
 set -gx KAFKA_HOME $BREW_PREFIX/opt/kafka/libexec
 set -gx KAFKA_CLUSTER_ID GYD7shokQV6Qf3NKao-Fvg
+
+set -gx XDG_DATA_DIRS /home/linuxbrew/.linuxbrew/share:$XDG_DATA_DIRS
+set -gx GPG_TTY (tty)
+set -gx HOMEBREW_NO_ENV_HINTS true
+set -gx GHOSTTY_RESOURCES_DIR $HOME/bin/share/ghostty
+set -gx CARGO_TARGET_DIR $HOME/.cargo-target
+
+# Use mold as linker if available
+if command -q mold
+    set -gx LD (which mold)
+end
+
+# TERM inside tmux
+if set -q TMUX
+    set -gx TERM screen-256color
+end
 
 umask 022
 
@@ -62,22 +80,6 @@ set -gx FZF_ALT_C_COMMAND "fd --type=d --hidden --strip-cwd-prefix --exclude .gi
 set -gx FZF_CTRL_T_OPTS "--preview 'if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi'"
 set -gx FZF_ALT_C_OPTS "--preview 'eza --tree --color=always {} | head -200'"
 
-# fzf-git (prefer the native fish integration if available)
-if test -e ~/.fzf-git/fzf-git.fish
-    source ~/.fzf-git/fzf-git.fish
-else if test -e ~/.fzf-git/fzf-git.sh
-    source ~/.fzf-git/fzf-git.sh
-end
-
-# Checkout a git ref via fzf-git
-function gco
-    _fzf_git_each_ref --no-multi | xargs git checkout
-end
-
-# cd into a git worktree via fzf-git
-function gswt
-    cd (_fzf_git_worktrees --no-multi)
-end
 
 # tmux - create/attach sessions with fzf fallback
 function tm
@@ -101,13 +103,18 @@ function tm
     or echo "No sessions found."
 end
 
+# Tool completions
+chezmoi completion fish | source
+rustup completions fish | source
+
 # thefuck
 thefuck --alias | source
 
 # vi key bindings (replaces oh-my-zsh vi-mode plugin)
 fish_vi_key_bindings
 
-# atuin is configured via conf.d/atuin.env.fish
+# atuin (env/PATH via conf.d/atuin.env.fish; init sets up key bindings)
+atuin init fish | source
 
 # starship prompt
 starship init fish | source
@@ -120,7 +127,7 @@ set -gx ANTHROPIC_API_KEY {{onepasswordRead "op://Personal/Anthropic API Credent
 set -gx GITHUB_TOKEN {{onepasswordRead "op://Personal/GitHub Personal Access Token/token" }}
 
 # zoxide (better cd)
-zoxide init fish | source
+zoxide init fish --cmd cd | source
 
 # mise (runtime version manager)
 mise activate fish | source
