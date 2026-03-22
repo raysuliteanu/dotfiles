@@ -11,6 +11,10 @@
   },
   "alwaysThinkingEnabled": true,
   "syntaxHighlightingDisabled": true,
+  "statusLine": {
+    "type": "command",
+    "command": "bash /home/ray/.claude/statusline-command.sh"
+  },
   "hooks": {
     "PreToolUse": [
       {
