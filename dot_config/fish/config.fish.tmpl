@@ -131,6 +131,10 @@ end
 bind ctrl-d __fish_ctrl_d
 bind -M insert ctrl-d __fish_ctrl_d
 
+# ctrl-p for history navigation (mirrors zsh behaviour)
+bind ctrl-p up-or-search
+bind -M insert ctrl-p up-or-search
+
 # API keys
 set -gx ANTHROPIC_API_KEY {{onepasswordRead "op://Personal/Anthropic API Credential/credential" }}
 set -gx GITHUB_TOKEN {{onepasswordRead "op://Personal/GitHub Personal Access Token/token" }}
@@ -140,3 +144,5 @@ zoxide init fish --cmd cd | source
 
 # mise (runtime version manager)
 mise activate fish | source
+
+tv init fish | source

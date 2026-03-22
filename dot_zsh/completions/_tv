@@ -1,0 +1,53 @@
+#compdef tv
+
+# Custom completion for television (tv) that surfaces channels and subcommands
+# for the first argument, overriding the brew-installed _tv which uses _default.
+
+_tv_channels() {
+    local channels
+    channels=(${(f)"$(tv list-channels 2>/dev/null)"})
+    compadd -a channels
+}
+
+_tv_subcommands() {
+    local subcommands
+    subcommands=(
+        'list-channels:Lists the available channels'
+        'init:Initializes shell completion'
+        'completions:Generates tab-completion scripts for tv subcommands'
+        'update-channels:Downloads the latest channel prototypes from github'
+        'help:Print help'
+    )
+    _describe 'subcommand' subcommands
+}
+
+_tv_shells() {
+    compadd bash zsh fish power-shell cmd nu
+}
+
+_tv() {
+    local context curcontext="$curcontext" state line
+    typeset -A opt_args
+
+    _arguments -C \
+        '(-h --help)'{-h,--help}'[Print help]' \
+        '(-V --version)'{-V,--version}'[Print version]' \
+        '1: :->first' \
+        '*:: :->args'
+
+    case $state in
+        first)
+            _tv_channels
+            _tv_subcommands
+            ;;
+        args)
+            case $line[1] in
+                init|completions)
+                    _tv_shells
+                    ;;
+            esac
+            ;;
+    esac
+}
+
+_tv "$@"
