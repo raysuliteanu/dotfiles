@@ -165,6 +165,7 @@ ctrl_n_shortcuts = true
 ## If set to false, both enter and tab will place the command in the prompt for editing.
 ## This applies for new installs. Old installs will keep the old behaviour unless configured otherwise.
 enter_accept = true
+search_mode = "daemon-fuzzy"
 
 ## Defaults to false. If enabled, when triggered after &&, || or |, Atuin will complete commands to chain rather than replace the current line.
 # command_chaining = false
@@ -256,11 +257,11 @@ records = true
 
 [daemon]
 ## Enables using the daemon to sync.
-enabled = false
+enabled = true
 
 ## Automatically start and manage the daemon when needed.
 ## Not compatible with `systemd_socket = true`.
-autostart = false
+autostart = true
 
 ## How often the daemon should sync in seconds
 # sync_frequency = 300
