@@ -52,6 +52,8 @@ a dps='docker ps'
 a ds='docker search'
 a docker-use-context='docker context use $(docker context ls -q | fzf --height=10 --prompt="use context > ")'
 
+a k=kubectl
+
 a ls='eza --icons --git'
 a l='ls -l'
 a ll='ls -l'
