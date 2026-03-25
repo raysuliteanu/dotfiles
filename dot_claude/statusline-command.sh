@@ -60,24 +60,20 @@ find_vcs_root() {
   return 1
 }
 
-# Detect VCS type and collect branch + repo root.
+# Detect VCS type and collect branch.
 vcs_label=""
 vcs_branch=""
-vcs_root=""
 
 jj_root=$(find_vcs_root "$cwd" ".jj")
 git_root=$(find_vcs_root "$cwd" ".git")
 
 if [ -n "$jj_root" ] && [ -n "$git_root" ]; then
-  # Co-located: .jj and .git are both present; use the shallower (or same) root.
-  # Prefer the jj root for the label, git for branch resolution.
+  # Co-located: .jj and .git are both present; prefer jj label, git for branch.
   vcs_label="jj (git)"
-  vcs_root="$jj_root"
   vcs_branch=$(git -C "$git_root" -c core.hooksPath=/dev/null symbolic-ref --short HEAD 2>/dev/null \
     || git -C "$git_root" -c core.hooksPath=/dev/null rev-parse --short HEAD 2>/dev/null)
 elif [ -n "$jj_root" ]; then
   vcs_label="jj"
-  vcs_root="$jj_root"
   # Show the short change ID (8 chars) so every commit is identifiable, plus the
   # bookmark name in parens when one exists. This is more useful than bookmarks alone
   # since anonymous changes are the norm in jj workflows.
@@ -86,14 +82,8 @@ elif [ -n "$jj_root" ]; then
   vcs_branch="${change_id}${bookmark_suffix}"
 elif [ -n "$git_root" ]; then
   vcs_label="git"
-  vcs_root="$git_root"
   vcs_branch=$(git -C "$git_root" -c core.hooksPath=/dev/null symbolic-ref --short HEAD 2>/dev/null \
     || git -C "$git_root" -c core.hooksPath=/dev/null rev-parse --short HEAD 2>/dev/null)
-fi
-
-short_vcs_root=""
-if [ -n "$vcs_root" ]; then
-  short_vcs_root=$(shorten_path "$vcs_root")
 fi
 
 # Build the two-line status output.
@@ -113,10 +103,9 @@ fi
 
 out="$line1"
 
-# Line 2 (only inside a VCS repo): vcs | repo root | branch
+# Line 2 (only inside a VCS repo): vcs | branch
 if [ -n "$vcs_label" ]; then
   line2="${OVERLAY1}${vcs_label}${RESET}"
-  line2="${line2} ${sep} ${PEACH}${short_vcs_root}${RESET}"
   if [ -n "$vcs_branch" ]; then
     line2="${line2} ${sep} ${YELLOW}${vcs_branch}${RESET}"
   fi
