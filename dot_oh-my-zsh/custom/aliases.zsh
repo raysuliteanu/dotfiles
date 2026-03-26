@@ -46,6 +46,7 @@ a fd='fd -H'
 a fdni='fd --no-ignore -H'
 a cd=z
 a lg=lazygit
+a lj=lazyjj
 a rg='rg -i'
 
 a dps='docker ps'
