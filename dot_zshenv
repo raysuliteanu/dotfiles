@@ -24,4 +24,4 @@ fi
 export HOMEBREW_NO_ENV_HINTS="true"
 
 # so my source build of ghostty can find themes and things
-export GHOSTTY_RESOURCES_DIR="$HOME/bin/share/ghostty"
+# export GHOSTTY_RESOURCES_DIR="$HOME/bin/share/ghostty"
