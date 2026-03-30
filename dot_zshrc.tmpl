@@ -213,10 +213,11 @@ export ANTHROPIC_API_KEY={{onepasswordRead "op://Personal/Anthropic API Credenti
 # export GITHUB_TOKEN={{onepasswordRead "op://Personal/GH_MCP_Token/credential" }}
 export GITHUB_TOKEN={{onepasswordRead "op://Personal/GitHub Personal Access Token/token" }}
 
-# ---- Zoxide (better cd) ----
-eval "$(zoxide init zsh)"
-
 export PATH="$HOME/.local/bin:$PATH"
+
 eval "$(mise activate zsh)"
 
 eval "$(tv init zsh)"
+
+eval "$(zoxide init zsh)"
+
