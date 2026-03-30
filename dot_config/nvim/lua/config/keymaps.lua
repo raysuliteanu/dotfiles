@@ -2,6 +2,8 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+local symbols = require("config.symbols")
+
 -- vim.keymap.set("n", "\\", "<cmd>Neotree toggle<cr>", { desc = "Toggle file tree viewer" })
 
 -- from Primeagen https://raw.githubusercontent.com/ThePrimeagen/init.lua/master/lua/theprimeagen/remap.lua
@@ -39,3 +41,7 @@ vim.keymap.set("n", "<leader>Ct", "<cmd>CloakToggle<cr>")
 
 -- Navigate to next diagnostic with F2
 vim.keymap.set("n", "<F2>", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
+
+vim.keymap.set("n", "<leader>st", symbols.search_types, { desc = "Search Types" })
+vim.keymap.set("n", "<leader>sT", symbols.search_symbols, { desc = "Search Symbols (Type Biased)" })
+vim.keymap.set("n", "<leader>sbt", symbols.search_buffer_types, { desc = "Search Buffer Types" })
