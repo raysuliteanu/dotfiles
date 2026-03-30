@@ -123,3 +123,5 @@ a -s jsx=$EDITOR
 a -s css=$EDITOR
 
 a mutt=neomutt
+
+a tm='sesh connect $(sesh list | fzf)'
