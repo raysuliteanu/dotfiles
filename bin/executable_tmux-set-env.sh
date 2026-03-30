@@ -7,4 +7,4 @@ if [[ $# -ne 2 ]]; then
 fi
 
 tmux set-environment "$1" "$2"
-export "$1"="$2"
+echo "Set $1 in tmux environment. Run 'export $1=$2' in existing panes."
