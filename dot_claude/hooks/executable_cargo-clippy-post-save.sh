@@ -24,7 +24,7 @@ done
 [[ -n "$cargo_root" ]] || exit 0
 
 # -D warnings makes clippy exit non-zero for warnings, not just hard errors
-if ! output=$(cd "$cargo_root" && cargo clippy -- -D warnings 2>&1); then
+if ! output=$(cd "$cargo_root" && cargo clippy --all-targets -- -D warnings 2>&1); then
     echo "$output" >&2
     exit 2
 fi
