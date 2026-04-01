@@ -6,7 +6,6 @@
 PEACH="\033[38;2;250;179;135m"    # #fab387 - directory
 YELLOW="\033[38;2;249;226;175m"   # #f9e2af - vcs branch
 SAPPHIRE="\033[38;2;116;199;236m" # #74c7ec - model
-LAVENDER="\033[38;2;180;190;254m" # #b4befe - context
 OVERLAY1="\033[38;2;127;132;156m" # #7f849c - separators / muted
 RESET="\033[0m"
 
@@ -44,7 +43,6 @@ short_dir=$(shorten_path "$cwd")
 
 model=$(echo "$input" | jq -r '.model.display_name // empty')
 
-remaining_pct=$(echo "$input" | jq -r '.context_window.remaining_percentage // empty')
 
 # Walk up from a directory looking for .jj or .git, returning the root path.
 find_vcs_root() {
@@ -96,10 +94,6 @@ if [ -n "$model" ]; then
   line1="${line1} ${sep} ${SAPPHIRE}${model}${RESET}"
 fi
 
-if [ -n "$remaining_pct" ]; then
-  remaining_int=$(printf '%.0f' "$remaining_pct")
-  line1="${line1} ${sep} ${LAVENDER}ctx: ${remaining_int}% remaining${RESET}"
-fi
 
 out="$line1"
 
