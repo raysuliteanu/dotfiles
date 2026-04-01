@@ -1,43 +1,44 @@
 {
-    "hooks": {
-        "PreToolUse": [
-            {
-                "matcher": "Bash",
-                "hooks": [
-                    {
-                        "type": "command",
-                        "command": "/home/ray/.claude/hooks/cargo-checks-pre-commit.sh"
-                    }
-                ]
-            }
-        ],
-        "PostToolUse": [
-            {
-                "matcher": "Write|Edit",
-                "hooks": [
-                    {
-                        "type": "command",
-                        "command": "/home/ray/.claude/hooks/shellcheck-post-save.sh"
-                    }
-                ]
-            }
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/ray/.claude/hooks/cargo-checks-pre-commit.sh"
+          }
         ]
-    },
-    "statusLine": {
-        "type": "command",
-        "command": "bash /home/ray/.claude/statusline-command.sh"
-    },
-    "enabledPlugins": {
-        "rust-analyzer-lsp@claude-plugins-official": true,
-        "lua-lsp@claude-plugins-official": true,
-        "clangd-lsp@claude-plugins-official": true,
-        "frontend-design@claude-plugins-official": true,
-        "code-review@claude-plugins-official": true,
-        "code-simplifier@claude-plugins-official": true,
-        "superpowers@claude-plugins-official": true,
-        "github@claude-plugins-official": true
-    },
-    "extraKnownMarketplaces": {},
-    "syntaxHighlightingDisabled": true,
-    "alwaysThinkingEnabled": true
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/ray/.claude/hooks/shellcheck-post-save.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash /home/ray/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "lua-lsp@claude-plugins-official": true,
+    "clangd-lsp@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "github@claude-plugins-official": false,
+    "everything-claude-code@everything-claude-code": true
+  },
+  "extraKnownMarketplaces": {},
+  "syntaxHighlightingDisabled": true,
+  "alwaysThinkingEnabled": true
 }
