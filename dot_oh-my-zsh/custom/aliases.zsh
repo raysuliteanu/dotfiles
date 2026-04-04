@@ -37,7 +37,7 @@ a c=clear
 a more='less -F'
 a less='less -F'
 #a top='btm --color=nord-light'
-a top=bpytop
+a top=btop
 a cat=bat
 a curl=curlie
 a e=emacs
