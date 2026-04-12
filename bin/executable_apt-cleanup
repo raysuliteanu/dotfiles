@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# removes unused dependencies
+sudo apt autoremove --purge  &&
+    # clears cached package files no longer downloadable
+    sudo apt autoclean  &&
+    # clears all cached package files (more aggressive)
+    sudo apt clean
+
+# vim: ft=bash
