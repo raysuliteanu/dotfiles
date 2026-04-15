@@ -1,15 +1,29 @@
 [user]
 name = "Ray Suliteanu"
 email = "raysuliteanu@pm.me"
+signing-key = "25BCE3C253935ABE"
 
 [ui]
 default-command = "log"
 diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
 diff-formatter = ":git"
 pager = "delta"
+show-cryptographic-signatures = true
 
 [aliases]
 init = ["git", "init"]
 
 [remotes.origin]
 auto-track-bookmarks = "glob:*"
+
+[signing]
+backend = "gpg"
+behavior = "own"
+
+[template-aliases]
+'format_short_cryptographic_signature(sig)' = '''
+if(sig,
+  "\nSigned-By: " ++ sig.display(),
+  ""
+)
+'''
