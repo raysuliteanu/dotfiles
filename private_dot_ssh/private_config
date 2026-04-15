@@ -5,4 +5,10 @@ Host rxs-pi.local
   IdentitiesOnly yes
   IdentityFile ~/.ssh/rxs-pi-rsa
   ForwardX11 yes
+Host codeberg.org
+  User raysuliteanu
+  HostName codeberg.org
+  PreferredAuthentications publickey
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/id_rsa
 
