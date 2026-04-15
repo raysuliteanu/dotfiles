@@ -80,6 +80,17 @@ When designing `pub` or crate-wide Rust APIs, consult the checklist in
 (with `-D warnings`) runs automatically after every `.rs` file save. Address
 any issues they report before proceeding.
 
+### Axum Route Parameters
+
+Axum v0.7+ uses `{param}` syntax for path capture groups, not the old `:param` syntax. Always write routes as:
+
+```rust
+.route("/users/{id}", get(handler))
+.route("/stack/{change_id}", get(handler))
+```
+
+Using `:param` compiles fine but panics at runtime on startup with: `Path segments must not start with ':'`. The `Path<String>` extractor in handlers works unchanged with either syntax.
+
 ### Writing compile_fail Tests
 
 Use `compile_fail` doctests to verify when certain code should _not_
