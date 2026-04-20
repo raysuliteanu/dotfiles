@@ -1,0 +1,6 @@
+base_url = "codeberg.org/"
+enable_https = true
+fancy_tables = true
+no_color = false
+editor = "nvim"
+max_width = 80
