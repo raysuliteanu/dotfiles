@@ -39,5 +39,15 @@
                 }
             }
         }
+    },
+    "mcp": {
+      "excalidraw": {
+        "type": "local",
+        "command": [
+          "npx",
+          "-y",
+          "excalidraw-mcp"
+        ]
+      }
     }
 }
