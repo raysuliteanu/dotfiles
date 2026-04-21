@@ -1,8 +1,8 @@
 # Global Instructions
 
-These are personal, cross-project defaults for OpenCode. Prefer project-local
-`AGENTS.md`, repository docs, and existing code conventions when they conflict
-with anything here.
+These are personal, cross-project defaults. Prefer project-local `AGENTS.md`,
+repository docs, and existing code conventions when they conflict with anything
+here.
 
 ## Working Style
 
