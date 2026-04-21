@@ -40,7 +40,13 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		end
 
 		local view = vim.fn.winsaveview()
+		-- gw respects formatexpr, which LazyVim sets to the LSP formatter.
+		-- Async LSP calls inside BufWritePre crash neovim, so clear it temporarily
+		-- to force gw to use vim's built-in textwidth wrapper.
+		local saved_formatexpr = vim.bo.formatexpr
+		vim.bo.formatexpr = ""
 		vim.cmd("silent keepjumps normal! ggVGgw")
+		vim.bo.formatexpr = saved_formatexpr
 		vim.fn.winrestview(view)
 	end,
 })
