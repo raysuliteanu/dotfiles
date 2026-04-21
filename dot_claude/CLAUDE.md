@@ -1,139 +1,68 @@
-# General Guidelines
+# Global Instructions
 
-## Tools
+These are personal, cross-project defaults. Prefer project-local `CLAUDE.md` or
+`AGENTS.md`, repository docs, and existing code conventions when they conflict with anything here.
 
-Use newer, more modern tools, replacing legacy tools, if available. For example,
+## Working Style
 
-- use `fd` rather than `find`
-- use `rg` rather than `grep`
-- use `eza` rather than `ls`
+- Keep changes minimal and targeted. Prefer the smallest correct diff over broad refactors.
+- Preserve the repository's existing style, structure, naming, and architecture unless there is a clear reason to change them.
+- For complex features or risky refactors, make a plan before editing.
+- Do not invent project facts. Read the relevant code and docs first.
+- Avoid adding new abstractions, files, or helpers unless they materially improve the result.
+- Put knowledge in the right place. Prefer existing docs and code comments over creating new top-level files.
 
-## Docker
+## Safety
 
-- use `docker compose` not `docker-compose`
-- use the `dive` tool for checking generated images for optimal image generation
+- Never use destructive commands like `rm -rf`, hard resets, or force pushes unless explicitly requested.
+- Do not revert or overwrite changes you did not make unless explicitly asked.
+- Never hardcode secrets, tokens, or credentials.
+- Validate external input at system boundaries and fail clearly.
+- Do not leak sensitive information in logs, error messages, or commits.
 
-# Programming Guidelines
+## Verification
 
-- in comments, focus on "why" over "what", avoiding obvious comments:
-  - Simple utility functions where intent is clear from the signature
-  - Trivial getters/setters or obvious wrapper code
-  - Code that's primarily syntactic sugar over well-known patterns
+- Add tests for new code when the repository has an appropriate test suite.
+- For bug fixes, prefer writing or updating a test that reproduces the issue before fixing it.
+- Run the smallest relevant verification for the change first, then broader checks if needed.
+- Ensure tests and linters pass before offering to commit when they are practical to run locally.
+- Do not claim code is working without verification when verification is available.
 
-# Testing Guidelines
+## Source Control
 
-Always create tests for new code, following the conventions of the programming
-language in use.
+- If a project has a `.jj/` directory, use `jj` for source control operations. Otherwise use `git`.
+- Follow conventional commits when writing commit messages.
+- Explain non-obvious trade-offs in commit messages when appropriate.
+- Do not add AI co-author trailers.
+- Use `git mv` for tracked file moves.
+- With `jj`, use `jj commit` rather than `jj desc ... && jj new`.
 
-Ensure all tests pass before offering to commit to source control.
+## Tool Preferences
 
-When fixing bugs, first write a test or tests that reproduce the bug, then fix
-the bug and ensure the test(s) now pass.
+- Prefer modern tools when available: `rg` over `grep`, `fd` over `find`, `eza` over `ls`.
+- For Docker, prefer `docker compose` over `docker-compose`.
+- Use comments sparingly and focus them on why, not what.
 
-# Source Control
+## Language Preferences
 
-## General
+### Rust
 
-Detect if the source control system for a project is `jj` by looking for a
-`.jj/` directory, and then use `jj` commands for source control operations, even
-if there's is also a `.git/` directory, since `jj` has a "co-located" mode for
-better `git` interoperability. Only use `git` if there is only a `.git/`
-directory without a `.jj/` directory.
+- Use `thiserror` for custom error types.
+- Use `cargo add` when adding dependencies.
+- In code using `anyhow` or `color-eyre`, add `.context()` or `with_context()` before propagating errors with `?`.
+- Prefer `expect()` over `unwrap()`, with a concise message explaining why failure is impossible.
+- For Axum route params, use `{param}` syntax, not `:param`.
+- Address `cargo fmt`, `clippy`, and other reported issues before finishing Rust changes when those checks are part of the repo workflow.
 
-Regardless of the actual source control tool (e.g. `git`, `jj`), follow the
-[conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)
-guidelines defined.
+### Java
 
-When writing commit messages, explain any non-obvious trade-offs made in the
-design or implementation.
+- Prefer Gradle with Groovy syntax over Maven for new projects.
+- Prefer JDK LTS releases.
+- For backend services, prefer Spring Boot unless the project already uses something else.
+- Prefer `RuntimeException` over checked `Exception` types for API-facing domain errors.
 
-Do not add `Co-Authored-By: Claude ...` tags.
+### Shell
 
-## JJ
-
-When doing commits, use `jj commit` and not `jj desc ... && jj new`.
-
-## Git
-
-Make sure you use `git mv` to move any files that are already checked into git.
-
-# Programming Languages
-
-## Rust
-
-Use the `thiserror` crate for custom error types.
-
-When adding dependencies to Rust projects, use `cargo add`.
-
-In code that uses `color-eyre` or `anyhow` `Result`s, consistently use
-`.context()` or `with_context()` prior to every error-propagation with `?`.
-Context messages should be simple present tense, such as to complete the sentence
-"while attempting to ...".
-
-Prefer `expect()` over `unwrap()`. The `expect` message should be very
-concise, and should explain why that expect call cannot fail.
-
-When designing `pub` or crate-wide Rust APIs, consult the checklist in
-<https://rust-lang.github.io/api-guidelines/checklist.html>.
-
-`cargo fmt --check` runs automatically as a pre-push hook and `cargo clippy`
-(with `-D warnings`) runs automatically after every `.rs` file save. Address
-any issues they report before proceeding.
-
-### Axum Route Parameters
-
-Axum v0.7+ uses `{param}` syntax for path capture groups, not the old `:param` syntax. Always write routes as:
-
-```rust
-.route("/users/{id}", get(handler))
-.route("/stack/{change_id}", get(handler))
-```
-
-Using `:param` compiles fine but panics at runtime on startup with: `Path segments must not start with ':'`. The `Path<String>` extractor in handlers works unchanged with either syntax.
-
-### Writing compile_fail Tests
-
-Use `compile_fail` doctests to verify when certain code should _not_
-compile, such as for type-state patterns or trait-based enforcement.
-Each `compile_fail` test should target a specific error condition since
-the doctest only has a binary output of whether it fails to compile, not
-the many reasons _why_. Make sure you clearly explain exactly WHY the
-code should fail to compile.
-
-If there is no obvious item to add the doctest to, create a new private
-item with `#[allow(dead_code)]` that you add the compile-fail tests to.
-Document that that's its purpose.
-
-## Java
-
-Prefer `Gradle` (with `Groovy` syntax) over `Maven` for the build system for new
-projects.
-
-Prefer JDK LTS versions.
-
-For backend services, use Spring Boot. When building containers for Java Spring
-Boot projects, follow the recommendations and best practices for structuring the
-image, using the Spring Boot Gradle/Maven plugins to build exploded JAR files.
-
-### Exceptions
-
-Prefer `RuntimeException` to `Exception` for APIs.
-
-Create class hierarchies for business/domain exceptions that, generally, extend
-`RuntimeException` and have a base exception class for all domain exceptions,
-
-## General Scripting
-
-Generally prefer shell scripts to other scripting languages like Python for
-simple scripts. Propose using Python when the solution would be much simpler
-or faster to execute.
-
-For the shebang line, always use `#!/usr/bin/env` prefix to find the correct
-shell binary, e.g. `#!/usr/bin/env bash`.
-
-### Shell Scripts
-
-Generally use `bash` as the shell script language.
-
-`shellcheck` runs automatically as a post-save hook on `.sh` files. Address
-any issues it reports before proceeding.
+- Prefer shell scripts for simple scripting tasks; use Python when it clearly simplifies the solution.
+- Use `#!/usr/bin/env bash` for bash scripts.
+- Address `shellcheck` findings when working on shell scripts.
