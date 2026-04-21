@@ -28,5 +28,19 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "markdown",
 	callback = function()
 		vim.opt_local.textwidth = 80
+		vim.opt_local.formatoptions:append("tcqn")
+	end,
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*.md",
+	callback = function()
+		if vim.bo.filetype ~= "markdown" then
+			return
+		end
+
+		local view = vim.fn.winsaveview()
+		vim.cmd("silent keepjumps normal! ggVGgw")
+		vim.fn.winrestview(view)
 	end,
 })
