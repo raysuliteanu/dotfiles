@@ -7,12 +7,16 @@
 [tag]
     sort = version:refname
 [user]
-    signingkey = 25BCE3C253935ABE
-    email = raysuliteanu@gmail.com
+    signingkey = ~/.ssh/id_rsa.pub
+    email = raysuliteanu@pm.me
     name = Ray Suliteanu
 [commit]
     verbose = true
     gpgsign = true
+[gpg]
+    format = ssh
+[gpg "ssh"]
+    allowedSignersFile = ~/.ssh/allowed_signers
 [core]
     pager = delta
 [interactive]
