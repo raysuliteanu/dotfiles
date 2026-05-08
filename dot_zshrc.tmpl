@@ -100,9 +100,6 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# Rust
-. "$HOME/.cargo/env"
-
 EDITOR=nvim
 
 BREW_PREFIX=$(brew --prefix)
@@ -191,7 +188,9 @@ eval "$(atuin init zsh)"
 # starship https://starship.rs/
 eval "$(starship init zsh)"
 
-. "$HOME/.deno/env"
+if [ -e $HOME/.deno/env ]; then
+    . "$HOME/.deno/env"
+fi
 
 export PATH=$PATH:$BREW_PREFIX/lib/ruby/gems/3.3.0/bin
 
