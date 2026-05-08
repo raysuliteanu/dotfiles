@@ -3,8 +3,12 @@ if [ -n "$TMUX" ]; then
   export TERM=screen-256color
 fi
 
-. "$HOME/.cargo/env"
-export CARGO_TARGET_DIR="$HOME/.cargo-target"
+# Rust
+if [ -e $HOME/.cargo/env ]; then
+    . "$HOME/.cargo/env"
+fi
+
+# export CARGO_TARGET_DIR="$HOME/.cargo-target"
 
 export PAGER='less -F'
 export EDITOR=nvim
