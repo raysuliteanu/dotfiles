@@ -44,9 +44,9 @@
       "excalidraw": {
         "type": "local",
         "command": [
-          "npx",
-          "-y",
-          "excalidraw-mcp"
+          "sh",
+          "-lc",
+          "mkdir -p \"$HOME/.local/state/excalidraw-mcp\" && cd \"$HOME/.local/state/excalidraw-mcp\" && exec npx -y excalidraw-mcp"
         ]
       }
     }
