@@ -41,13 +41,26 @@
         }
     },
     "mcp": {
-      "excalidraw": {
-        "type": "local",
-        "command": [
-          "sh",
-          "-lc",
-          "mkdir -p \"$HOME/.local/state/excalidraw-mcp\" && cd \"$HOME/.local/state/excalidraw-mcp\" && exec npx -y excalidraw-mcp"
-        ]
-      }
+        "excalidraw": {
+            "type": "local",
+            "command": [
+                "sh",
+                "-lc",
+                "mkdir -p \"$HOME/.local/state/excalidraw-mcp\" && cd \"$HOME/.local/state/excalidraw-mcp\" && exec npx -y excalidraw-mcp"
+            ]
+        }
+    },
+    "provider": {
+        "ollama": {
+            "npm": "@ai-sdk/openai-compatible",
+            "options": {
+                "baseURL": "http://rays-mac-mini:11434/v1"
+            },
+            "models": {
+                "qwen2.5-coder:32b-32k": {
+                    "name": "Qwen2.5-Coder 32B (Mini)"
+                }
+            }
+        }
     }
 }
