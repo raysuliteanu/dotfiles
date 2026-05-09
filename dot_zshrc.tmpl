@@ -100,9 +100,6 @@ plugins=(chezmoi gradle mvn rust sudo systemd vi-mode web-search)
 
 source $ZSH/oh-my-zsh.sh
 
-# Fix Delete key in vi-insert mode (vi-mode plugin doesn't bind ^[[3~ in viins)
-bindkey -M viins "^[[3~" delete-char
-
 # User configuration
 
 EDITOR=nvim
@@ -125,6 +122,8 @@ if [ -n "$SSH_TTY" ]; then
   unset SSH_AUTH_SOCK
 elif [ -e $HOME/.1password/agent.sock ]; then
   # linux: use 1Password's as ssh-agent
+  # fall back if the remote doesn't have terminfo for the local terminal (e.g. xterm-ghostty)
+  infocmp "$TERM" &>/dev/null || export TERM=xterm-256color
   SSH_AUTH_SOCK=$HOME/.1password/agent.sock
 elif [ -e "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock" ]; then
   # macOS: 1Password native socket path
