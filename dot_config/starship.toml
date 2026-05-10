@@ -33,6 +33,7 @@ $line_break\
 $character"""
 
 palette = 'catppuccin_latte'
+scan_timeout = 500
 
 [os]
 disabled = false
@@ -84,6 +85,7 @@ style = "bg:yellow"
 format = '[[ $symbol $branch ](fg:crust bg:yellow)]($style)'
 
 [git_status]
+disabled = true
 style = "bg:yellow"
 format = '[[($all_status$ahead_behind )](fg:crust bg:yellow)]($style)'
 
