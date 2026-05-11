@@ -1,7 +1,6 @@
 [user]
 name = "Ray Suliteanu"
 email = "raysuliteanu@pm.me"
-signing-key = "~/.ssh/id_rsa"
 
 [ui]
 default-command = "log"
@@ -19,9 +18,10 @@ auto-track-bookmarks = "glob:*"
 [signing]
 backend = "ssh"
 behavior = "own"
+key = "{{ .chezmoi.homeDir }}/.ssh/id_rsa"
 
 [signing.backends.ssh]
-allowed-signers = "~/.ssh/allowed_signers"
+allowed-signers = "{{ .chezmoi.homeDir }}/.ssh/allowed_signers"
 
 [template-aliases]
 'format_short_cryptographic_signature(sig)' = '''
