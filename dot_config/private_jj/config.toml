@@ -1,7 +1,7 @@
 [user]
 name = "Ray Suliteanu"
 email = "raysuliteanu@pm.me"
-signing-key = "~/.ssh/id_rsa.pub"
+signing-key = "~/.ssh/id_rsa"
 
 [ui]
 default-command = "log"
