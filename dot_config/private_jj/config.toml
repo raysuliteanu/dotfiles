@@ -20,8 +20,8 @@ auto-track-bookmarks = "glob:*"
 backend = "ssh"
 behavior = "own"
 
-#[signing.backends.ssh]
-#allowed-signers = "~/.ssh/allowed_signers"
+[signing.backends.ssh]
+allowed-signers = "~/.ssh/allowed_signers"
 
 [template-aliases]
 'format_short_cryptographic_signature(sig)' = '''
