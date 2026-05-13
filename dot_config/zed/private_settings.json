@@ -1,4 +1,17 @@
 {
+  "cli_default_open_behavior": "existing_window",
+  "project_panel": {
+    "dock": "left"
+  },
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "dock": "left"
+  },
   "calls": {
     "mute_on_join": true,
   },
@@ -8,9 +21,9 @@
     "file_icons": true,
   },
   "title_bar": {
+    "show_branch_status_icon": true,
     "show_menus": false,
     "show_user_picture": true,
-    "show_branch_icon": true,
   },
   "close_on_file_delete": true,
   "auto_signature_help": true,
@@ -27,9 +40,20 @@
   "restore_on_startup": "launchpad",
   "icon_theme": "Catppuccin Mocha",
   "agent": {
+    "favorite_models": [
+      {
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-6-latest",
+        "enable_thinking": true,
+        "effort": "high"
+      }
+    ],
+    "dock": "right",
     "default_model": {
+      "effort": "high",
+      "enable_thinking": true,
       "provider": "anthropic",
-      "model": "claude-sonnet-4-latest",
+      "model": "claude-sonnet-4-6-latest",
     },
   },
   "base_keymap": "JetBrains",
