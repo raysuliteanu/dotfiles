@@ -118,18 +118,6 @@ if [ -e $HOME/.config/op/plugins.sh ]; then
   source $HOME/.config/op/plugins.sh
 fi
 
-if [ -n "$SSH_TTY" ]; then
-  unset SSH_AUTH_SOCK
-  # fall back if the remote doesn't have terminfo for the local terminal (e.g. xterm-ghostty)
-  infocmp "$TERM" &>/dev/null || export TERM=xterm-256color
-elif [ -e $HOME/.1password/agent.sock ]; then
-  # linux: use 1Password's as ssh-agent
-  SSH_AUTH_SOCK=$HOME/.1password/agent.sock
-elif [ -e "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock" ]; then
-  # macOS: 1Password native socket path
-  SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-fi
-
 source <(fzf --zsh)
 
 # -- Use fd instead of fzf --
