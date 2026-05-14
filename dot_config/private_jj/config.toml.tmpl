@@ -1,7 +1,6 @@
 [user]
 name = "Ray Suliteanu"
 email = "raysuliteanu@pm.me"
-signing-key = "25BCE3C253935ABE"
 
 [ui]
 default-command = "log"
@@ -17,8 +16,12 @@ init = ["git", "init"]
 auto-track-bookmarks = "glob:*"
 
 [signing]
-backend = "gpg"
+backend = "ssh"
 behavior = "own"
+key = "{{ .chezmoi.homeDir }}/.ssh/id_rsa"
+
+[signing.backends.ssh]
+allowed-signers = "{{ .chezmoi.homeDir }}/.ssh/allowed_signers"
 
 [template-aliases]
 'format_short_cryptographic_signature(sig)' = '''
