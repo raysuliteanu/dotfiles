@@ -4,7 +4,8 @@ if [ -n "$TMUX" ]; then
 fi
 
 # Rust
-if [ -e $HOME/.cargo/env ]; then
+if [ -e "$HOME/.cargo/env" ]; then
+    # shellcheck source=/dev/null
     . "$HOME/.cargo/env"
 fi
 
@@ -18,7 +19,8 @@ export BAT_PAGER="$PAGER"
 
 export XDG_DATA_DIRS="/home/linuxbrew/.linuxbrew/share:$XDG_DATA_DIRS"
 
-export GPG_TTY="$(tty)"
+GPG_TTY="$(tty)"
+export GPG_TTY
 
 MOLD_PATH=$(which mold)
 if [ -e "$MOLD_PATH" ]; then
@@ -27,7 +29,7 @@ fi
 
 export HOMEBREW_NO_ENV_HINTS="true"
 
-if [ $GHOSTTY_BIN_DIR == "$HOME/bin" ]; then
+if [ "$GHOSTTY_BIN_DIR" = "$HOME/bin" ]; then
     # so my source build of ghostty can find themes and things
     export GHOSTTY_RESOURCES_DIR="$HOME/bin/share/ghostty"
 fi
