@@ -1,6 +1,7 @@
 Host rays-mac-mini
     HostName rays-mac-mini
     ForwardAgent yes
+    IdentityFile ~/.ssh/mac-mini
 Host rxs-pi.local
     User ray
     HostName rxs-pi.local
@@ -8,6 +9,7 @@ Host rxs-pi.local
     IdentitiesOnly yes
     IdentityFile ~/.ssh/rxs-pi-rsa
     ForwardX11 yes
+    ForwardAgent yes
 Host codeberg.org
     User raysuliteanu
     HostName codeberg.org
