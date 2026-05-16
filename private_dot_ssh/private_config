@@ -1,13 +1,13 @@
+Host *
+    IdentityAgent ~/.1password/agent.sock
 Host rays-mac-mini
     HostName rays-mac-mini
     ForwardAgent yes
-    IdentityFile ~/.ssh/mac-mini
 Host rxs-pi.local
     User ray
     HostName rxs-pi.local
     PreferredAuthentications publickey
     IdentitiesOnly yes
-    IdentityFile ~/.ssh/rxs-pi-rsa
     ForwardX11 yes
     ForwardAgent yes
 Host codeberg.org
@@ -15,4 +15,3 @@ Host codeberg.org
     HostName codeberg.org
     PreferredAuthentications publickey
     IdentitiesOnly yes
-    IdentityFile ~/.ssh/id_rsa
