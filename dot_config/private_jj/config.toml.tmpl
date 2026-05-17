@@ -18,7 +18,7 @@ auto-track-bookmarks = "glob:*"
 [signing]
 backend = "ssh"
 behavior = "own"
-key = "{{ .chezmoi.homeDir }}/.ssh/id_rsa"
+key = "{{ .chezmoi.homeDir }}/.ssh/id_rsa.pub"
 
 [signing.backends.ssh]
 allowed-signers = "{{ .chezmoi.homeDir }}/.ssh/allowed_signers"
