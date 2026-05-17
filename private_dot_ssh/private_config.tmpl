@@ -2,6 +2,7 @@ Host *
     IdentityAgent {{ if eq .chezmoi.os "darwin" }}"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"{{ else }}~/.1password/agent.sock{{ end }}
 Host rays-mac-mini
     HostName rays-mac-mini
+    User raysuliteanu
     ForwardAgent yes
 Host rxs-pi.local
     User ray
