@@ -7,7 +7,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.claude/hooks/cargo-fmt-pre-push.sh"
+            "command": "$HOME/.claude/hooks/cargo-checks-pre-commit.sh"
           }
         ]
       }
