@@ -1,15 +1,20 @@
+Host *
+    ForwardAgent yes
+Host kidoni
+    IdentityAgent {{ if eq .chezmoi.os "darwin" }}"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"{{ else }}~/.1password/agent.sock{{ end }}
+    HostName kidoni
+    User ray
 Host rays-mac-mini
     IdentityAgent {{ if eq .chezmoi.os "darwin" }}"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"{{ else }}~/.1password/agent.sock{{ end }}
     HostName rays-mac-mini
     User raysuliteanu
-    ForwardAgent yes
 Host rxs-pi.local
     User ray
     HostName rxs-pi.local
     PreferredAuthentications publickey
     ForwardX11 yes
-    ForwardAgent yes
 Host codeberg.org
     User raysuliteanu
     HostName codeberg.org
     PreferredAuthentications publickey
+    ForwardAgent no
