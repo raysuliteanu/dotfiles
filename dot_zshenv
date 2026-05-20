@@ -29,7 +29,7 @@ fi
 
 export HOMEBREW_NO_ENV_HINTS="true"
 
-if [ -n "$SSH_AUTH_SOCK" ]; then
+if [ ! -n "$SSH_AUTH_SOCK" ]; then
     if [ "$(uname)" = "Darwin" ]; then
         export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
     else
