@@ -7,8 +7,9 @@ input=$(cat)
 command=$(jq -r '.tool_input.command // empty' <<< "$input")
 cwd=$(jq -r '.cwd // empty' <<< "$input")
 
-# Intercept commits (jj commit, git commit) and pushes (jj git push, git push)
-[[ "$command" == *"jj commit"* || "$command" == *"git commit"* || "$command" == *"git push"* ]] || exit 0
+# Intercept commits (jj commit, jj describe, git commit) and pushes (jj git push, git push)
+# Note: `jj describe -m ... && jj new` is equivalent to `jj commit` — catch both.
+[[ "$command" == *"jj commit"* || "$command" == *"jj describe"* || "$command" == *"git commit"* || "$command" == *"git push"* ]] || exit 0
 
 # Walk up from cwd to find the cargo workspace/project root
 dir="${cwd:-$(pwd)}"
