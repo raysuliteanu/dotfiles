@@ -29,6 +29,14 @@ fi
 
 export HOMEBREW_NO_ENV_HINTS="true"
 
+if [ ! -n "$SSH_AUTH_SOCK" ]; then
+    if [ "$(uname)" = "Darwin" ]; then
+        export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+    else
+        export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"
+    fi
+fi
+
 if [ "$GHOSTTY_BIN_DIR" = "$HOME/bin" ]; then
     # so my source build of ghostty can find themes and things
     export GHOSTTY_RESOURCES_DIR="$HOME/bin/share/ghostty"
