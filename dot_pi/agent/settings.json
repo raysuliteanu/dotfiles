@@ -1,5 +1,5 @@
 {
   "lastChangelogVersion": "0.75.4",
   "defaultProvider": "ollama",
-  "defaultModel": "llama3.1:8b"
+  "defaultModel": "command-r:35b"
 }
