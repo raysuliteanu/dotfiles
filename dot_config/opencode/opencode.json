@@ -62,6 +62,9 @@
                 },
                 "llama3.1:8b": {
                     "name": "Llama 3.1 8B"
+                },
+                "command-r:35b": {
+                    "name": "Command R 35B"
                 }
             }
         }
