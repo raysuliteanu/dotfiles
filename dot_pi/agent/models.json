@@ -1,7 +1,7 @@
 {
   "providers": {
     "mlx": {
-      "baseUrl": "http://localhost:8888/v1",
+      "baseUrl": "https://rays-mac-mini.tail029721.ts.net:8888/v1",
       "api": "openai-completions",
       "apiKey": "mlx",
       "models": [
