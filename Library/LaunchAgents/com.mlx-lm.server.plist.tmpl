@@ -6,13 +6,7 @@
 	<string>com.mlx-lm.server</string>
 	<key>ProgramArguments</key>
 	<array>
-		<string>{{ .chezmoi.homeDir }}/.local/share/uv/tools/mlx-lm/bin/mlx_lm.server</string>
-		<string>--model</string>
-		<string>mlx-community/gemma-4-26B-A4B-it-OptiQ-4bit</string>
-		<string>--host</string>
-		<string>0.0.0.0</string>
-		<string>--port</string>
-		<string>8888</string>
+		<string>{{ .chezmoi.homeDir }}/bin/mlx-lm-server</string>
 	</array>
 	<key>EnvironmentVariables</key>
 	<dict>
