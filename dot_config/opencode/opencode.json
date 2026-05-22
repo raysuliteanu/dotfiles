@@ -50,23 +50,4 @@
             ]
         }
     },
-    "provider": {
-        "ollama": {
-            "npm": "@ai-sdk/openai-compatible",
-            "options": {
-                "baseURL": "http://rays-mac-mini:11434/v1"
-            },
-            "models": {
-                "qwen2.5-coder:32b-32k": {
-                    "name": "Qwen2.5-Coder 32B (Mini)"
-                },
-                "llama3.1:8b": {
-                    "name": "Llama 3.1 8B"
-                },
-                "command-r:35b": {
-                    "name": "Command R 35B"
-                }
-            }
-        }
-    }
 }
