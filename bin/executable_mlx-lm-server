@@ -18,8 +18,7 @@ Commands:
   start [PORT]   Start the MLX LM server and expose it via tailscale serve
   stop  [PORT]   Stop the MLX LM server and remove the tailscale serve config
 
-PORT defaults to $DEFAULT_PORT. Tailscale serves HTTPS on PORT; the MLX server
-listens locally on PORT+1 to avoid conflicts (e.g. 8888 -> mlx on 8889).
+PORT defaults to $DEFAULT_PORT. Both the MLX server and tailscale serve use the same port.
 
 Logs: $LOG_FILE
 EOF
@@ -40,7 +39,6 @@ is_running() {
 cmd_start() {
     local port="${1:-$DEFAULT_PORT}"
     validate_port "$port"
-    local mlx_port=$((port + 1))
 
     if is_running; then
         local running_port
@@ -52,17 +50,17 @@ cmd_start() {
 
     mkdir -p "$STATE_DIR"
 
-    echo "Starting MLX server (local port $mlx_port)..."
+    echo "Starting MLX server on port $port..."
     $MLX_SERVER \
         --model "$MLX_MODEL" \
         --host 127.0.0.1 \
-        --port "$mlx_port" \
+        --port "$port" \
         >> "$LOG_FILE" 2>&1 &
     echo $! > "$PID_FILE"
     echo "$port" > "$PORT_FILE"
 
-    echo "Configuring tailscale serve: HTTPS $port -> localhost:$mlx_port..."
-    $TAILSCALE serve --bg --https="$port" "$mlx_port"
+    echo "Configuring tailscale serve: HTTPS $port -> localhost:$port..."
+    $TAILSCALE serve --bg --https="$port" "$port"
 
     echo "MLX server started (PID $(cat "$PID_FILE"))."
     echo "Available at: https://rays-mac-mini.tail029721.ts.net:$port"
@@ -95,7 +93,6 @@ cmd_stop() {
     kill "$pid"
     rm -f "$PID_FILE" "$PORT_FILE"
 
-    local mlx_port=$((port + 1))
     echo "Removing tailscale serve on port $port..."
     $TAILSCALE serve --https="$port" off
     echo "MLX server stopped."
