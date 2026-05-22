@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+TAILSCALE=/usr/local/bin/tailscale
+MLX_SERVER=/Users/raysuliteanu/.local/share/uv/tools/mlx-lm/bin/mlx_lm.server
+
+cleanup() {
+    echo "Stopping tailscale serve on port 8888..."
+    $TAILSCALE serve --https=8888 off
+}
+trap cleanup EXIT INT TERM
+
+echo "Starting tailscale serve on port 8888..."
+$TAILSCALE serve --https=8888 8888
+
+echo "Starting mlx_lm.server..."
+exec $MLX_SERVER \
+    --model mlx-community/gemma-4-26B-A4B-it-OptiQ-4bit \
+    --host 0.0.0.0 \
+    --port 8888

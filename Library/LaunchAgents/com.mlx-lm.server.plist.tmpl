@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.mlx-lm.server</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>{{ .chezmoi.homeDir }}/.local/share/uv/tools/mlx-lm/bin/mlx_lm.server</string>
+		<string>--model</string>
+		<string>mlx-community/gemma-4-26B-A4B-it-OptiQ-4bit</string>
+		<string>--host</string>
+		<string>0.0.0.0</string>
+		<string>--port</string>
+		<string>8888</string>
+	</array>
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>HF_TOKEN</key>
+		<string>{{ onepasswordRead "op://Personal/HuggingFace Token/credential" }}</string>
+		<key>PATH</key>
+		<string>/opt/homebrew/bin:{{ .chezmoi.homeDir }}/.local/bin:/usr/local/bin:/usr/bin:/bin</string>
+	</dict>
+	<key>KeepAlive</key>
+	<true/>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>StandardOutPath</key>
+	<string>{{ .chezmoi.homeDir }}/.local/share/mlx-lm/server.log</string>
+	<key>StandardErrorPath</key>
+	<string>{{ .chezmoi.homeDir }}/.local/share/mlx-lm/server.log</string>
+</dict>
+</plist>
