@@ -11,7 +11,7 @@ cleanup() {
 trap cleanup EXIT INT TERM
 
 echo "Starting tailscale serve on port 8888..."
-$TAILSCALE serve --https=8888 8888
+$TAILSCALE serve --bg --https=8888 8888
 
 echo "Starting mlx_lm.server..."
 exec $MLX_SERVER \
