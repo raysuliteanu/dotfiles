@@ -55,6 +55,7 @@ cmd_start() {
         --model "$MLX_MODEL" \
         --host 127.0.0.1 \
         --port "$port" \
+        --max-tokens 32768 \
         >> "$LOG_FILE" 2>&1 &
     echo $! > "$PID_FILE"
     echo "$port" > "$PORT_FILE"
