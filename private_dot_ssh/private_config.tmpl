@@ -1,11 +1,9 @@
 Host *
     ForwardAgent yes
 Host kidoni
-    IdentityAgent {{ if eq .chezmoi.os "darwin" }}"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"{{ else }}~/.1password/agent.sock{{ end }}
     HostName kidoni
     User ray
 Host rays-mac-mini
-    IdentityAgent {{ if eq .chezmoi.os "darwin" }}"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"{{ else }}~/.1password/agent.sock{{ end }}
     HostName rays-mac-mini
     User raysuliteanu
 Host rxs-pi.local
@@ -18,5 +16,3 @@ Host codeberg.org
     HostName codeberg.org
     PreferredAuthentications publickey
     ForwardAgent no
-    IdentitiesOnly yes
-    IdentityFile ~/.ssh/id_rsa.pub
