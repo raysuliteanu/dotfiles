@@ -17,6 +17,7 @@ Usage: $(basename "$0") <command> [PORT]
 Commands:
   start [PORT]   Start the MLX LM server and expose it via tailscale serve
   stop  [PORT]   Stop the MLX LM server and remove the tailscale serve config
+  restart [PORT] Restart the MLX LM server
 
 PORT defaults to $DEFAULT_PORT. Both the MLX server and tailscale serve use the same port.
 
@@ -99,8 +100,31 @@ cmd_stop() {
     echo "MLX server stopped."
 }
 
+cmd_restart() {
+    local port="${1:-$DEFAULT_PORT}"
+    validate_port "$port"
+
+    if is_running; then
+        local running_port
+        running_port=$(cat "$PORT_FILE" 2>/dev/null || echo "")
+
+        if [ -n "$running_port" ]; then
+            echo "Restarting MLX server (currently running on port $running_port)..."
+            cmd_stop "$running_port"
+        else
+            echo "Restarting MLX server (port unknown, stopping process)..."
+            local pid
+            pid=$(cat "$PID_FILE")
+            kill "$pid"
+            rm -f "$PID_FILE" "$PORT_FILE"
+        fi
+    fi
+    cmd_start "$port"
+}
+
 case "${1:-}" in
-    start) cmd_start "${2:-}" ;;
-    stop)  cmd_stop  "${2:-}" ;;
-    *)     usage; exit 0 ;;
+    start)   cmd_start   "${2:-}" ;;
+    stop)    cmd_stop    "${2:-}" ;;
+    restart) cmd_restart "${2:-}" ;;
+    *)       usage; exit 0 ;;
 esac
