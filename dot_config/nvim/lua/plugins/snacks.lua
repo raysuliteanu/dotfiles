@@ -10,9 +10,15 @@ return {
 					{
 						pane = 2,
 						section = "terminal",
+						enabled = vim.fn.has("mac") == 0,
 						cmd = "colorscript -e tiefighter1row",
 						height = 8,
 						padding = 1,
+					},
+					{
+						pane = 2,
+						enabled = vim.fn.has("mac") == 1,
+						padding = 9,
 					},
 					{ section = "keys", gap = 1, padding = 1 },
 					{
