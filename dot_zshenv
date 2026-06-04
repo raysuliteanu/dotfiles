@@ -32,6 +32,9 @@ export HOMEBREW_NO_ENV_HINTS="true"
 if [ -z "$SSH_CONNECTION" ]; then
     if [ "$(uname)" = "Darwin" ]; then
         export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+        if [ -d "/Applications/Ghostty.app/Contents/Resources/terminfo" ]; then
+            export TERMINFO_DIRS="/Applications/Ghostty.app/Contents/Resources/terminfo${TERMINFO_DIRS:+:$TERMINFO_DIRS}"
+        fi
     else
         export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"
     fi
