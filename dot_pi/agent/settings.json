@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.75.4",
-  "defaultProvider": "",
-  "defaultModel": ""
+  "lastChangelogVersion": "0.78.1",
+  "defaultProvider": "mlx",
+  "defaultModel": "mlx-community/gemma-4-26B-A4B-it-OptiQ-4bit"
 }
