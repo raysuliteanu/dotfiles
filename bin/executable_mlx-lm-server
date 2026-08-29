@@ -3,7 +3,7 @@ set -euo pipefail
 
 TAILSCALE=/usr/local/bin/tailscale
 MLX_SERVER=/Users/raysuliteanu/.local/share/uv/tools/mlx-lm/bin/mlx_lm.server
-MLX_MODEL=mlx-community/gemma-4-26B-A4B-it-OptiQ-4bit
+MLX_MODEL=mlx-community/Qwen3-30B-A3B-Instruct-2507-4bit
 STATE_DIR=/Users/raysuliteanu/.local/share/mlx-lm
 PID_FILE=$STATE_DIR/server.pid
 PORT_FILE=$STATE_DIR/server.port
