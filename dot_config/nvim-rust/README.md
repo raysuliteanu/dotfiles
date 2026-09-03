@@ -1,23 +1,71 @@
 # nvim-rust
 
-A focused Neovim configuration for Rust development, separate from the general
-config in `~/.config/nvim`. Built on LazyVim.
+A small, focused Neovim configuration for Rust development, built on
+[LazyVim](https://www.lazyvim.org/).
 
-## Usage
+General-purpose Neovim configs tend to accumulate every language and tool you
+have ever touched. This one carries only what Rust work actually needs:
+rust-analyzer via rustaceanvim, `Cargo.toml` support, a debugger, and enough
+Markdown, Git and Jujutsu support to live in a real repository. Around 40
+plugins in total, most of them LazyVim's own defaults.
 
-Neovim picks this config up via `NVIM_APPNAME`, which also isolates its plugin,
-state and cache directories (`~/.local/share/nvim-rust`, `~/.local/state/nvim-rust`,
-`~/.cache/nvim-rust`). Nothing is shared with the default config.
+It is deliberately unopinionated about everything else. There is no AI tooling,
+no note-taking, no second language server — if you want those, add them in
+`lua/plugins/`.
+
+## Requirements
+
+- Neovim >= 0.11.2 (LazyVim's minimum)
+- `rust-analyzer` on `PATH` — `rustup component add rust-analyzer`
+- `git`, a C compiler and `curl` (for treesitter parsers and Mason downloads)
+- A [Nerd Font](https://www.nerdfonts.com/) for the icons
+- Optionally [`jj`](https://jj-vcs.github.io/jj/) for the Jujutsu integration
+
+Everything else — taplo, marksman, codelldb, markdownlint-cli2, markdown-toc —
+is installed by Mason on first launch.
+
+## Installation
+
+### As a separate config (recommended)
+
+`NVIM_APPNAME` lets Neovim keep several configurations side by side. It isolates
+the plugin, state and cache directories too, so this config shares nothing with
+whatever you already run:
 
 ```sh
+git clone https://github.com/raysuliteanu/nvim-rust ~/.config/nvim-rust
 NVIM_APPNAME=nvim-rust nvim
 ```
 
-Suggested shell alias:
+That leaves `~/.config/nvim` untouched. An alias makes it convenient:
 
 ```sh
 alias rv='NVIM_APPNAME=nvim-rust nvim'
 ```
+
+Directories used: `~/.config/nvim-rust`, `~/.local/share/nvim-rust`,
+`~/.local/state/nvim-rust`, `~/.cache/nvim-rust`.
+
+### As your default config
+
+If you want this to be what plain `nvim` starts, back up anything already there
+first:
+
+```sh
+mv ~/.config/nvim{,.bak}
+mv ~/.local/share/nvim{,.bak}
+mv ~/.local/state/nvim{,.bak}
+mv ~/.cache/nvim{,.bak}
+
+git clone https://github.com/raysuliteanu/nvim-rust ~/.config/nvim
+nvim
+```
+
+Remove the `.git` directory afterwards if you would rather track it in your own
+dotfiles repo than stay pinned to this one.
+
+Either way, the first launch installs plugins and tools and takes a minute.
+Run `:checkhealth` once it settles.
 
 ## What's included
 
@@ -87,8 +135,8 @@ on first run.
 
 Git keeps LazyVim's `<leader>g` mappings, so both work in colocated repos.
 
-## External dependencies
+## Customising
 
-`rust-analyzer` must be on `PATH` (`rustup component add rust-analyzer`).
-Everything else — taplo, marksman, codelldb, markdownlint-cli2, markdown-toc —
-is installed by Mason on first launch.
+`lazyvim.json` lists the enabled LazyVim extras; add or remove entries there, or
+use `:LazyExtras`. Anything beyond that goes in `lua/plugins/` as a normal
+lazy.nvim spec — files are picked up automatically.
