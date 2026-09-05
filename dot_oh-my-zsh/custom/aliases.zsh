@@ -20,6 +20,8 @@ a v=vi
 a view='vi -R'
 a rv='NVIM_APPNAME=nvim-rust nvim'
 a rvi='NVIM_APPNAME=nvim-rust nvim'
+a jv='NVIM_APPNAME=nvim-java nvim'
+a jvi='NVIM_APPNAME=nvim-java nvim'
 
 a b=brew
 a bs='brew search'
