@@ -10,9 +10,21 @@ if [ -z "$SEARCH_DIR" ]; then
     exit 1
 fi
 
-# Find all git repositories and run 'git gc'
-while IFS= read -r git_dir; do
-    repo_dir=$(dirname "$git_dir")
+# Find repo roots (git or jj), without descending into them
+# so nested repos inside a repo are left to their parent
+while IFS= read -r repo_dir; do
+
+    # jj repos with a co-located git repo are managed by jj, not git
+    if [ -d "$repo_dir/.jj" ]; then
+        echo "Skipping jj repository: $repo_dir"
+        continue
+    fi
+
+    if ! git -C "$repo_dir" rev-parse --git-dir >/dev/null 2>&1; then
+        echo "Skipping non-git directory: $repo_dir"
+        continue
+    fi
+
     echo "Running 'git gc' in $repo_dir"
-    git -C "$repo_dir" gc
-done < <(fd -H -t d "^\.git$" "$SEARCH_DIR")
+    git -C "$repo_dir" gc || echo "git gc failed in $repo_dir"
+done < <(find "$SEARCH_DIR" -type d -exec test -d '{}/.git' -o -d '{}/.jj' \; -print -prune)
