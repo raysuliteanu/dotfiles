@@ -65,6 +65,7 @@ a ll='ls -l'
 a lL='ls -lX' # eza -X == ls -L
 a la='ls -a'
 a lR='ls -lR'
+a laR='ls -alR'
 # eza -snew == ls -rt
 a lrt='ls -l -snew'
 a lart='ls -la -snew'
