@@ -1,5 +1,5 @@
 {
-  "model": "sonnet",
+  "model": "opus",
   "hooks": {
     "PreToolUse": [
       {
@@ -45,7 +45,11 @@
   "extraKnownMarketplaces": {},
   "syntaxHighlightingDisabled": true,
   "alwaysThinkingEnabled": true,
-  "theme": "dark",
+  "effortLevel": "medium",
+  "awaySummaryEnabled": false,
   "autoUpdatesChannel": "stable",
-  "minimumVersion": "2.1.136"
+  "minimumVersion": "2.1.136",
+  "tui": "fullscreen",
+  "theme": "dark",
+  "remoteControlAtStartup": false
 }
