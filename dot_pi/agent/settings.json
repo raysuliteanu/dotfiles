@@ -1,7 +1,7 @@
 {
   "lastChangelogVersion": "0.85.0",
   "defaultProvider": "mlx",
-  "defaultModel": "mlx-community/gemma-4-26B-A4B-it-OptiQ-4bit",
+  "defaultModel": "mlx-community/Qwen3-30B-A3B-Instruct-2507-4bit",
   "hideThinkingBlock": true,
   "quietStartup": true,
   "theme": "dark"
