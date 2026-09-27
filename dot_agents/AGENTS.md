@@ -48,6 +48,7 @@ Otherwise use `git`.
 - Prefer modern tools when available: `rg` over `grep`, `fd` over `find`, `eza`
 over `ls`.
 - For Docker, prefer `docker compose` over `docker-compose`.
+- Use `mise` to manage dev tools and dev environments in software projects
 
 ## Language Preferences
 
