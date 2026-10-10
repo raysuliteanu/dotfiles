@@ -9,7 +9,10 @@ if [ -e "$HOME/.cargo/env" ]; then
     . "$HOME/.cargo/env"
 fi
 
-export CARGO_TARGET_DIR="$HOME/.cargo-target"
+# No shared CARGO_TARGET_DIR: parallel agents in separate jj workspaces would
+# contend on its lock and thrash each other's artifacts. Each project builds into
+# its own ./target; sccache (~/.cargo/config.toml) still shares compiled deps.
+# export CARGO_TARGET_DIR="$HOME/.cargo-target"
 
 export PAGER='less -F'
 export EDITOR=nvim

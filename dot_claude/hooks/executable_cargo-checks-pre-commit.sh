@@ -9,10 +9,31 @@ cwd=$(jq -r '.cwd // empty' <<< "$input")
 
 # Intercept commits (jj commit, jj describe, git commit) and pushes (jj git push, git push)
 # Note: `jj describe -m ... && jj new` is equivalent to `jj commit` — catch both.
-[[ "$command" == *"jj commit"* || "$command" == *"jj describe"* || "$command" == *"git commit"* || "$command" == *"git push"* ]] || exit 0
+# Global options may sit between the tool and the subcommand (`jj -R DIR commit`,
+# `git -C DIR commit`), so match the subcommand anywhere in the same command.
+[[ "$command" =~ (^|[^[:alnum:]_-])jj[[:space:]][^\;\&\|]*(commit|describe|git[[:space:]]+push) ||
+   "$command" =~ (^|[^[:alnum:]_-])git[[:space:]][^\;\&\|]*(commit|push) ]] || exit 0
 
-# Walk up from cwd to find the cargo workspace/project root
+# The commit may target another directory than the session cwd (e.g. a jj
+# workspace used by a parallel agent): honor `cd DIR && ...`, `jj -R DIR`,
+# `jj --repository DIR` and `git -C DIR`, so each workspace is checked against
+# its own tree.
 dir="${cwd:-$(pwd)}"
+target=""
+if [[ "$command" =~ ^[[:space:]]*cd[[:space:]]+([^[:space:]\;\&]+) ]]; then
+    target="${BASH_REMATCH[1]}"
+fi
+if [[ "$command" =~ (jj[[:space:]]+(-R|--repository)[[:space:]=]+|git[[:space:]]+-C[[:space:]]+)([^[:space:]\;\&]+) ]]; then
+    target="${BASH_REMATCH[3]}"
+fi
+if [[ -n "$target" ]]; then
+    target="${target%\"}"; target="${target#\"}"; target="${target%\'}"; target="${target#\'}"
+    target="${target/#\~/$HOME}"
+    [[ "$target" == /* ]] || target="$dir/$target"
+    [[ -d "$target" ]] && dir="$target"
+fi
+
+# Walk up from the target dir to find the cargo workspace/project root
 cargo_root=""
 while [[ "$dir" != "/" ]]; do
     if [[ -f "$dir/Cargo.toml" ]]; then
