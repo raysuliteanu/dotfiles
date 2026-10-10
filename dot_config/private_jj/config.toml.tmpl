@@ -18,20 +18,12 @@ auto-track-bookmarks = "glob:*"
 [signing]
 backend = "ssh"
 # Sign when pushing, not on every snapshot: parallel agents would otherwise hit
-# the 1Password SSH agent on each working-copy snapshot.
+# the SSH agent on each working-copy snapshot.
 behavior = "drop"
 key = "{{ .chezmoi.homeDir }}/.ssh/id_rsa.pub"
 
 [signing.backends.ssh]
 allowed-signers = "{{ .chezmoi.homeDir }}/.ssh/allowed_signers"
-
-[template-aliases]
-'format_short_cryptographic_signature(sig)' = '''
-if(sig,
-  "\nSigned-By: " ++ sig.display(),
-  ""
-)
-'''
 
 [git]
 sign-on-push = true
