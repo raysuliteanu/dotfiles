@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.85.0",
+  "lastChangelogVersion": "1.1.0",
   "defaultProvider": "mlx",
   "defaultModel": "mlx-community/GLM-4.7-Flash-6bit",
   "hideThinkingBlock": true,
