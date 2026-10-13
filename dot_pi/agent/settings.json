@@ -4,5 +4,10 @@
   "defaultModel": "mlx-community/GLM-4.7-Flash-6bit",
   "hideThinkingBlock": true,
   "quietStartup": true,
-  "theme": "dark"
+  "theme": "system",
+  "tuiMode": "fullscreen",
+  "packages": [
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:pi-web-access"
+  ]
 }
