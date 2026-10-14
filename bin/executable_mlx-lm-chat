@@ -1,132 +1,90 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-TAILSCALE=/usr/local/bin/tailscale
-MLX_CHAT=/Users/raysuliteanu/.local/share/uv/tools/mlx-lm/bin/mlx_lm.chat
-MLX_MODEL=meta-llama/Llama-3.1-8B-Instruct
-STATE_DIR=/Users/raysuliteanu/.local/share/mlx-lm
-PID_FILE=$STATE_DIR/chat.pid
-LOG_FILE=$STATE_DIR/chat.log
-DEFAULT_PORT=8889
+MLX_CHAT=${MLX_LM_CHAT:-$(which mlx_lm.chat)}
+MLX_MODEL=google/gemma-4-26B-A4B-it
 
 usage() {
-  cat <<EOF
-Usage: $(basename "$0") <command> [PORT]
+    cat <<EOF
+Usage: $(basename "$0") [OPTIONS]
 
-Commands:
-  start [PORT]   Start the MLX LM chat and expose it via tailscale serve
-  stop  [PORT]   Stop the MLX LM chat and remove the tailscale serve config
-  restart [PORT] Restart the MLX LM chat
+Chat with an LLM using MLX.
 
-PORT defaults to $DEFAULT_PORT. Both the MLX chat and tailscale serve use the same port.
+Options:
+  --model MODEL         Model to use (default: $MLX_MODEL)
+  --max-tokens N        Maximum tokens to generate (default: 32768)
+  --temp N              Sampling temperature (default: 0.7)
+  --top-p N             Sampling top-p (default: 0.9)
+  --system-prompt TEXT  System prompt to use
+  --help                Show this help message
 
-Logs: $LOG_FILE
+Examples:
+  $(basename "$0")
+  $(basename "$0") --model meta-llama/Llama-3.1-8B-Instruct
+  $(basename "$0") --max-tokens 1024 --temp 0.8
 EOF
 }
 
-validate_port() {
-  local port=$1
-  if ! [[ "$port" =~ ^[0-9]+$ ]] || [ "$port" -lt 1024 ] || [ "$port" -gt 65534 ]; then
-    echo "Error: '$port' is not a valid port. Must be between 1024 and 65534." >&2
-    exit 1
-  fi
-}
+# Parse arguments
+MODEL="$MLX_MODEL"
+MAX_TOKENS=32768
+TEMP=0.7
+TOP_P=0.9
+SYSTEM_PROMPT=""
+TRUST_REMOTE_CODE=false
 
-is_running() {
-  [ -f "$PID_FILE" ] && kill -0 "$(cat "$PID_FILE")" 2>/dev/null
-}
+while [[ $# -gt 0 ]]; do
+    case $1 in
+    --model)
+        MODEL="$2"
+        shift 2
+        ;;
+    --max-tokens)
+        MAX_TOKENS="$2"
+        shift 2
+        ;;
+    --temp)
+        TEMP="$2"
+        shift 2
+        ;;
+    --top-p)
+        TOP_P="$2"
+        shift 2
+        ;;
+    --system-prompt)
+        SYSTEM_PROMPT="$2"
+        shift 2
+        ;;
+    --trust-remote-code)
+        TRUST_REMOTE_CODE=true
+        shift
+        ;;
+    --help)
+        usage
+        exit 0
+        ;;
+    *)
+        echo "Error: Unknown option: $1" >&2
+        usage
+        exit 1
+        ;;
+    esac
+done
 
-cmd_start() {
-  local port="${1:-$DEFAULT_PORT}"
-  validate_port "$port"
+# Run the chat
+ARGS=(
+    --model "$MODEL"
+    --max-tokens "$MAX_TOKENS"
+    --temp "$TEMP"
+    --top-p "$TOP_P"
+)
 
-  if is_running; then
-    local running_port
-    running_port=$(cat "$PORT_FILE" 2>/dev/null || echo "unknown")
-    echo "Error: MLX chat is already running on port $running_port (PID $(cat "$PID_FILE"))." >&2
-    echo "Run '$(basename "$0") stop' to stop it first." >&2
-    exit 1
-  fi
+if [ "$SYSTEM_PROMPT" != "" ]; then
+    ARGS+=(--system-prompt "$SYSTEM_PROMPT")
+fi
 
-  mkdir -p "$STATE_DIR"
+if [ "$TRUST_REMOTE_CODE" = true ]; then
+    ARGS+=(--trust-remote-code)
+fi
 
-  echo "Starting MLX chat on port $port..."
-  $MLX_CHAT \
-    --model "$MLX_MODEL" \
-    --host 127.0.0.1 \
-    --port "$port" \
-    --max-tokens 32768 \
-    >>"$LOG_FILE" 2>&1 &
-  echo $! >"$PID_FILE"
-  echo "$port" >"$PORT_FILE"
-
-  echo "Configuring tailscale serve: HTTPS $port -> localhost:$port..."
-  $TAILSCALE serve --bg --https="$port" "$port"
-
-  echo "MLX chat started (PID $(cat "$PID_FILE"))."
-  echo "Available at: https://rays-mac-mini.tail029721.ts.net:$port"
-  echo "Logs: tail -f $LOG_FILE"
-}
-
-cmd_stop() {
-  local port="${1:-$DEFAULT_PORT}"
-  validate_port "$port"
-
-  if ! is_running; then
-    echo "MLX chat is not running."
-    # Still attempt to clean up tailscale in case it was left configured
-    $TAILSCALE serve --https="$port" off 2>/dev/null || true
-    rm -f "$PID_FILE" "$PORT_FILE"
-    exit 0
-  fi
-
-  local running_port
-  running_port=$(cat "$PORT_FILE" 2>/dev/null || echo "")
-  if [ -n "$running_port" ] && [ "$running_port" != "$port" ]; then
-    echo "Warning: MLX chat is running on port $running_port, not $port." >&2
-    echo "Run '$(basename "$0") stop $running_port' to stop it." >&2
-    exit 1
-  fi
-
-  local pid
-  pid=$(cat "$PID_FILE")
-  echo "Stopping MLX chat (PID $pid)..."
-  kill "$pid"
-  rm -f "$PID_FILE" "$PORT_FILE"
-
-  echo "Removing tailscale serve on port $port..."
-  $TAILSCALE serve --https="$port" off
-  echo "MLX chat stopped."
-}
-
-cmd_restart() {
-  local port="${1:-$DEFAULT_PORT}"
-  validate_port "$port"
-
-  if is_running; then
-    local running_port
-    running_port=$(cat "$PORT_FILE" 2>/dev/null || echo "")
-
-    if [ -n "$running_port" ]; then
-      echo "Restarting MLX chat (currently running on port $running_port)..."
-      cmd_stop "$running_port"
-    else
-      echo "Restarting MLX chat (port unknown, stopping process)..."
-      local pid
-      pid=$(cat "$PID_FILE")
-      kill "$pid"
-      rm -f "$PID_FILE" "$PORT_FILE"
-    fi
-  fi
-  cmd_start "$port"
-}
-
-case "${1:-}" in
-start) cmd_start "${2:-}" ;;
-stop) cmd_stop "${2:-}" ;;
-restart) cmd_restart "${2:-}" ;;
-*)
-  usage
-  exit 0
-  ;;
-esac
+$MLX_CHAT "${ARGS[@]}"
