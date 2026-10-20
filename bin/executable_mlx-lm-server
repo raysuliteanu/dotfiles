@@ -3,7 +3,8 @@ set -euo pipefail
 
 TAILSCALE=/usr/local/bin/tailscale
 MLX_SERVER=/Users/raysuliteanu/.local/share/uv/tools/mlx-lm/bin/mlx_lm.server
-MLX_MODEL=mlx-community/GLM-4.7-Flash-6bit
+DEFAULT_MODEL=mlx-community/GLM-4.7-Flash-6bit
+MLX_MODEL=$DEFAULT_MODEL
 STATE_DIR=/Users/raysuliteanu/.local/share/mlx-lm
 PID_FILE=$STATE_DIR/server.pid
 PORT_FILE=$STATE_DIR/server.port
@@ -12,12 +13,15 @@ DEFAULT_PORT=8888
 
 usage() {
   cat <<EOF
-Usage: $(basename "$0") <command> [PORT]
+Usage: $(basename "$0") [-m|--model MODEL] <command> [PORT]
 
 Commands:
   start [PORT]   Start the MLX LM server and expose it via tailscale serve
   stop  [PORT]   Stop the MLX LM server and remove the tailscale serve config
   restart [PORT] Restart the MLX LM server
+
+Options:
+  -m, --model MODEL  Model to serve (start/restart only). Defaults to $DEFAULT_MODEL
 
 PORT defaults to $DEFAULT_PORT. Both the MLX server and tailscale serve use the same port.
 
@@ -51,7 +55,7 @@ cmd_start() {
 
   mkdir -p "$STATE_DIR"
 
-  echo "Starting MLX server on port $port..."
+  echo "Starting MLX server on port $port with model $MLX_MODEL..."
   $MLX_SERVER \
     --model "$MLX_MODEL" \
     --host 127.0.0.1 \
@@ -121,6 +125,25 @@ cmd_restart() {
   fi
   cmd_start "$port"
 }
+
+args=()
+while [ $# -gt 0 ]; do
+  case "$1" in
+  -m | --model)
+    if [ $# -lt 2 ]; then
+      echo "Error: $1 requires a MODEL argument." >&2
+      exit 1
+    fi
+    MLX_MODEL=$2
+    shift 2
+    ;;
+  *)
+    args+=("$1")
+    shift
+    ;;
+  esac
+done
+set -- ${args[@]+"${args[@]}"}
 
 case "${1:-}" in
 start) cmd_start "${2:-}" ;;
