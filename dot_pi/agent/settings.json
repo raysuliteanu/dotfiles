@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "1.1.0",
+  "lastChangelogVersion": "1.4.0",
   "defaultProvider": "mlx",
   "defaultModel": "mlx-community/GLM-4.7-Flash-6bit",
   "hideThinkingBlock": true,
@@ -8,6 +8,7 @@
   "tuiMode": "fullscreen",
   "packages": [
     "npm:@juicesharp/rpiv-ask-user-question",
-    "npm:pi-web-access"
+    "npm:pi-web-access",
+    "npm:pi-subagents"
   ]
 }
