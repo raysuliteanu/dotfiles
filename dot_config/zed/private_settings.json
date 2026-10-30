@@ -1,65 +1,99 @@
 {
-  "cli_default_open_behavior": "existing_window",
-  "project_panel": {
-    "dock": "left"
-  },
-  "outline_panel": {
-    "dock": "left"
-  },
-  "collaboration_panel": {
-    "dock": "left"
-  },
-  "git_panel": {
-    "dock": "left"
-  },
-  "calls": {
-    "mute_on_join": true,
-  },
-  "tabs": {
-    "show_close_button": "always",
-    "show_diagnostics": "all",
-    "file_icons": true,
-  },
-  "title_bar": {
-    "show_branch_status_icon": true,
-    "show_menus": false,
-    "show_user_picture": true,
-  },
-  "close_on_file_delete": true,
-  "auto_signature_help": true,
-  "sticky_scroll": {
-    "enabled": true,
-  },
-  "scroll_beyond_last_line": "off",
-  "which_key": {
-    "enabled": true,
-  },
-  "autosave": "on_focus_change",
-  "ui_font_family": ".ZedSans",
-  "buffer_font_family": "FiraCode Nerd Font Mono",
-  "restore_on_startup": "launchpad",
-  "icon_theme": "Catppuccin Mocha",
-  "agent": {
-    "favorite_models": [
-      {
-        "provider": "anthropic",
-        "model": "claude-sonnet-4-6-latest",
-        "enable_thinking": true,
-        "effort": "high"
-      }
-    ],
-    "dock": "right",
-    "default_model": {
-      "effort": "high",
-      "enable_thinking": true,
-      "provider": "anthropic",
-      "model": "claude-sonnet-4-6-latest",
+    "language_models": {
+        "openai_compatible": {
+            "mlx": {
+                "api_url": "https://rays-mac-mini.tail029721.ts.net:8888/v1",
+                "available_models": [
+                    {
+                        "name": "mlx-community/GLM-4.7-Flash-6bit",
+                        "max_tokens": 200000,
+                        "max_output_tokens": 32000,
+                        "max_completion_tokens": 200000,
+                        "capabilities": {
+                            "tools": true,
+                            "images": false,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": false,
+                            "chat_completions": true,
+                            "interleaved_reasoning": false,
+                            "max_tokens_parameter": false
+                        }
+                    }
+                ]
+            }
+        }
     },
-  },
-  "base_keymap": "JetBrains",
-  "vim_mode": true,
-  "ui_font_size": 18,
-  "buffer_font_size": 18,
-  "theme": "Catppuccin Mocha",
-  "relative_line_numbers": "enabled",
+    "proxy": "",
+    "terminal": {
+        "copy_on_select": true
+    },
+    "vim": {
+        "toggle_relative_line_numbers": false
+    },
+    "cli_default_open_behavior": "existing_window",
+    "project_panel": {
+        "dock": "left"
+    },
+    "outline_panel": {
+        "dock": "right"
+    },
+    "collaboration_panel": {
+        "dock": "right"
+    },
+    "git_panel": {
+        "dock": "right"
+    },
+    "calls": {
+        "mute_on_join": true,
+    },
+    "tabs": {
+        "show_close_button": "always",
+        "show_diagnostics": "all",
+        "file_icons": true,
+    },
+    "title_bar": {
+        "show_branch_status_icon": true,
+        "show_menus": false,
+        "show_user_picture": false,
+    },
+    "close_on_file_delete": true,
+    "auto_signature_help": true,
+    "sticky_scroll": {
+        "enabled": true,
+    },
+    "scroll_beyond_last_line": "off",
+    "which_key": {
+        "enabled": true,
+    },
+    "autosave": {
+        "after_delay": {
+            "milliseconds": 2000
+        }
+    },
+    "ui_font_family": ".ZedSans",
+    "buffer_font_family": "JetBrainsMono Nerd Font Mono",
+    "restore_on_startup": "launchpad",
+    "icon_theme": "Catppuccin Mocha",
+    "agent": {
+        "favorite_models": [
+            {
+                "provider": "anthropic",
+                "model": "claude-sonnet-4-6-latest",
+                "enable_thinking": true,
+                "effort": "high"
+            }
+        ],
+        "dock": "right",
+        "default_model": {
+            "enable_thinking": false,
+            "provider": "mlx",
+            "model": "mlx-community/GLM-4.7-Flash-6bit",
+        },
+    },
+    "base_keymap": "JetBrains",
+    "vim_mode": true,
+    "ui_font_size": 16.0,
+    "buffer_font_size": 16.0,
+    "theme": "Catppuccin Mocha",
+    "relative_line_numbers": "enabled",
 }
