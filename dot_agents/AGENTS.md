@@ -49,6 +49,8 @@ Otherwise use `git`.
 over `ls`.
 - For Docker, prefer `docker compose` over `docker-compose`.
 - Use `mise` to manage dev tools and dev environments in software projects
+except for `rust` projects which should use the standard `rust-toolchain.toml`
+if needed.
 
 ## Language Preferences
 
