@@ -104,7 +104,8 @@ a glog='git log --oneline --graph'
 
 a tf='tail -f'
 
-a glow='glow -t'
+# -t TUI mode; -n preserve newlines from source document (for wrapping)
+a glow='glow -t -n'
 
 # suffix aliases
 # run `glow` if file on command-line ends in '.md' without command first
