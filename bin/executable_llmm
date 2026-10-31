@@ -1,0 +1,227 @@
+#!/usr/bin/env bash
+# llmm - LLM model manager: thin wrapper over the `hf` CLI (Hugging Face cache)
+set -euo pipefail
+
+HUB_CACHE=${HF_HUB_CACHE:-${HF_HOME:-$HOME/.cache/huggingface}/hub}
+
+usage() {
+  cat <<EOF
+Usage: $(basename "$0") <command> [args]
+
+Commands:
+  ls, list [-s size|date|name] [-f FILTER]  List downloaded models (default sort: size)
+  info <model>                              Show details for one model
+  get, download <repo|url> [hf download opts]
+                                            Download a model from Hugging Face
+                                            (e.g. --include '*.safetensors')
+  rm, remove <model>... [-y]                Delete model(s), asking first
+  update [<model>...]                       Re-download models that changed on HF (default: all)
+  prune [-y]                                Clean up incomplete downloads and old revisions
+  upgrade                                   Upgrade the tools (hf, mlx-lm)
+  du                                        Show cache location and total size
+  search <query>                            Search mlx-community models on HF
+  help                                      Show this help
+
+<model> can be a full repo id or any unique, case-insensitive part of one
+(e.g. 'glm' for mlx-community/GLM-4.7-Flash-6bit).
+FILTER is passed to 'hf cache ls -f', e.g. 'size>10GB' or 'accessed>30d'.
+
+Cache: $HUB_CACHE
+EOF
+}
+
+die() {
+  echo "Error: $*" >&2
+  exit 1
+}
+
+confirm() {
+  local ans=""
+  read -r -p "$1 [y/N] " ans || true
+  [[ $ans =~ ^[Yy]([Ee][Ss])?$ ]]
+}
+
+human_bytes() {
+  awk -v b="$1" 'BEGIN { split("B K M G T", u); i = 1; while (b >= 1024 && i < 5) { b /= 1024; i++ } printf "%.1f%s\n", b, u[i] }'
+}
+
+# Cached models as JSON (hf prints cache warnings on stderr; drop them)
+cache_json() {
+  hf cache ls --json "$@" 2>/dev/null
+}
+
+# Resolve a name/fragment to exactly one cached repo id
+resolve() {
+  local pat=$1 ids matches
+  ids=$(cache_json | jq -r '.[] | select(.repo_type == "model") | .repo_id')
+  matches=$(grep -ixF -- "$pat" <<<"$ids" || true)
+  [[ -n $matches ]] || matches=$(grep -iF -- "$pat" <<<"$ids" || true)
+  [[ -n $matches ]] || die "no downloaded model matches '$pat'"
+  if (($(wc -l <<<"$matches") > 1)); then
+    echo "Error: '$pat' matches more than one model:" >&2
+    sed 's/^/  /' <<<"$matches" >&2
+    exit 1
+  fi
+  echo "$matches"
+}
+
+repo_dir() {
+  echo "$HUB_CACHE/models--${1//\//--}"
+}
+
+cmd_ls() {
+  local sort=size filters=() opt
+  while getopts "s:f:" opt; do
+    case $opt in
+    s) sort=$OPTARG ;;
+    f) filters+=(-f "$OPTARG") ;;
+    *) die "usage: ls [-s size|date|name] [-f FILTER]" ;;
+    esac
+  done
+  case $sort in
+  size | name) ;;
+  date) sort=modified ;;
+  *) die "sort must be one of: size, date, name" ;;
+  esac
+  {
+    printf 'MODEL\tSIZE\tMODIFIED\tLAST USED\n'
+    cache_json --sort "$sort" ${filters[@]+"${filters[@]}"} |
+      jq -r '.[] | select(.repo_type == "model") | [.repo_id, .size, .last_modified, .last_accessed] | @tsv'
+  } | column -t -s $'\t'
+  echo
+  cmd_du_summary
+}
+
+cmd_du_summary() {
+  # Summary/hint lines are colored and split across stdout/stderr
+  hf cache ls --format human 2>&1 | sed $'s/\x1b\\[[0-9;]*m//g' | grep -E '^(Found|Warning|Hint: Found)' || true
+}
+
+cmd_du() {
+  echo "Cache: $HUB_CACHE"
+  cmd_du_summary
+}
+
+cmd_info() {
+  (($# == 1)) || die "usage: info <model>"
+  local id dir snap cfg
+  id=$(resolve "$1")
+  dir=$(repo_dir "$id")
+  echo "Model:    $id"
+  echo "URL:      https://huggingface.co/$id"
+  echo "Path:     $dir"
+  echo "Revisions:"
+  cache_json --revisions |
+    jq -r --arg id "$id" '.[] | select(.repo_id == $id) |
+      "  \(.revision[0:12])  \(.size)  modified \(.last_modified)  refs: \(.refs | join(",") | if . == "" then "(detached)" else . end)"'
+  snap=$(cache_json --revisions | jq -r --arg id "$id" 'first(.[] | select(.repo_id == $id and (.refs | index("main")))) | .snapshot_path')
+  [[ -n $snap && -d $snap ]] || return 0
+  echo "Files:    $(find "$snap" \( -type f -o -type l \) | wc -l | tr -d ' ')"
+  cfg=$snap/config.json
+  if [[ -f $cfg ]]; then
+    jq -r '"Type:     \(.model_type // .text_config.model_type // "?")",
+      (.quantization // .quantization_config // empty |
+        "Quant:    \(.bits // "?")-bit, group size \(.group_size // "?")")' "$cfg"
+  fi
+}
+
+cmd_get() {
+  (($# >= 1)) || die "usage: get <repo|url> [hf download opts]"
+  local repo=$1 size
+  shift
+  repo=${repo#https://huggingface.co/}
+  repo=${repo%%/tree/*}
+  repo=${repo%/}
+  [[ $repo == */* ]] || die "expected <owner>/<name>, got '$repo'"
+  size=$(hf models info "$repo" --expand usedStorage --json 2>/dev/null | jq -r '.used_storage // empty') ||
+    die "model '$repo' not found on Hugging Face"
+  [[ -n $size ]] && echo "Downloading $repo (repo size ~$(human_bytes "$size"); less if using --include)"
+  hf download "$repo" "$@"
+}
+
+cmd_rm() {
+  local yes=0 ids=() id
+  for arg in "$@"; do
+    case $arg in
+    -y | --yes) yes=1 ;;
+    *) ids+=("$(resolve "$arg")") ;;
+    esac
+  done
+  ((${#ids[@]} > 0)) || die "usage: rm <model>... [-y]"
+  echo "Will delete:"
+  for id in "${ids[@]}"; do
+    cache_json | jq -r --arg id "$id" '.[] | select(.repo_id == $id) | "  \(.repo_id)  (\(.size))"'
+  done
+  ((yes)) || confirm "Proceed?" || {
+    echo "Aborted."
+    exit 1
+  }
+  hf cache rm -y "${ids[@]/#/model/}"
+}
+
+cmd_update() {
+  local ids=() id local_sha remote_sha updated=0
+  if (($# == 0)); then
+    while IFS= read -r id; do ids+=("$id"); done < <(cache_json | jq -r '.[] | select(.repo_type == "model") | .repo_id')
+  else
+    for arg in "$@"; do ids+=("$(resolve "$arg")"); done
+  fi
+  for id in "${ids[@]}"; do
+    local_sha=$(cat "$(repo_dir "$id")/refs/main" 2>/dev/null || true)
+    if ! remote_sha=$(hf models info "$id" --json 2>/dev/null | jq -r '.sha // empty') || [[ -z $remote_sha ]]; then
+      echo "?  $id: could not query Hugging Face (gated, removed, or offline?)"
+      continue
+    fi
+    if [[ $local_sha == "$remote_sha" ]]; then
+      echo "ok $id: up to date"
+    else
+      echo ">> $id: ${local_sha:0:12} -> ${remote_sha:0:12}, downloading"
+      hf download "$id" >/dev/null
+      updated=1
+    fi
+  done
+  ((updated)) && echo "Old revisions are still on disk; run '$(basename "$0") prune' to free the space."
+  return 0
+}
+
+cmd_prune() {
+  hf cache prune "$@"
+}
+
+cmd_upgrade() {
+  echo "==> brew upgrade hf"
+  brew upgrade hf
+  echo "==> uv tool upgrade mlx-lm"
+  uv tool upgrade mlx-lm
+}
+
+cmd_search() {
+  (($# >= 1)) || die "usage: search <query>"
+  {
+    printf 'MODEL\tDOWNLOADS\tLIKES\tCREATED\n'
+    hf models ls --search "$*" --author mlx-community --sort downloads --limit 25 --json 2>/dev/null |
+      jq -r '.[] | [.id, .downloads, .likes, .created_at[0:10]] | @tsv'
+  } | column -t -s $'\t'
+}
+
+command -v hf >/dev/null || die "'hf' not found (brew install hf)"
+command -v jq >/dev/null || die "'jq' not found (brew install jq)"
+
+cmd=${1:-help}
+shift || true
+case $cmd in
+ls | list) cmd_ls "$@" ;;
+info) cmd_info "$@" ;;
+get | download) cmd_get "$@" ;;
+rm | remove) cmd_rm "$@" ;;
+update) cmd_update "$@" ;;
+prune) cmd_prune "$@" ;;
+upgrade) cmd_upgrade ;;
+du) cmd_du ;;
+search) cmd_search "$@" ;;
+help | -h | --help) usage ;;
+*)
+  usage >&2
+  exit 1
+  ;;
+esac
