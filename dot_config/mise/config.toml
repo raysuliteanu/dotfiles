@@ -4,7 +4,7 @@ groovy = "latest"
 java = "temurin-25"
 kotlin = { version = "latest", asset_pattern = "kotlin-compiler-*.zip", bin_path = "kotlinc/bin" }
 maven = "latest"
-micronaut = { version = "latest", exe = "mn" }
+micronaut = "latest"
 node = "latest"
 quarkus = "latest"
 sbt = "latest"
