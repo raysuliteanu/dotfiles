@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# sesh-style picker for Rex: fuzzy-find running sessions and zoxide directories.
+# Picking a session switches to it; picking a directory switches to the session
+# named after it, creating one there if needed. Run by the "sesh" action in
+# init.lua, which passes the Rex client ID to switch.
+set -euo pipefail
+
+client=$1
+
+pick=$(
+  {
+    rex ls --json | jq -r '.sessions[] | "s\t\u001b[32m● \(.label)\u001b[0m\t\(.session_id)"'
+    zoxide query -l | while IFS= read -r dir; do
+      printf 'd\t  %s\t%s\n' "${dir/#$HOME/~}" "$dir"
+    done
+  } | fzf --ansi --delimiter='\t' --with-nth=2 --no-sort --border \
+        --prompt='⚡  ' --border-label=' rex sessions ' --bind 'tab:down,btab:up'
+) || exit 0
+
+IFS=$'\t' read -r kind _ value <<<"$pick"
+
+if [[ $kind == d ]]; then
+  name=$(basename "$value")
+  id=$(rex ls --json | jq -r --arg n "$name" 'first(.sessions[] | select(.label == $n) | .session_id) // empty')
+  [[ -n $id ]] || id=$(rex new "$name" -c "$value" --json | jq -r '.session_id')
+else
+  id=$value
+fi
+
+rex -C "$client" do session.select session_id="$id"
