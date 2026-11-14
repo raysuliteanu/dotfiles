@@ -8,8 +8,24 @@ rex.bind(prefix .. ">" .. prefix, "pane.send_key", { key = "ctrl+space" })
 -- <prefix> c: new tab (tmux new-window)
 rex.bind(prefix .. ">c", "client.tab.new")
 
--- <prefix> s: session picker (tmux sesh popup)
-rex.bind(prefix .. ">s", "session.switch")
+-- <prefix> s: sesh-style picker over sessions and zoxide directories
+-- (see sesh-pick next to this file); cmd+k keeps the built-in picker
+rex.action{
+  name  = "sesh",
+  title = "Sessions and Directories…",
+  run   = function(ctx, args)
+    local _, err = rex.session.new_layer{
+      bounds = { 0.15, 0.1, 0.7, 0.8 },
+      focus  = true,
+      layout = rex.layout.block{
+        flavor  = "com.superlogical.terminal.shell",
+        options = { command = { os.getenv("HOME") .. "/.config/rex/sesh-pick", ctx.client_id } },
+      },
+    }
+    if err ~= nil then error(err, 0) end
+  end,
+}
+rex.bind(prefix .. ">s", "sesh")
 
 -- <prefix> | and -: split right / down
 rex.bind(prefix .. ">shift+\\", "pane.split.right")
