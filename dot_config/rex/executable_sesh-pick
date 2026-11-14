@@ -1,20 +1,45 @@
 #!/usr/bin/env bash
-# sesh-style picker for Rex: fuzzy-find running sessions and zoxide directories.
-# Picking a session switches to it; picking a directory switches to the session
-# named after it, creating one there if needed. Run by the "sesh" action in
-# init.lua, which passes the Rex client ID to switch.
+# sesh-style picker for Rex: fuzzy-find running sessions and directories from
+# zoxide, ~/.config, or fd. Picking a session switches to it; picking a
+# directory switches to the session named after it, creating one there if
+# needed. Run by the "sesh" action in init.lua, which passes the Rex client ID
+# to switch.
 set -euo pipefail
+
+# Rows are kind <TAB> display <TAB> value. An "s" row's value is a session ID;
+# a "d" row's value is a directory.
+rows() {
+  local tilde="~"
+  sed 's:/$::' | while IFS= read -r dir; do
+    printf 'd\t  %s\t%s\n' "${dir/#$HOME/$tilde}" "$dir"
+  done
+}
+
+list() {
+  case $1 in
+  all) list sessions; list zoxide ;;
+  sessions) rex ls --json | jq -r '.sessions[] | "s\t\u001b[32m● \(.label)\u001b[0m\t\(.session_id)"' ;;
+  zoxide) zoxide query -l | rows ;;
+  configs) fd -H -t d -d 1 . "$HOME/.config" | rows ;;
+  find) fd -H -d 2 -t d -E .Trash . "$HOME" | rows ;;
+  esac
+}
+
+if [[ ${1-} == --list ]]; then
+  list "$2"
+  exit
+fi
 
 client=$1
 
 pick=$(
-  {
-    rex ls --json | jq -r '.sessions[] | "s\t\u001b[32m● \(.label)\u001b[0m\t\(.session_id)"'
-    zoxide query -l | while IFS= read -r dir; do
-      printf 'd\t  %s\t%s\n' "${dir/#$HOME/~}" "$dir"
-    done
-  } | fzf --ansi --delimiter='\t' --with-nth=2 --no-sort --border \
-        --prompt='⚡  ' --border-label=' rex sessions ' --bind 'tab:down,btab:up'
+  list all | fzf --ansi --delimiter='\t' --with-nth=2 --no-sort --border \
+    --prompt='⚡  ' --border-label=' rex sessions ' \
+    --header='  ^a all ^g configs ^f find' \
+    --bind 'tab:down,btab:up' \
+    --bind "ctrl-a:change-prompt(⚡  )+reload('$0' --list all)" \
+    --bind "ctrl-g:change-prompt(⚙️  )+reload('$0' --list configs)" \
+    --bind "ctrl-f:change-prompt(🔎  )+reload('$0' --list find)"
 ) || exit 0
 
 IFS=$'\t' read -r kind _ value <<<"$pick"
