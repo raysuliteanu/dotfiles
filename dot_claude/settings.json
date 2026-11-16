@@ -42,6 +42,17 @@
           }
         ]
       }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/bin/sh -c 'rex __internal session-start --agent claude --feature-session-naming=false 2>/dev/null || true'",
+            "timeout": 5
+          }
+        ]
+      }
     ]
   },
   "statusLine": {
@@ -73,5 +84,11 @@
   "minimumVersion": "2.1.136",
   "tui": "fullscreen",
   "theme": "dark",
-  "remoteControlAtStartup": false
+  "agentPushNotifEnabled": true,
+  "remoteControlAtStartup": true,
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  }
 }
