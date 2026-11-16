@@ -25,5 +25,5 @@ key = "{{ .chezmoi.homeDir }}/.ssh/id_rsa.pub"
 [signing.backends.ssh]
 allowed-signers = "{{ .chezmoi.homeDir }}/.ssh/allowed_signers"
 
-[git]
-sign-on-push = true
+[revsets]
+git-sign-on-push = "~signed() & mine()"
