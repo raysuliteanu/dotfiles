@@ -60,7 +60,7 @@ else
   id=$value
 fi
 
-rex -C "$client" do session.select session_id="$id"
+rex -C "$client" "do" session.select session_id="$id"
 if [[ -n $PICK_CURRENT && $id != "$PICK_CURRENT" ]]; then
   mkdir -p "$(dirname "$last_file")"
   printf '%s\n' "$PICK_CURRENT" >"$last_file"
