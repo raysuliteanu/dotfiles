@@ -44,7 +44,6 @@ a less='less -F'
 #a top='btm --color=nord-light'
 a top=btop
 a cat=bat
-a curl=curlie
 a e=emacs
 a du=dust
 a fd='fd -H'
