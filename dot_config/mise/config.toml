@@ -6,6 +6,8 @@ kotlin = { version = "latest", asset_pattern = "kotlin-compiler-*.zip", bin_path
 maven = "latest"
 micronaut = "latest"
 node = "latest"
+python = "3.14"
+uv = "0.13.9"
 quarkus = "latest"
 sbt = "latest"
 scala = "latest"
