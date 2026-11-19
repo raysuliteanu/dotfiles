@@ -61,6 +61,9 @@ cmd_start() {
     --host 127.0.0.1 \
     --port "$port" \
     --max-tokens 32768 \
+    --prompt-cache-bytes 4294967296 \
+    --prompt-cache-size 4 \
+    --kv-bits 8 \
     >>"$LOG_FILE" 2>&1 &
   echo $! >"$PID_FILE"
   echo "$port" >"$PORT_FILE"
