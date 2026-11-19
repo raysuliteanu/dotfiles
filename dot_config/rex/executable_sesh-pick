@@ -3,8 +3,12 @@
 # zoxide, ~/.config, or fd. Picking a session switches to it; picking a
 # directory switches to the session named after it, creating one there if
 # needed. Run by the "sesh" action in init.lua, which passes the Rex client ID
-# to switch.
+# to switch and the current session. The current session is left out, and the
+# session last switched away from with this picker is listed (and selected)
+# first, so the picker toggles between two sessions.
 set -euo pipefail
+
+last_file=${XDG_STATE_HOME:-$HOME/.local/state}/rex/sesh-last
 
 # Rows are kind <TAB> display <TAB> value. An "s" row's value is a session ID;
 # a "d" row's value is a directory.
@@ -18,7 +22,10 @@ rows() {
 list() {
   case $1 in
   all) list sessions; list zoxide ;;
-  sessions) rex ls --json | jq -r '.sessions[] | "s\t\u001b[32m● \(.label)\u001b[0m\t\(.session_id)"' ;;
+  sessions)
+    rex ls --json | jq -r --arg cur "${PICK_CURRENT-}" --arg last "$(cat "$last_file" 2>/dev/null)" \
+      '[.sessions[] | select(.session_id != $cur)] | sort_by(.session_id != $last) | .[]
+       | "s\t\u001b[32m● \(.label)\u001b[0m\t\(.session_id)"' ;;
   zoxide) zoxide query -l | rows ;;
   configs) fd -H -t d -d 1 . "$HOME/.config" | rows ;;
   find) fd -H -d 2 -t d -E .Trash . "$HOME" | rows ;;
@@ -31,6 +38,7 @@ if [[ ${1-} == --list ]]; then
 fi
 
 client=$1
+export PICK_CURRENT=${2-}
 
 pick=$(
   list all | fzf --ansi --delimiter='\t' --with-nth=2 --no-sort --border \
@@ -53,3 +61,7 @@ else
 fi
 
 rex -C "$client" do session.select session_id="$id"
+if [[ -n $PICK_CURRENT && $id != "$PICK_CURRENT" ]]; then
+  mkdir -p "$(dirname "$last_file")"
+  printf '%s\n' "$PICK_CURRENT" >"$last_file"
+fi

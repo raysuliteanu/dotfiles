@@ -19,7 +19,7 @@ rex.action{
       focus  = true,
       layout = rex.layout.block{
         flavor  = "com.superlogical.terminal.shell",
-        options = { command = { os.getenv("HOME") .. "/.config/rex/sesh-pick", ctx.client_id } },
+        options = { command = { os.getenv("HOME") .. "/.config/rex/sesh-pick", ctx.client_id, ctx.session_id } },
       },
     }
     if err ~= nil then error(err, 0) end
