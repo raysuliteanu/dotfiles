@@ -35,6 +35,9 @@ rex.bind(prefix .. ">-", "pane.split.down")
 rex.bind("shift+left", "client.tab.previous")
 rex.bind("shift+right", "client.tab.next")
 
+-- <prefix> R: rename the current session
+rex.bind(prefix .. ">shift+r", "session.rename")
+
 -- <prefix> r: resize mode; h/j/k/l resize until Escape or Enter
 rex.mode("resize", { exclusive = true })
 rex.bind(prefix .. ">r", "client.mode.enter", { name = "resize" })
