@@ -1,6 +1,6 @@
 {
   "lastChangelogVersion": "1.5.2",
-  "defaultProvider": "mlx",
+  "defaultProvider": "openrouter",
   "defaultModel": "typesafe/jev-router",
   "defaultTools": [
     "+codemode"
