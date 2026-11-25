@@ -180,6 +180,38 @@ if [ -e $HOME/.atuin/bin/env ]; then
 fi
 eval "$(atuin init zsh)"
 
+# In Rex, show atuin's search in a floating pane, like its tmux popup. atuin only
+# supports tmux, so wrap the function its zsh hook runs the search through.
+if [[ -n ${REX_BLOCK-} && -z ${TMUX-} ]] && (( $+functions[__atuin_search_cmd] )); then
+  functions -c __atuin_search_cmd __atuin_search_cmd_inline
+
+  __atuin_search_cmd() {
+    local dir req res
+    dir=$(command mktemp -d) || return 1
+    # env assignments are separate arguments, so the query needs no quoting
+    req=$(command jq -nc --arg cwd "$PWD" '{
+        bounds: [0.1, 0.2, 0.8, 0.6], focus: true,
+        layout: {block: {flavor: "com.superlogical.terminal.shell", label: "atuin",
+          options: {shell: "none", cwd: $cwd, command: $ARGS.positional}}}}' \
+      --args -- /usr/bin/env "PATH=$PATH" "ATUIN_SESSION=$ATUIN_SESSION" ATUIN_SHELL=zsh \
+      "ATUIN_QUERY=$BUFFER" /bin/sh -c 'out=$1; shift; exec atuin search "$@" -i 2>"$out"' \
+      sh "$dir/result" "$@" 2>/dev/null) &&
+      res=$(command rex api call -s "$REX_BLOCK" session.new_layer "$req" 2>/dev/null </dev/null) || {
+      command rm -r "$dir"
+      __atuin_search_cmd_inline "$@"
+      return
+    }
+    command rex wait -s "$REX_BLOCK" "$(command jq -r '.block_ids[0]' <<<"$res")" &>/dev/null </dev/null
+    # Rex keeps a pane open if its program exits right away, so close it
+    command rex api call -s "$REX_BLOCK" session.close_layer \
+      "$(command jq -c '{layer_id}' <<<"$res")" &>/dev/null </dev/null
+    # with splits, Rex may have moved focus to another pane
+    command rex focus -s "$REX_BLOCK" "$REX_BLOCK" &>/dev/null </dev/null
+    [[ -f $dir/result ]] && print -r -- "$(<$dir/result)"
+    command rm -r "$dir"
+  }
+fi
+
 # starship https://starship.rs/
 eval "$(starship init zsh)"
 
@@ -199,8 +231,6 @@ export HF_TOKEN={{onepasswordRead "op://Personal/HuggingFace Token/credential" }
 export PATH="$HOME/.local/bin:$PATH"
 
 eval "$(mise activate zsh)"
-
-eval "$(tv init zsh)"
 
 eval "$(zoxide init zsh)"
 
