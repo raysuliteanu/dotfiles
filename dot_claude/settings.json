@@ -1,5 +1,10 @@
 {
-  "model": "opus",
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  },
+  "model": "opus[1m]",
   "hooks": {
     "PreToolUse": [
       {
@@ -8,6 +13,15 @@
           {
             "type": "command",
             "command": "$HOME/.claude/hooks/cargo-checks-pre-commit.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "^Bash$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/opt/homebrew/bin/atuin hook claude-code"
           }
         ]
       }
@@ -19,6 +33,15 @@
           {
             "type": "command",
             "command": "$HOME/.claude/hooks/shellcheck-post-save.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "^Bash$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/opt/homebrew/bin/atuin hook claude-code"
           }
         ]
       }
@@ -53,6 +76,17 @@
           }
         ]
       }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "^Bash$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/opt/homebrew/bin/atuin hook claude-code"
+          }
+        ]
+      }
     ]
   },
   "statusLine": {
@@ -84,11 +118,11 @@
   "minimumVersion": "2.1.136",
   "tui": "fullscreen",
   "theme": "dark",
-  "agentPushNotifEnabled": true,
   "remoteControlAtStartup": true,
-  "attribution": {
-    "commit": "",
-    "pr": "",
-    "sessionUrl": false
+  "agentPushNotifEnabled": true,
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "medium"
+    }
   }
 }
