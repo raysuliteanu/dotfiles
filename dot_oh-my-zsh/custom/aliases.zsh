@@ -133,3 +133,5 @@ a mutt=neomutt
 a tm='sesh connect $(sesh list | fzf)'
 
 a ts=tailscale
+
+a atr='atuin threads resume'
