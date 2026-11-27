@@ -39,9 +39,10 @@ a bsr='brew services run'
 
 a h=history
 a c=clear
-a more='less -F'
-a less='less -F'
-#a top='btm --color=nord-light'
+
+# in ~/.zshenv the env var LESS=-RF is applied for both less and more with this alias
+a more='less'
+
 a top=btop
 a cat=bat
 a e=emacs
