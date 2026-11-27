@@ -15,6 +15,10 @@ fi
 # export CARGO_TARGET_DIR="$HOME/.cargo-target"
 
 export PAGER='less -F'
+# Environment rather than aliases, so pagers started by other programs see these too
+export LESS=-RF
+# macOS `more` is less and reads MORE instead; other `more`s reject these flags
+case "$OSTYPE" in darwin*) export MORE=-RF ;; esac
 export EDITOR=nvim
 
 export BAT_PAGER="$PAGER"
